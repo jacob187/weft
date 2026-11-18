@@ -1,0 +1,24 @@
+/* verite — design tokens. Override any of these per site via `theme` (inline on <html>). */
+:root {
+  --black: #0c0b09;
+  --black2: #131210;
+  --void: #000;
+  --glow: #1c1a15;
+  --silver: #d8d5cd;
+  --silver-dim: #8f8c83;
+  --silver-faint: #54524b;
+  --amber: #d9a94f;
+  --scroll-thumb: #2a2823;
+  --frame-line: #23211c;
+
+  /* Film-frame scenes (duotone, drawn by scenes.ts). */
+  --scene-bg: #1a1813;
+  --scene-sky: #22201a;
+  --scene-night: #15130f;
+  --scene-wave: #12100c;
+  --scene-glass: #2b2820;
+
+  --serif: "Playfair Display", serif;
+  --narrow: "Archivo Narrow", sans-serif;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}

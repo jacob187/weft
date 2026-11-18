@@ -1,0 +1,121 @@
+---
+import Page from '~/layouts/Page.astro';
+import type { TemplateProps } from '~/templates/types';
+import type { Content } from './content';
+import meta from './meta';
+import './theme.css';
+import './style.css';
+
+type Props = TemplateProps<Content>;
+const { content: c, theme, seo, showcase } = Astro.props;
+---
+
+<Page
+  seo={{ ...c.seo, themeColor: meta.themeColor, favicon: meta.favicon, ...seo }}
+  fontsHref={meta.fontsHref}
+  theme={theme}
+>
+  <canvas id="grain" aria-hidden="true"></canvas>
+
+  <nav id="nav">
+    <a class="wordmark" href="#" set:html={c.wordmarkHtml} />
+    <ul class="nav-links">
+      {c.nav.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+    </ul>
+  </nav>
+
+  <header>
+    <div class="bar-t"><span class="reel">{c.hero.reel}</span></div>
+    <div class="title-card">
+      <p class="tc-pre">{c.hero.pre}</p>
+      <h1 set:html={c.hero.headingHtml} />
+      <p class="tc-sub">{c.hero.sub}</p>
+      <p class="tc-foot">{c.hero.foot}</p>
+    </div>
+    <div class="bar-b"><span class="runtime">{c.hero.runtime}</span></div>
+  </header>
+
+  <section id="films">
+    <span class="kicker rv">{c.films.kicker}</span>
+    <h2 class="rv d1" set:html={c.films.headingHtml} />
+    <div class="strip-wrap rv d2">
+      <div class="strip">
+        {
+          c.films.items.map((f) => (
+            <div class="frame" data-scene={f.scene}>
+              <div class="cap">
+                <b>{f.title}</b>
+                <span>{f.meta}</span>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+    <p class="strip-note">{c.films.note}</p>
+  </section>
+
+  <section id="method">
+    <span class="kicker rv">{c.method.kicker}</span>
+    <blockquote class="rv d1" set:html={c.method.quoteHtml} />
+    <cite class="rv d2">{c.method.cite}</cite>
+  </section>
+
+  <section id="credits" aria-label={c.credits.label}>
+    <div class="credits-mask"></div>
+    <div class="credits-roll">
+      {
+        c.credits.entries.map((e) => (
+          <>
+            <div class="role">{e.role}</div>
+            <div class="name">{e.name}</div>
+          </>
+        ))
+      }
+      {
+        showcase && c.showcase && (
+          <>
+            <div class="gap" />
+            <div class="role">{c.showcase.credit.role}</div>
+            <div class="name">{c.showcase.credit.name}</div>
+          </>
+        )
+      }
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-grid">
+      <div>
+        <a class="wordmark" href="#" set:html={c.wordmarkHtml} />
+        <p class="foot-note" set:html={c.footer.noteHtml} />
+      </div>
+      <p>
+        <Fragment set:html={c.footer.creditHtml} />
+        {
+          showcase && c.showcase && (
+            <>
+              <br />
+              <Fragment set:html={c.showcase.footerHtml} />
+            </>
+          )
+        }
+      </p>
+    </div>
+  </footer>
+
+  {showcase && c.showcase && <a class="hub-chip" href={c.showcase.chipHref}>{c.showcase.chipLabel}</a>}
+</Page>
+
+<script>
+  import { reveal, scrolledClass } from '~/lib/motion';
+  import { initGrain } from './grain';
+  import { initScenes } from './scenes';
+
+  const grain = document.getElementById('grain');
+  if (grain instanceof HTMLCanvasElement) initGrain(grain);
+  initScenes(document.querySelectorAll<HTMLElement>('[data-scene]'));
+  const nav = document.getElementById('nav');
+  if (nav) scrolledClass(nav);
+  reveal('.rv', { threshold: 0.15 });
+</script>
