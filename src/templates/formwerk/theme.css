@@ -1,0 +1,17 @@
+/* formwerk — design tokens. Override any of these per site via `theme` (inline on <html>). */
+:root {
+  --bone: #efe9dc;
+  --paper: #f4efe3;
+  --blk: #191713;
+  --red: #d5372c;
+  --blue: #1d4f9e;
+  --yellow: #e8b23a;
+  --white: #fff;
+  --ink-soft: #5b564b;
+  --ink-mute: #8a8272;
+  --ink-foot: #6d675a;
+  --foot-bg: #e6dfd0;
+  --disp: "Archivo Black", sans-serif;
+  --body: "Work Sans", sans-serif;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}
