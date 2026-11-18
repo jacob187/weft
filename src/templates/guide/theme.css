@@ -1,0 +1,16 @@
+/* guide — design tokens. Override any of these per site via `theme` (inline on <html>). */
+:root {
+  --bg: #08080d;
+  --bg2: #0d0d15;
+  --card: #111119;
+  --tx: #ecebe6;
+  --dim: #9a99a6;
+  --faint: #55545f;
+  --gold: #e8c168;
+  --mint: #7ce7d8;
+  --scroll-thumb: #22222e;
+  --serif: "Fraunces", serif;
+  --sans: "Inter", sans-serif;
+  --mono: "JetBrains Mono", monospace;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}
