@@ -1,0 +1,126 @@
+---
+import Page from '~/layouts/Page.astro';
+import type { TemplateProps } from '~/templates/types';
+import type { Content, Marginalia } from './content';
+import meta from './meta';
+import './theme.css';
+import './style.css';
+
+type Props = TemplateProps<Content>;
+const { content: c, theme, seo, showcase } = Astro.props;
+
+const noteStyle = (n: Marginalia) =>
+  [
+    `${n.side}:${n.offset}`,
+    n.top !== undefined && `top:${n.top}`,
+    n.bottom !== undefined && `bottom:${n.bottom}`,
+    n.rotate !== undefined && `transform:rotate(${n.rotate}deg)`,
+  ]
+    .filter(Boolean)
+    .join(';');
+---
+
+<Page
+  seo={{ ...c.seo, themeColor: meta.themeColor, favicon: meta.favicon, ...seo }}
+  fontsHref={meta.fontsHref}
+  theme={theme}
+>
+  <nav id="nav">
+    <a class="wordmark" href="#" set:html={c.wordmarkHtml} />
+    <ul class="nav-links">
+      {c.nav.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+    </ul>
+  </nav>
+
+  <main>
+    <header>
+      <div class="folio">
+        <svg id="border-svg" aria-hidden="true"></svg>
+        <p class="rubric">{c.hero.rubric}</p>
+        <h1 set:html={c.hero.headingHtml} />
+        <p class="hero-sub" set:html={c.hero.subHtml} />
+        <p class="folio-foot">{c.hero.folioFoot}</p>
+        {c.hero.marginalia.map((n) => <span class="marg-note" style={noteStyle(n)} set:html={n.textHtml} />)}
+      </div>
+    </header>
+
+    <section id="collection">
+      <span class="kicker rv">{c.collection.kicker}</span>
+      <h2 class="rv d1" set:html={c.collection.headingHtml} />
+      <div class="mss">
+        {
+          c.collection.manuscripts.map((m, i) => (
+            <div class={i === 0 ? 'ms rv' : `ms rv d${i}`}>
+              <div class="panel" data-panel={m.panel} data-caption={m.caption} data-label={m.label} />
+              <h3>{m.title}</h3>
+              <div class="date">{m.date}</div>
+              <p>{m.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id="scriptorium">
+      <div class="scrip-inner">
+        <span class="kicker rv">{c.scriptorium.kicker}</span>
+        <h2 class="rv d1" set:html={c.scriptorium.headingHtml} />
+        <div class="steps rv d2">
+          {
+            c.scriptorium.steps.map((s) => (
+              <div class="step">
+                <span class="no">{s.no}</span>
+                <h3>{s.title}</h3>
+                <p>{s.text}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id="visit">
+      <span class="kicker rv">{c.visit.kicker}</span>
+      <h2 class="rv d1" set:html={c.visit.headingHtml} />
+      <div class="visit-note rv d2">
+        <p set:html={c.visit.bodyHtml} />
+        <span class="seal">{c.visit.seal}</span>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot-grid">
+      <div>
+        <a class="wordmark" href="#" set:html={c.wordmarkHtml} />
+        <p class="foot-note" set:html={c.footer.noteHtml} />
+      </div>
+      <p>
+        <Fragment set:html={c.footer.creditHtml} />
+        {
+          showcase && c.showcase && (
+            <>
+              <br />
+              <Fragment set:html={c.showcase.footerHtml} />
+            </>
+          )
+        }
+      </p>
+    </div>
+  </footer>
+
+  {showcase && c.showcase && <a class="hub-chip" href={c.showcase.chipHref}>{c.showcase.chipLabel}</a>}
+</Page>
+
+<script>
+  import { reveal, scrolledClass } from '~/lib/motion';
+  import { initBorder } from './border';
+  import { initPanels } from './panels';
+
+  const border = document.getElementById('border-svg');
+  if (border instanceof SVGSVGElement) initBorder(border);
+  initPanels(document.querySelectorAll<HTMLElement>('[data-panel]'));
+  const nav = document.getElementById('nav');
+  if (nav) scrolledClass(nav);
+  reveal('.rv', { threshold: 0.15 });
+</script>
