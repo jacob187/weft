@@ -1,0 +1,194 @@
+/* botanica — layout & components. Colors come from theme.css tokens only. */
+* { margin: 0; padding: 0; box-sizing: border-box }
+html { scroll-behavior: smooth }
+body {
+  background: var(--paper); color: var(--ink); font-family: var(--sans); font-weight: 300;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+::selection { background: var(--terra); color: var(--paper) }
+::-webkit-scrollbar { width: 10px }
+::-webkit-scrollbar-track { background: var(--paper2) }
+::-webkit-scrollbar-thumb { background: var(--sand); border-radius: 5px }
+::-webkit-scrollbar-thumb:hover { background: var(--moss) }
+
+/* paper grain */
+body::after {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 80; opacity: .05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='2'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* growing vine rail */
+#vineRail { position: fixed; top: 0; left: 0; height: 100vh; width: 150px; pointer-events: none; z-index: 5 }
+#vineRail svg { position: absolute; top: 0; left: 0; overflow: visible }
+
+/* pollen */
+#pollen { position: fixed; inset: 0; pointer-events: none; z-index: 4 }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50; display: flex; align-items: center;
+  justify-content: space-between; padding: 26px 44px; transition: all .5s var(--ease);
+}
+nav.scrolled {
+  background: color-mix(in srgb, var(--paper) 85%, transparent); backdrop-filter: blur(12px); padding: 14px 44px;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
+}
+.wordmark { font-family: var(--serif); font-weight: 500; font-size: 21px; letter-spacing: .34em; color: var(--moss); text-decoration: none }
+.wordmark span { color: var(--terra) }
+.nav-links { display: flex; gap: 34px; list-style: none }
+.nav-links a {
+  color: var(--ink-soft); text-decoration: none; font-size: 11px; letter-spacing: .24em;
+  text-transform: uppercase; position: relative; transition: color .3s;
+}
+.nav-links a:hover { color: var(--terra) }
+
+/* hero */
+header { min-height: 100vh; display: grid; place-items: center; position: relative; padding: 120px 24px 80px; text-align: center }
+.est { font-size: 11px; letter-spacing: .5em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 30px }
+h1 {
+  font-family: var(--serif); font-weight: 300; font-size: clamp(52px, 9vw, 132px); line-height: 1.02;
+  color: var(--moss); font-variation-settings: "opsz" 144;
+}
+h1 em { font-style: italic; color: var(--terra); font-weight: 400 }
+.hero-sub { max-width: 430px; margin: 36px auto 44px; font-size: 15px; line-height: 1.9; color: var(--ink-soft) }
+.hero-flower { position: absolute; pointer-events: none; opacity: .9 }
+.btn {
+  display: inline-block; position: relative; padding: 16px 42px; background: var(--moss); color: var(--paper);
+  border-radius: 99px; font-size: 11px; letter-spacing: .26em; text-transform: uppercase; text-decoration: none;
+  transition: transform .45s var(--ease), box-shadow .45s, background .45s;
+  box-shadow: 0 14px 30px color-mix(in srgb, var(--ink) 22%, transparent);
+}
+.btn:hover { transform: translateY(-3px); background: var(--terra); box-shadow: 0 20px 44px color-mix(in srgb, var(--terra) 30%, transparent) }
+.hero-scroll {
+  position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+  font-size: 10px; letter-spacing: .4em; color: var(--ink-faint); text-transform: uppercase;
+}
+
+/* sections */
+section { padding: 120px 44px; position: relative; max-width: 1280px; margin: 0 auto }
+.kicker { font-size: 11px; letter-spacing: .44em; text-transform: uppercase; color: var(--terra); margin-bottom: 20px; display: block }
+h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(34px, 4.4vw, 60px); line-height: 1.12; color: var(--moss) }
+h2 em { font-style: italic; color: var(--terra) }
+
+.rv { opacity: 0; transform: translateY(34px); transition: opacity .95s var(--ease), transform .95s var(--ease) }
+.rv.in { opacity: 1; transform: none }
+.rv.d1 { transition-delay: .12s } .rv.d2 { transition-delay: .24s } .rv.d3 { transition-delay: .36s }
+
+/* botanical svg fills/strokes (glyphs, flowers) */
+.f-moss { fill: var(--moss) } .f-leaf { fill: var(--leaf) } .f-terra { fill: var(--terra) }
+.f-terra-soft { fill: var(--terra-soft) } .f-gold { fill: var(--gold) }
+.s-moss { stroke: var(--moss) } .s-terra { stroke: var(--terra) } .s-root { stroke: var(--root) }
+
+/* notes */
+.notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 26px; margin-top: 70px }
+.note {
+  background: rgba(255, 255, 255, .42); border: 1px solid color-mix(in srgb, var(--ink) 10%, transparent); border-radius: 22px;
+  padding: 44px 34px 38px; text-align: center; transition: transform .5s var(--ease), box-shadow .5s, border-color .5s;
+  position: relative; overflow: hidden;
+}
+.note:hover {
+  transform: translateY(-8px); box-shadow: 0 30px 60px color-mix(in srgb, var(--ink) 14%, transparent);
+  border-color: color-mix(in srgb, var(--terra) 35%, transparent);
+}
+.note .glyph { height: 88px; display: flex; align-items: center; justify-content: center; margin-bottom: 26px }
+.note .glyph svg { transition: transform .6s var(--ease) }
+.note:hover .glyph svg { transform: rotate(-6deg) scale(1.08) }
+.note h3 { font-family: var(--serif); font-weight: 400; font-size: 25px; color: var(--moss); margin-bottom: 6px }
+.note .lat { font-style: italic; font-family: var(--serif); color: var(--terra); font-size: 14px; margin-bottom: 16px }
+.note p { font-size: 13.5px; line-height: 1.85; color: var(--ink-soft) }
+.note .stage {
+  position: absolute; top: 18px; right: 22px; font-size: 10px; letter-spacing: .3em;
+  text-transform: uppercase; color: var(--ink-faint);
+}
+
+/* bottles */
+#collection {
+  max-width: none; background: var(--paper2); border-top: 1px solid color-mix(in srgb, var(--ink) 8%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 8%, transparent);
+}
+.col-inner { max-width: 1280px; margin: 0 auto }
+.bottles { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 76px }
+.bottle-card { text-align: center; padding: 20px 10px }
+.bottle-stage { position: relative; display: flex; justify-content: center; align-items: flex-end; height: 300px; margin-bottom: 30px }
+.bottle-stage svg { filter: drop-shadow(0 26px 26px color-mix(in srgb, var(--ink) 18%, transparent)); transition: transform .6s var(--ease) }
+.bottle-card:hover .bottle-stage svg { transform: translateY(-12px) rotate(-1.5deg) }
+.bottle-stage::after {
+  content: ""; position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%);
+  width: 120px; height: 16px; border-radius: 50%;
+  background: radial-gradient(ellipse, color-mix(in srgb, var(--ink) 18%, transparent), transparent 70%);
+  transition: width .6s var(--ease), opacity .6s;
+}
+.bottle-card:hover .bottle-stage::after { width: 150px; opacity: .7 }
+.bottle-card h3 { font-family: var(--serif); font-weight: 400; font-size: 24px; color: var(--moss) }
+.bottle-card .notes-line { font-style: italic; font-family: var(--serif); font-size: 14px; color: var(--ink-soft); margin: 8px 0 14px }
+.bottle-card .price { font-size: 12px; letter-spacing: .24em; color: var(--terra) }
+
+/* bottle svg parts; colorway via --liquid / --cap */
+.bottle-verte { --liquid: var(--bottle-verte-liquid); --cap: var(--bottle-verte-cap) }
+.bottle-mai { --liquid: var(--bottle-mai-liquid); --cap: var(--bottle-mai-cap) }
+.bottle-pluie { --liquid: var(--bottle-pluie-liquid); --cap: var(--bottle-pluie-cap) }
+.bottle .cap { fill: var(--cap) }
+.bottle .neck { fill: var(--sand) }
+.bottle .glass { fill: var(--glass-body); fill-opacity: .38; stroke: var(--moss); stroke-opacity: .35; stroke-width: 1.4 }
+.bottle .liq-stop { stop-color: var(--liquid) }
+.bottle .glass-hi { stop-color: var(--glass-hi) }
+.bottle .glass-shade { stop-color: var(--glass-shade) }
+.bottle .label { fill: var(--label-paper); stroke: var(--moss); stroke-opacity: .25 }
+.bottle .label-brand { font-family: var(--serif); fill: var(--moss) }
+.bottle .label-rule { stroke: var(--terra); stroke-width: 1 }
+.bottle .label-name { font-family: var(--sans); fill: var(--ink-soft) }
+.bottle .shine { stroke: var(--glass-hi); stroke-opacity: .5; stroke-width: 3 }
+
+/* story band */
+#story { max-width: none; background: var(--moss); color: var(--paper); overflow: hidden }
+.story-inner { max-width: 900px; margin: 0 auto; text-align: center; position: relative; padding: 40px 0 }
+#story .kicker { color: var(--terra-soft) }
+#story blockquote { font-family: var(--serif); font-weight: 300; font-style: italic; font-size: clamp(26px, 3.6vw, 44px); line-height: 1.45 }
+#story blockquote b { color: var(--terra-soft); font-weight: 400 }
+#story cite {
+  display: block; margin-top: 34px; font-style: normal; font-size: 11px;
+  letter-spacing: .4em; text-transform: uppercase; color: color-mix(in srgb, var(--paper) 55%, transparent);
+}
+
+/* almanac */
+.alm-rows { margin-top: 64px; border-top: 1px solid color-mix(in srgb, var(--ink) 14%, transparent) }
+.alm-row {
+  display: grid; grid-template-columns: 110px 1fr 2fr; gap: 26px; padding: 26px 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 10%, transparent); align-items: baseline; transition: background .4s, padding-left .4s;
+}
+.alm-row:hover { background: rgba(255, 255, 255, .4); padding-left: 24px }
+.alm-row .mon { font-family: var(--serif); font-style: italic; color: var(--terra); font-size: 18px }
+.alm-row .what { font-family: var(--serif); font-size: 20px; color: var(--moss) }
+.alm-row p { font-size: 13px; line-height: 1.8; color: var(--ink-soft) }
+
+footer { background: var(--paper); padding: 80px 44px 50px; border-top: 1px solid color-mix(in srgb, var(--ink) 10%, transparent) }
+.foot-grid { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; align-items: flex-end }
+footer p { font-size: 12px; color: var(--ink-faint); letter-spacing: .08em; line-height: 2 }
+footer .address { margin-top: 16px }
+footer a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--terra) 40%, transparent); transition: color .3s }
+footer a:hover { color: var(--terra) }
+footer .wordmark { border-bottom: none; color: var(--moss) }
+
+.hub-chip {
+  position: fixed; bottom: 20px; left: 20px; z-index: 70; font-size: 10px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--ink-soft); text-decoration: none; background: color-mix(in srgb, var(--paper) 75%, transparent);
+  backdrop-filter: blur(10px); border: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); padding: 9px 15px; border-radius: 99px;
+  opacity: .6; transition: opacity .3s, border-color .3s;
+}
+.hub-chip:hover { opacity: 1; border-color: var(--terra) }
+
+@media (max-width: 900px) {
+  nav { padding: 20px 22px } .nav-links { display: none }
+  section { padding: 90px 22px }
+  #vineRail { width: 70px; opacity: .75 }
+  .alm-row { grid-template-columns: 80px 1fr; grid-template-rows: auto auto }
+  .alm-row p { grid-column: 1 / -1 }
+}
+@media (max-width: 760px) {
+  .hero-flower { display: none }
+  .hero-scroll { display: none }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important }
+  html { scroll-behavior: auto }
+  .rv { opacity: 1; transform: none }
+}

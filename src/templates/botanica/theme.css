@@ -1,0 +1,32 @@
+/* botanica — design tokens. Override any of these per site via `theme` (inline on <html>). */
+:root {
+  --paper: #f2ecdd;
+  --paper2: #eae2cd;
+  --paper3: #e0d6bc;
+  --ink: #2e3a2a;
+  --ink-soft: #57614d;
+  --ink-faint: #8a9179;
+  --moss: #3c4d34;
+  --leaf: #57724a;
+  --root: #8a6b3f;
+  --terra: #c4694a;
+  --terra-soft: #d99b7c;
+  --gold: #b08d3f;
+  --sand: #c9bd9d;
+
+  /* perfume bottles */
+  --glass-hi: #ffffff;
+  --glass-shade: #5c5c50;
+  --glass-body: #eef0e4;
+  --label-paper: #f7f3e6;
+  --bottle-verte-liquid: #7d9463;
+  --bottle-verte-cap: var(--moss);
+  --bottle-mai-liquid: var(--terra-soft);
+  --bottle-mai-cap: #8a5a40;
+  --bottle-pluie-liquid: #9db4ab;
+  --bottle-pluie-cap: #465a52;
+
+  --serif: "Fraunces", serif;
+  --sans: "Karla", sans-serif;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}
