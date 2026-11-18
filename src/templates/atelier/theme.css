@@ -1,0 +1,15 @@
+/* atelier — design tokens. Override any of these per site via `theme` (inline on <html>). */
+:root {
+  --paper: #f5f5f2;
+  --paper-hi: #fbfbf9;
+  --ink: #141414;
+  --ink-soft: #4a4a48;
+  --ink-faint: #9a9a94;
+  --rule: #dcdcd6;
+  /* text on the dark philosophy band */
+  --on-ink: #b9b9b2;
+  --on-ink-faint: #7a7a74;
+  --serif: "Bodoni Moda", serif;
+  --sans: "Figtree", sans-serif;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}
