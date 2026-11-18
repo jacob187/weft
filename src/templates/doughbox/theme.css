@@ -1,0 +1,23 @@
+/* doughbox — design tokens. Override any of these per site via `theme` (inline on <html>). */
+:root {
+  --cream: #fff3df;
+  --cream2: #ffe9c7;
+  --paper: #fff;
+  --cocoa: #4a2c1e;
+  --cocoa-soft: #7a5a48;
+  --cocoa-faint: #a98f7f;
+  --cocoa-pale: #c9a68f;
+  --butter: #ffd166;
+  --butter-deep: #eaa933;
+  --berry: #f7a6c1;
+  --berry-deep: #e56998;
+  --mint: #9fd8b4;
+  --sky: #a8d8f0;
+  /* pastry illustrations */
+  --dough: #ffb37a;
+  --crust: #e8b57e;
+  --disp: "Baloo 2", cursive;
+  --body: "Nunito", sans-serif;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --spring: cubic-bezier(.34, 1.8, .5, 1);
+}
