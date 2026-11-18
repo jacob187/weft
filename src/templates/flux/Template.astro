@@ -1,0 +1,123 @@
+---
+import Page from '~/layouts/Page.astro';
+import type { TemplateProps } from '~/templates/types';
+import type { Content } from './content';
+import type { ChartData } from './flux';
+import meta from './meta';
+import './theme.css';
+import './style.css';
+
+type Props = TemplateProps<Content>;
+const { content: c, theme, seo, showcase } = Astro.props;
+
+const delays = ['', 'd1', 'd2'];
+const { anomalies } = c.climate;
+const firstYear = anomalies[0].year;
+const lastYear = anomalies[anomalies.length - 1].year;
+const chartData: ChartData = {
+  climate: c.climate,
+  spiral: { months: c.spiral.months, rings: c.spiral.rings },
+  keeling: c.keeling.series,
+};
+const chartJson = JSON.stringify(chartData).replace(/</g, '\\u003c');
+---
+
+<Page
+  seo={{ ...c.seo, themeColor: meta.themeColor, favicon: meta.favicon, ...seo }}
+  fontsHref={meta.fontsHref}
+  theme={theme}
+>
+  <nav id="nav">
+    <a class="wordmark" href="#" set:html={c.wordmarkHtml} />
+    <ul class="nav-links">
+      {c.nav.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+    </ul>
+  </nav>
+
+  <main>
+    <header>
+      <div>
+        <span class="kicker">{c.hero.kicker}</span>
+        <h1 set:html={c.hero.headingHtml} />
+        <p class="hero-sub" set:html={c.hero.subHtml} />
+      </div>
+      <canvas id="stripes" aria-label={c.hero.stripesLabel}></canvas>
+      <div class="stripe-cap">
+        <span>{firstYear}</span><span id="stripeRead" data-idle={c.hero.stripesIdle}>{c.hero.stripesIdle}</span><span>{lastYear}</span>
+      </div>
+    </header>
+
+    <section id={c.spiral.id}>
+      <h2 class="rv" set:html={c.spiral.headingHtml} />
+      <div class="spiral-wrap">
+        <canvas id="spiral" class="rv" aria-label={c.spiral.label}></canvas>
+        <div class="sp-copy rv d1">
+          {c.spiral.paragraphsHtml.map((p) => <p set:html={p.replace('{year}', String(firstYear))} />)}
+          <div class="legend">
+            {c.spiral.legend.map((l) => <span><i style={`background:var(--${l.tone})`}></i>{l.label}</span>)}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id={c.keeling.id}>
+      <div class="keel-inner">
+        <h2 class="rv" set:html={c.keeling.headingHtml} />
+        <p class="hero-sub rv d1" set:html={c.keeling.bodyHtml} />
+        <svg id="keelChart" viewBox="0 0 1200 320" preserveAspectRatio="none" class="rv d1"></svg>
+        <div class="keel-cap">
+          {c.keeling.captions.map((t) => <span>{t}</span>)}
+        </div>
+      </div>
+    </section>
+
+    <section id={c.stats.id}>
+      <h2 class="rv" set:html={c.stats.headingHtml} />
+      <div class="stats">
+        {
+          c.stats.items.map((s, i) => (
+            <div class:list={['stat', 'rv', delays[i % 3]]}>
+              <div class="v"><i data-count={s.value} data-dec={s.decimals}>0</i>{s.suffix}</div>
+              <div class="k">{s.label}</div>
+            </div>
+          ))
+        }
+      </div>
+      <p class="note rv d1">{c.stats.note}</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot-grid">
+      <div>
+        <a class="wordmark" href="#" set:html={c.wordmarkHtml} />
+        <p class="foot-note" set:html={c.footer.noteHtml} />
+      </div>
+      <p>
+        <Fragment set:html={c.footer.creditHtml} />
+        {
+          showcase && (
+            <>
+              <br />
+              Part of the <a href="/">Fable Showcase</a> — 25 sites, 25 styles.
+            </>
+          )
+        }
+      </p>
+    </div>
+  </footer>
+
+  {showcase && <a class="hub-chip" href="/">← Fable Showcase</a>}
+
+  <script is:inline type="application/json" id="flux-data" set:html={chartJson} />
+</Page>
+
+<script>
+  import { reveal, scrolledClass } from '~/lib/motion';
+  import { initFlux } from './flux';
+
+  initFlux();
+  const nav = document.getElementById('nav');
+  if (nav) scrolledClass(nav);
+  reveal('.rv', { threshold: 0.15 });
+</script>

@@ -1,0 +1,31 @@
+/* flux — design tokens. Override any of these per site via `theme` (inline on <html>). */
+:root {
+  --ink: #0e1626;
+  --ink2: #131d31;
+  --paper: #f0ede6;
+  --dim: #94a0b5;
+  --faint: #4e5b73;
+  --scroll-thumb: #22304d;
+
+  --cold: #3b6fb5;
+  --cold2: #7aa6d6;
+  --warm: #e8b96b;
+  --hot: #d96b4a;
+  --crit: #b53b30;
+
+  /*
+   * Anomaly color scale for the stripes, spiral and keeling gradient: --scale-N is the color at the
+   * N-th value of `climate.scaleStops` in content (cold → hot), blended linearly between stops.
+   */
+  --scale-1: #265091;
+  --scale-2: var(--cold2);
+  --scale-3: #dcd6c8;
+  --scale-4: var(--warm);
+  --scale-5: var(--hot);
+  --scale-6: var(--crit);
+
+  --serif: "Spectral", serif;
+  --sans: "IBM Plex Sans", sans-serif;
+  --mono: "IBM Plex Mono", monospace;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}
