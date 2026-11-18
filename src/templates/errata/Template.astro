@@ -1,0 +1,144 @@
+---
+import Page from '~/layouts/Page.astro';
+import type { TemplateProps } from '~/templates/types';
+import type { Content, Placement } from './content';
+import type { DeskConfig } from './desk';
+import meta from './meta';
+import './theme.css';
+import './style.css';
+
+type Props = TemplateProps<Content>;
+const { content: c, theme, seo, showcase } = Astro.props;
+
+const d = c.desk;
+const deskConfig: DeskConfig = { closeGlyph: d.closeGlyph, spawn: d.spawn };
+
+const place = (p: Placement) =>
+  [
+    p.left !== undefined && `left:${p.left}`,
+    p.right !== undefined && `right:${p.right}`,
+    p.top !== undefined && `top:${p.top}`,
+    p.bottom !== undefined && `bottom:${p.bottom}`,
+    `max-width:${p.maxWidth}`,
+    `z-index:${p.z}`,
+    p.rotate !== undefined && `transform:rotate(${p.rotate}deg)`,
+  ]
+    .filter(Boolean)
+    .join(';');
+---
+
+<Page
+  seo={{ ...c.seo, themeColor: meta.themeColor, favicon: meta.favicon, ...seo }}
+  fontsHref={meta.fontsHref}
+  theme={theme}
+>
+  <nav>
+    <a class="logo" href="#" set:html={c.wordmarkHtml} />
+    <div class="nav-mid" aria-hidden="true"><span class="tk">{c.nav.ticker.repeat(4)}</span></div>
+    <div class="nav-links">
+      {c.nav.links.map((l) => <a href={l.href}>{l.label}</a>)}
+    </div>
+  </nav>
+
+  <header id="desk" data-config={JSON.stringify(deskConfig)} data-trail={d.trailGlyph}>
+    <div class="win" style={place(d.manifesto.placement)} data-drag>
+      <div class="bar"><span>{d.manifesto.title}</span><span class="x" data-x>{d.closeGlyph}</span></div>
+      <div class="body">
+        <h1 set:html={d.manifesto.headingHtml} />
+        <p class="lede">{d.manifesto.text}</p>
+        <span class="stamp">{d.manifesto.stamp}</span>
+      </div>
+    </div>
+    <div class="win" style={place(d.evidence.placement)} data-drag>
+      <div class="bar"><span>{d.evidence.title}</span><span class="x" data-x>{d.closeGlyph}</span></div>
+      <div class="body">
+        <p>{d.evidence.caption}</p>
+        <svg class="fig" width="100%" height="110" viewBox="0 0 240 110">
+          <rect class="fig-bg" width="240" height="110" />
+          <g class="fig-grid">
+            <line x1="60" y1="0" x2="60" y2="110" /><line x1="120" y1="0" x2="120" y2="110" />
+            <line x1="180" y1="0" x2="180" y2="110" /><line x1="0" y1="55" x2="240" y2="55" />
+          </g>
+          <rect class="fig-red" x="14" y="18" width="70" height="30" transform="rotate(-7 49 33)" />
+          <circle class="fig-blue" cx="150" cy="40" r="24" />
+          <rect class="fig-chart" x="170" y="70" width="52" height="22" transform="rotate(5 196 81)" />
+        </svg>
+      </div>
+    </div>
+    <div class="win" style={place(d.doNot.placement)} data-drag>
+      <div class="bar"><span>{d.doNot.title}</span><span class="x" data-x>{d.closeGlyph}</span></div>
+      <div class="body center">
+        <p class="lead">{d.doNot.lead}</p>
+        <button class="donot" id="donot">{d.doNot.button}</button>
+        <p class="counter">({d.doNot.counterLabel} <span id="spawnCount">0</span>)</p>
+      </div>
+    </div>
+    <div class="win" style={place(d.quote.placement)} data-drag>
+      <div class="bar"><span>{d.quote.title}</span><span class="x" data-x>{d.closeGlyph}</span></div>
+      <div class="body">
+        <p class="quote" set:html={d.quote.quoteHtml} />
+      </div>
+    </div>
+    <p class="hero-hint" set:html={d.hintHtml} />
+  </header>
+
+  <section id="rules">
+    <h2 class="rv" set:html={c.rules.headingHtml} />
+    <div class="rants rv">
+      {
+        c.rules.rants.map((r, i) => (
+          <div class="rant">
+            <span class="no">{i + 1}</span>
+            <div class="txt" set:html={r.html} />
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section id="specimen">
+    <h2 class="rv" set:html={c.specimen.headingHtml} />
+    <div class="spec-chaos rv">
+      <span class="note">{c.specimen.note}</span>
+      {c.specimen.lines.map((line, i) => <div class={`f${i + 1}`}>{line}</div>)}
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-grid">
+      <div>
+        <a class="logo foot-logo" href="#" set:html={c.wordmarkHtml} />
+        <p class="foot-note" set:html={c.footer.noteHtml} />
+      </div>
+      <p>
+        <Fragment set:html={c.footer.creditHtml} />
+        {
+          showcase && c.showcase && (
+            <>
+              <br />
+              <Fragment set:html={c.showcase.footerHtml} />
+            </>
+          )
+        }
+      </p>
+    </div>
+  </footer>
+
+  {showcase && c.showcase && <a class="hub-chip" href={c.showcase.chipHref}>{c.showcase.chipLabel}</a>}
+</Page>
+
+<script>
+  import { reveal } from '~/lib/motion';
+  import { initDesk } from './desk';
+  import { initCursorTrail } from './trail';
+
+  const desk = document.getElementById('desk');
+  if (desk) {
+    initDesk(desk);
+    initCursorTrail(desk.dataset.trail ?? '');
+  }
+  for (const a of document.querySelectorAll<HTMLAnchorElement>('.rant a[href="#"]')) {
+    a.addEventListener('click', (e) => e.preventDefault());
+  }
+  reveal('.rv', { threshold: 0.15 });
+</script>

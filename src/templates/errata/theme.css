@@ -1,0 +1,15 @@
+/* errata — design tokens. Override any of these per site via `theme` (inline on <html>). */
+:root {
+  --off: #f2f0ea;
+  --blk: #141414;
+  --red: #e03616;
+  --blue: #1133cc;
+  --chart: #d8e83a;
+  --white: #fff;
+  --mute: #777;
+  --rule: #ccc;
+  --mono1: "Rubik Mono One", monospace;
+  --type: "Courier Prime", monospace;
+  --arch: "Archivo", sans-serif;
+  --serif: Times, serif;
+}

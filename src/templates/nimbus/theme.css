@@ -1,0 +1,35 @@
+/* nimbus — design tokens. Override any of these per site via `theme` (inline on <html>). */
+:root {
+  --slate: #2b3242;
+  --slate2: #222836;
+  --deep: #181d28;
+  --peach: #f2c9a8;
+  --peach2: #e8a87c;
+  --cream: #f2e6d8;
+  --dim: #a5aebf;
+  --faint: #5d6678;
+  --scroll-thumb: #333c50;
+
+  /* Sky shader: per-mood gradient (bot→top) and cloud lit/shade colors. */
+  --dawn-top: #6b7a9e;
+  --dawn-bot: #f29e6b;
+  --dawn-lit: #ffe0bd;
+  --dawn-shade: #9e8085;
+  --storm-top: #212636;
+  --storm-bot: #4d5466;
+  --storm-lit: #8c91a1;
+  --storm-shade: #292b38;
+  --rain-top: #3b4559;
+  --rain-bot: #6b758a;
+  --rain-lit: #adb5c7;
+  --rain-shade: #4d5466;
+  /* Sun glow (dawn), lightning flash and rain streaks. */
+  --sun-core: #ffb86b;
+  --sun-halo: #ff804d;
+  --flash: #e6ebff;
+  --rain-drop: #dce4f0;
+
+  --serif: "Gloock", serif;
+  --sans: "Hanken Grotesk", sans-serif;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}

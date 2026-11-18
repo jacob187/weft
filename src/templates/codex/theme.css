@@ -1,0 +1,29 @@
+/* codex — design tokens. Override any of these per site via `theme` (inline on <html>). */
+:root {
+  --parch: #f0e6d0;
+  --parch2: #e6d9bc;
+  --parch3: #dccdaa;
+  --vellum: #e9dcc0;
+  --vellum-hi: #f6eeda;
+  --ink: #2e2618;
+  --ink-soft: #5c5138;
+  --faint: #877a5c;
+  --indigo: #2b3a6b;
+  --on-indigo: #c3c9de;
+  --rubric: #a83226;
+  --gold: #c9a13b;
+  --gold-hi: #eed37a;
+  --gold-lo: #8f6f22;
+  /* Illumination palette: vine leaves, landscape, sea, wax seal. */
+  --leaf: #4a5a34;
+  --moss: #5c7247;
+  --sage: #8a9a5b;
+  --sea: #dfeaf2;
+  --seal-hi: #c94a3a;
+  --seal-lo: #8f2a1c;
+  --seal-ink: #f3d9c8;
+  --gar: "EB Garamond", serif;
+  --cardo: "Cardo", serif;
+  --hand: "Caveat", cursive;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}

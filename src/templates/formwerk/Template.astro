@@ -1,0 +1,123 @@
+---
+import Page from '~/layouts/Page.astro';
+import type { TemplateProps } from '~/templates/types';
+import type { Content } from './content';
+import meta from './meta';
+import { posterTitle, type PosterConfig } from './poster';
+import './theme.css';
+import './style.css';
+
+type Props = TemplateProps<Content>;
+const { content: c, theme, seo, showcase } = Astro.props;
+
+const m = c.machine;
+const config: PosterConfig = {
+  words: m.words,
+  titles: m.titles,
+  numberSign: m.numberSign,
+  stampBefore: m.stampBefore,
+  stampAfter: m.stampAfter,
+  downloadPrefix: m.downloadPrefix,
+  initialSeed: m.initialSeed,
+};
+---
+
+<Page
+  seo={{ ...c.seo, themeColor: meta.themeColor, favicon: meta.favicon, ...seo }}
+  fontsHref={meta.fontsHref}
+  theme={theme}
+>
+  <nav id="nav">
+    <a class="logo" href="#"><span class="mark"><i></i><i></i><i></i></span>{c.brand}</a>
+    <ul class="nav-links">
+      {c.nav.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+    </ul>
+  </nav>
+
+  <main data-config={JSON.stringify(config)}>
+    <header>
+      <div>
+        <h1 set:html={c.hero.headingHtml} />
+        <p class="hero-sub" set:html={c.hero.subHtml} />
+        <div class="controls">
+          <button class="gen-btn" id="gen">{m.newLabel}</button>
+          <button class="dl-btn" id="dl">{m.downloadLabel}</button>
+          <span class="seed-read">{m.seedLabel} <b id="seedTxt">{String(m.initialSeed).padStart(4, '0')}</b> · {m.keyHintLabel} <kbd>{m.keyHintKey}</kbd></span>
+        </div>
+      </div>
+      <div class="poster-wrap">
+        <svg id="poster" viewBox="0 0 400 564" role="img" aria-label={m.posterLabel}></svg>
+        <div class="poster-cap"><span id="titleTxt">{posterTitle(m.initialSeed, m.titles, m.numberSign)}</span><span>{m.pressLabel}</span></div>
+      </div>
+    </header>
+
+    <section id="rules">
+      <h2 class="rv" set:html={c.rules.headingHtml} />
+      <div class="rules rv d1">
+        {
+          c.rules.items.map((r) => (
+            <div class="rule">
+              <div class="shape">
+                {r.shape === 'circle' && (
+                  <svg width="60" height="60"><circle class="shape-circle" cx="30" cy="30" r="26" /></svg>
+                )}
+                {r.shape === 'bar' && (
+                  <svg width="60" height="60"><rect class="shape-bar" x="6" y="24" width="48" height="12" /></svg>
+                )}
+                {r.shape === 'triangle' && (
+                  <svg width="60" height="60"><path class="shape-triangle" d="M30 6 L54 54 L6 54 Z" /></svg>
+                )}
+                {r.shape === 'type' && (
+                  <svg width="66" height="60"><text class="shape-type" x="0" y="46">{r.glyph}</text></svg>
+                )}
+              </div>
+              <h3>{r.title}</h3>
+              <p>{r.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id="seeds">
+      <h2 class="rv" set:html={c.seeds.headingHtml} />
+      <div class="mini-row rv d1">
+        {c.seeds.list.map((s) => <div class="mini" data-seed={s} title={`${c.seeds.seedTitle} ${s}`}></div>)}
+      </div>
+      <p class="mini-note rv d1">{c.seeds.note}</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="#"><span class="mark"><i></i><i></i><i></i></span>{c.brand}</a>
+        <p class="foot-note" set:html={c.footer.noteHtml} />
+      </div>
+      <p>
+        <Fragment set:html={c.footer.creditHtml} />
+        {
+          showcase && c.showcase && (
+            <>
+              <br />
+              <Fragment set:html={c.showcase.footerHtml} />
+            </>
+          )
+        }
+      </p>
+    </div>
+  </footer>
+
+  {showcase && c.showcase && <a class="hub-chip" href={c.showcase.chipHref}>{c.showcase.chipLabel}</a>}
+</Page>
+
+<script>
+  import { reveal, scrolledClass } from '~/lib/motion';
+  import { initPosterMachine } from './poster';
+
+  const main = document.querySelector<HTMLElement>('main[data-config]');
+  if (main) initPosterMachine(main);
+  const nav = document.getElementById('nav');
+  if (nav) scrolledClass(nav);
+  reveal('.rv', { threshold: 0.15 });
+</script>

@@ -1,0 +1,117 @@
+---
+import Page from '~/layouts/Page.astro';
+import type { TemplateProps } from '~/templates/types';
+import type { Content } from './content';
+import meta from './meta';
+import './theme.css';
+import './style.css';
+
+type Props = TemplateProps<Content>;
+const { content: c, theme, seo, showcase } = Astro.props;
+---
+
+<Page
+  seo={{ ...c.seo, themeColor: meta.themeColor, favicon: meta.favicon, ...seo }}
+  fontsHref={meta.fontsHref}
+  theme={theme}
+>
+  <nav id="nav">
+    <a class="wordmark" href="#" set:html={c.wordmarkHtml} />
+    <ul class="nav-links">
+      {c.nav.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+    </ul>
+  </nav>
+
+  <header id="hero">
+    <canvas id="skygl" aria-label={c.hero.skyLabel}></canvas>
+    <canvas id="rainfx" aria-hidden="true"></canvas>
+    <div class="hero-ui">
+      <div class="hero-copy">
+        <h1 set:html={c.hero.headingHtml} />
+        <p>{c.hero.text}</p>
+      </div>
+      <div class="modes" role="group" aria-label={c.hero.moodsLabel}>
+        <span class="lbl">{c.hero.moodsCaption}</span>
+        {
+          c.hero.moods.map((m, i) => (
+            <button class={i === 0 ? 'mode on' : 'mode'} data-mode={m.id}>
+              <span class="ico">{m.icon}</span>
+              <span>
+                {m.label}
+                <small>{m.hint}</small>
+              </span>
+            </button>
+          ))
+        }
+      </div>
+    </div>
+  </header>
+
+  <section id="why">
+    <span class="kicker rv">{c.why.kicker}</span>
+    <h2 class="rv d1" set:html={c.why.headingHtml} />
+    <div class="feats">
+      {
+        c.why.features.map((f, i) => (
+          <div class={i === 0 ? 'feat rv' : `feat rv d${i}`}>
+            <span class="no">{f.no}</span>
+            <h3>{f.title}</h3>
+            <p>{f.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section id="words">
+    <div id="quote">
+      <span class="kicker rv">{c.words.kicker}</span>
+      <blockquote class="rv d1" set:html={c.words.quoteHtml} />
+      <cite class="rv d2">{c.words.cite}</cite>
+    </div>
+  </section>
+
+  <section id="get">
+    <div class="dl-band rv">
+      <h3>{c.get.heading}</h3>
+      <p>{c.get.text}</p>
+      <a class="btn" href={c.get.cta.href}>{c.get.cta.label}</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-grid">
+      <div>
+        <a class="wordmark" href="#" set:html={c.wordmarkHtml} />
+        <p class="foot-note" set:html={c.footer.noteHtml} />
+      </div>
+      <p>
+        <Fragment set:html={c.footer.creditHtml} />
+        {
+          showcase && c.showcase && (
+            <>
+              <br />
+              <Fragment set:html={c.showcase.footerHtml} />
+            </>
+          )
+        }
+      </p>
+    </div>
+  </footer>
+
+  {showcase && c.showcase && <a class="hub-chip" href={c.showcase.chipHref}>{c.showcase.chipLabel}</a>}
+</Page>
+
+<script>
+  import { reveal, scrolledClass } from '~/lib/motion';
+  import { initHero } from './hero';
+
+  const hero = document.getElementById('hero');
+  if (hero) initHero(hero);
+  const nav = document.getElementById('nav');
+  if (nav) scrolledClass(nav);
+  for (const a of document.querySelectorAll<HTMLAnchorElement>('.btn[href="#"]')) {
+    a.addEventListener('click', (e) => e.preventDefault());
+  }
+  reveal('.rv', { threshold: 0.15 });
+</script>
