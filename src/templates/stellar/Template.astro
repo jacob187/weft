@@ -1,0 +1,127 @@
+---
+import Page from '~/layouts/Page.astro';
+import type { TemplateProps } from '~/templates/types';
+import type { Content } from './content';
+import meta from './meta';
+import './theme.css';
+import './style.css';
+
+type Props = TemplateProps<Content>;
+const { content: c, theme, seo, showcase } = Astro.props;
+const delay = (i: number) => (i ? `rv d${i}` : 'rv');
+---
+
+<Page
+  seo={{ ...c.seo, themeColor: meta.themeColor, favicon: meta.favicon, ...seo }}
+  fontsHref={meta.fontsHref}
+  theme={theme}
+>
+  <nav id="nav">
+    <a class="wordmark" href="#" set:html={c.wordmarkHtml} />
+    <ul class="nav-links">
+      {c.nav.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+    </ul>
+  </nav>
+
+  <header>
+    <canvas
+      id="cosmos"
+      aria-label={c.hero.canvasLabel}
+      data-word={c.hero.morph.word}
+      data-shape-names={JSON.stringify(c.hero.morph.shapeNames)}></canvas>
+    <div class="hero-ui">
+      <div class="hero-copy">
+        <span class="kick">{c.hero.kicker}</span>
+        <p set:html={c.hero.bodyHtml} />
+        <a class="btn" href={c.hero.cta.href}>{c.hero.cta.label}</a>
+      </div>
+      <div class="morph-label">{c.hero.morph.label}<b id="morphName">{c.hero.morph.word}</b></div>
+    </div>
+  </header>
+
+  <section id={c.shows.id}>
+    <span class="kicker rv">{c.shows.kicker}</span>
+    <h2 class="rv d1" set:html={c.shows.headingHtml} />
+    <div class="shows rv d2">
+      {
+        c.shows.items.map((s) => (
+          <div class="show">
+            <div class="time">{s.time}<small>{s.duration}</small></div>
+            <div>
+              <h3>{s.title}</h3>
+              <p>{s.description}</p>
+            </div>
+            <span class="age">{s.age}</span>
+            <a class="bk" href={s.book.href}>{s.book.label}</a>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section id={c.tonight.id}>
+    <div class="tn-inner">
+      <span class="kicker rv">{c.tonight.kicker}</span>
+      <h2 class="rv d1" set:html={c.tonight.headingHtml} />
+      <div class="objects">
+        {
+          c.tonight.objects.map((o, i) => (
+            <div class={`obj ${delay(i)}`}>
+              <span class="mag">{o.magnitude}</span>
+              <div class="sky" data-obj={o.kind}></div>
+              <h3>{o.name}</h3>
+              <div class="type">{o.type}</div>
+              <p>{o.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id={c.membership.id}>
+    <span class="kicker rv">{c.membership.kicker}</span>
+    <h2 class="rv d1" set:html={c.membership.headingHtml} />
+    <div class="mem-band rv d2">
+      <div>
+        <h3 set:html={c.membership.offerHtml} />
+        <p>{c.membership.description}</p>
+      </div>
+      <a class="btn" href={c.membership.cta.href}>{c.membership.cta.label}</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-grid">
+      <div>
+        <a class="wordmark" href="#" set:html={c.wordmarkHtml} />
+        <p class="foot-note" set:html={c.footer.noteHtml} />
+      </div>
+      {
+        (c.footer.creditHtml || showcase) && (
+          <p>
+            {c.footer.creditHtml && <Fragment set:html={c.footer.creditHtml} />}
+            {c.footer.creditHtml && showcase && <br />}
+            {showcase && (<>Part of the <a href="/">Fable Showcase</a> — 25 sites, 25 styles.</>)}
+          </p>
+        )
+      }
+    </div>
+  </footer>
+
+  {showcase && <a class="hub-chip" href="/">← Fable Showcase</a>}
+</Page>
+
+<script>
+  import { reveal, scrolledClass } from '~/lib/motion';
+  import { initCosmos } from './cosmos';
+  import { initSkyIcons } from './skies';
+
+  const cosmos = document.getElementById('cosmos');
+  if (cosmos instanceof HTMLCanvasElement) initCosmos(cosmos, document.getElementById('morphName'));
+  initSkyIcons(document.querySelectorAll<HTMLElement>('[data-obj]'));
+
+  const nav = document.getElementById('nav');
+  if (nav) scrolledClass(nav);
+  reveal('.rv', { threshold: 0.15 });
+</script>
