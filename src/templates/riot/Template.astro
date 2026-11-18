@@ -1,0 +1,160 @@
+---
+import Page from '~/layouts/Page.astro';
+import type { TemplateProps } from '~/templates/types';
+import type { Content } from './content';
+import meta from './meta';
+import { scatterSvg } from './scatter';
+import './theme.css';
+import './style.css';
+
+type Props = TemplateProps<Content>;
+const { content: c, theme, seo, showcase = false } = Astro.props;
+
+const delay = (i: number) => (i > 0 ? ` d${Math.min(i, 2)}` : '');
+// Each track slides by half its width, so it needs enough copies to stay wider than any screen.
+const MARQUEE_COPIES = 8;
+const marqueeText = (items: string[]) => items.map((t) => `${t} ${c.marqueeSeparator}`).join(' ');
+---
+
+<Page
+  seo={{ ...c.seo, themeColor: meta.themeColor, favicon: meta.favicon, ...seo }}
+  fontsHref={meta.fontsHref}
+  theme={theme}
+>
+  <nav id="nav">
+    <a class="logo" href="#" set:html={c.brandHtml} />
+    <ul class="nav-links">
+      {c.nav.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      <li><a class="tix" href={c.navCta.href}>{c.navCta.label}</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <svg
+      class="scatter"
+      viewBox="0 0 1200 800"
+      preserveAspectRatio="xMidYMid slice"
+      aria-hidden="true"
+      set:html={scatterSvg()}
+    />
+    <div class="hero-dates">
+      {
+        c.hero.dates.map((d, i) => (
+          <Fragment>
+            {i > 0 && <b>{c.hero.dateSeparator}</b>}
+            <span>{d}</span>
+          </Fragment>
+        ))
+      }
+    </div>
+    <div class="riot-type" id="riotType" aria-label={c.hero.titleLabel}>
+      <span class="row r1" data-word={c.hero.title[0]}></span>
+      <span class="row r2" data-word={c.hero.title[1]}></span>
+    </div>
+    <p class="hero-sub">
+      <Fragment set:html={c.hero.subHtml} /><br />
+      <span class="hover-hint">{c.hero.hint}</span>
+    </p>
+    <div class="hero-cta">
+      <a class="big-tix" href={c.hero.cta.href}>{c.hero.cta.label}</a>
+    </div>
+  </header>
+
+  {
+    c.marquees.map((m, i) => (
+      <div class={`mq ${i % 2 ? 'b' : 'a'}`} aria-hidden="true">
+        <div class="mq-track">
+          {Array.from({ length: MARQUEE_COPIES }, () => <span>{marqueeText(m.items)}</span>)}
+        </div>
+      </div>
+    ))
+  }
+
+  <section id={c.lineup.id}>
+    <span class="kicker rv">{c.lineup.kicker}</span>
+    <h2 class="rv d1" set:html={c.lineup.headingHtml} />
+    <div class="lineup">
+      {
+        c.lineup.acts.map((a) => (
+          <a class={`act t${a.tier} rv`} href={a.href}>
+            {a.name}
+            <span class="day">{a.slot}</span>
+          </a>
+        ))
+      }
+      <p class="more rv">{c.lineup.more}</p>
+    </div>
+  </section>
+
+  <section id={c.stages.id}>
+    <div class="st-inner">
+      <span class="kicker rv">{c.stages.kicker}</span>
+      <h2 class="rv d1" set:html={c.stages.headingHtml} />
+      <div class="stage-grid rv d2">
+        {
+          c.stages.items.map((s) => (
+            <div class="stage">
+              <h3>{s.name}</h3>
+              <div class="cap">{s.cap}</div>
+              <p>{s.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id={c.tickets.id}>
+    <span class="kicker rv">{c.tickets.kicker}</span>
+    <h2 class="rv d1" set:html={c.tickets.headingHtml} />
+    <div class="tiers">
+      {
+        c.tickets.tiers.map((t, i) => (
+          <div class={`tier rv${delay(i)}`}>
+            {t.ribbon && <span class="soldout">{t.ribbon}</span>}
+            <h3>{t.name}</h3>
+            <div class="pr">
+              {t.price}
+              <small>{t.unit}</small>
+            </div>
+            <ul>{t.perks.map((p) => <li>{p}</li>)}</ul>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="logo" href="#" set:html={c.brandHtml} />
+        <p set:html={c.footer.noteHtml} />
+      </div>
+      <p>
+        <Fragment set:html={c.footer.creditHtml} />
+        {
+          showcase && (
+            <>
+              <br />
+              Part of the <a href="/">Fable Showcase</a> — 25 sites, 25 styles.
+            </>
+          )
+        }
+      </p>
+    </div>
+  </footer>
+
+  {showcase && <a class="hub-chip" href="/">← Fable Showcase</a>}
+</Page>
+
+<script>
+  import { reveal, scrolledClass } from '~/lib/motion';
+  import { initRiotType } from './riotType';
+
+  const type = document.getElementById('riotType');
+  if (type) initRiotType(type);
+
+  const nav = document.getElementById('nav');
+  if (nav) scrolledClass(nav);
+  reveal('.rv', { threshold: 0.12 });
+</script>
