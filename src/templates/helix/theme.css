@@ -1,0 +1,18 @@
+/* helix — design tokens. Override any of these per site via `theme` (inline on <html>). */
+:root {
+  --coal: #101113;
+  --coal2: #16181b;
+  --panel: color-mix(in srgb, var(--coal2) 72%, transparent);
+  --chrome: #c9ced6;
+  --amber: #e8a33d;
+  --tx: #eceef1;
+  --dim: #9aa2ad;
+  --faint: #565d68;
+  --scroll-thumb: #24272c;
+  /* 3D scene: pedestal disc and ambient light */
+  --pedestal: #191b1e;
+  --ambient: #404550;
+  --disp: "Michroma", sans-serif;
+  --body: "Instrument Sans", sans-serif;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}

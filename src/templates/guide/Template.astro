@@ -1,0 +1,74 @@
+---
+import Page from '~/layouts/Page.astro';
+import type { TemplateProps } from '~/templates/types';
+import type { Content } from './content';
+import meta from './meta';
+import './theme.css';
+import './style.css';
+
+type Props = TemplateProps<Content>;
+const { content: c, theme, seo } = Astro.props;
+---
+
+<Page
+  seo={{ ...c.seo, themeColor: meta.themeColor, favicon: meta.favicon, ...seo }}
+  fontsHref={meta.fontsHref}
+  theme={theme}
+>
+  <nav>
+    <a class="wordmark" href={c.wordmarkHref} set:html={c.wordmarkHtml} />
+    <a class="back" href={c.back.href}>{c.back.label}</a>
+  </nav>
+
+  <div class="wrap">
+    <span class="kick">{c.hero.kicker}</span>
+    <h1 set:html={c.hero.headingHtml} />
+    <p class="lede" set:html={c.hero.ledeHtml} />
+
+    {
+      c.sections.map((s) => (
+        <>
+          <h2>
+            <span class="num">{s.num}</span>
+            {s.title}
+          </h2>
+          {s.blocks.map((b) => {
+            if (b.type === 'paragraph') return <p set:html={b.textHtml} />;
+            if (b.type === 'callout') {
+              return (
+                <div class="callout">
+                  <p set:html={b.textHtml} />
+                </div>
+              );
+            }
+            if (b.type === 'list') {
+              const Tag = b.ordered ? 'ol' : 'ul';
+              return <Tag>{b.itemsHtml.map((item) => <li set:html={item} />)}</Tag>;
+            }
+            if (b.type === 'code') {
+              return <pre><code set:html={b.codeHtml} /></pre>;
+            }
+            return (
+              <div class="table-scroll">
+                <table>
+                  <tr>{b.head.map((h) => <th>{h}</th>)}</tr>
+                  {b.rowsHtml.map((row) => <tr>{row.map((cell) => <td set:html={cell} />)}</tr>)}
+                </table>
+              </div>
+            );
+          })}
+        </>
+      ))
+    }
+
+    <div class="foot-cta">
+      <h3>{c.cta.title}</h3>
+      <p>{c.cta.body}</p>
+      <a class="btn" href={c.cta.button.href}>{c.cta.button.label}</a>
+    </div>
+  </div>
+
+  <footer>
+    <p set:html={c.footerHtml} />
+  </footer>
+</Page>
