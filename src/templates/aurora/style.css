@@ -1,0 +1,164 @@
+/* aurora — layout & components. Colors come from theme.css tokens only. */
+* { margin: 0; padding: 0; box-sizing: border-box }
+html { scroll-behavior: smooth }
+body {
+  background: var(--night); color: var(--icy); font-family: var(--sans); font-weight: 300;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+::selection { background: var(--mint); color: var(--night) }
+::-webkit-scrollbar { width: 10px }
+::-webkit-scrollbar-track { background: var(--night) }
+::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 5px }
+::-webkit-scrollbar-thumb:hover { background: var(--mint) }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50; display: flex; align-items: center;
+  justify-content: space-between; padding: 26px 46px; transition: all .5s var(--ease);
+}
+nav.scrolled {
+  background: color-mix(in srgb, var(--night) 68%, transparent); backdrop-filter: blur(16px); padding: 15px 46px;
+  border-bottom: 1px solid color-mix(in srgb, var(--mint) 10%, transparent);
+}
+.wordmark {
+  font-family: var(--sans); font-weight: 200; font-size: 20px; letter-spacing: .55em;
+  color: var(--icy); text-decoration: none; text-transform: uppercase;
+}
+.wordmark b { color: var(--mint); font-weight: 400 }
+.nav-links { display: flex; gap: 36px; list-style: none }
+.nav-links a {
+  color: var(--icy-dim); text-decoration: none; font-size: 11px; letter-spacing: .26em;
+  text-transform: uppercase; transition: color .3s; position: relative; padding-bottom: 4px;
+}
+.nav-links a::after {
+  content: ""; position: absolute; left: 50%; bottom: 0; width: 4px; height: 4px;
+  border-radius: 50%; background: var(--mint); transform: translateX(-50%) scale(0); transition: transform .35s var(--ease);
+}
+.nav-links a:hover { color: var(--icy) }
+.nav-links a:hover::after { transform: translateX(-50%) scale(1) }
+
+/* hero */
+header { position: relative; height: 100vh; min-height: 620px; overflow: hidden; display: flex; align-items: center; justify-content: center; text-align: center }
+#sky { position: absolute; inset: 0; width: 100%; height: 100% }
+#sky.no-webgl { background: linear-gradient(180deg, var(--night), var(--night2)) }
+.mountains { position: absolute; bottom: -2px; left: 0; right: 0; pointer-events: none }
+.mountains .far { fill: var(--ridge-far) }
+.mountains .near { fill: var(--ridge-near) }
+.hero-content { position: relative; z-index: 3; padding: 0 24px; margin-top: -4vh }
+.hero-kicker { font-size: 11px; letter-spacing: .6em; text-transform: uppercase; color: var(--mint); margin-bottom: 26px }
+h1 {
+  font-family: var(--serif); font-weight: 300; font-size: clamp(54px, 8.6vw, 124px); line-height: 1.02;
+  text-shadow: 0 2px 40px color-mix(in srgb, var(--night) 60%, transparent);
+}
+h1 em {
+  font-style: italic; background: linear-gradient(100deg, var(--mint), var(--violet));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero-sub { max-width: 480px; margin: 30px auto 42px; font-size: 15px; line-height: 1.95; color: var(--icy-dim) }
+.btn {
+  display: inline-block; padding: 16px 44px; border-radius: 99px; color: var(--night);
+  background: linear-gradient(100deg, var(--mint), var(--mint-hi)); text-decoration: none; font-size: 11px;
+  font-weight: 500; letter-spacing: .28em; text-transform: uppercase;
+  box-shadow: 0 10px 40px color-mix(in srgb, var(--mint) 25%, transparent); transition: transform .4s var(--ease), box-shadow .4s;
+}
+.btn:hover { transform: translateY(-3px); box-shadow: 0 18px 60px color-mix(in srgb, var(--mint) 40%, transparent) }
+.coord { position: absolute; bottom: 70px; left: 46px; z-index: 3; font-size: 10px; letter-spacing: .3em; color: var(--icy-faint); text-transform: uppercase }
+.hero-scroll {
+  position: absolute; bottom: 28px; right: 46px; z-index: 3; font-size: 10px;
+  letter-spacing: .3em; color: var(--icy-faint); text-transform: uppercase;
+  display: flex; align-items: center; gap: 12px;
+}
+.hero-scroll::after { content: ""; width: 34px; height: 1px; background: linear-gradient(90deg, var(--mint), transparent) }
+
+section { padding: 130px 46px; max-width: 1280px; margin: 0 auto; position: relative }
+.kicker { font-size: 10px; letter-spacing: .5em; text-transform: uppercase; color: var(--mint); display: block; margin-bottom: 20px }
+h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(34px, 4.4vw, 60px); line-height: 1.1 }
+h2 em { font-style: italic; color: var(--mint) }
+.rv { opacity: 0; transform: translateY(34px); transition: opacity 1s var(--ease), transform 1s var(--ease) }
+.rv.in { opacity: 1; transform: none }
+.rv.d1 { transition-delay: .12s } .rv.d2 { transition-delay: .24s } .rv.d3 { transition-delay: .36s }
+
+/* experiences */
+.exp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 24px; margin-top: 70px }
+.exp {
+  position: relative; border-radius: 20px; padding: 40px 32px 36px; overflow: hidden;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--icy) 5.5%, transparent), color-mix(in srgb, var(--icy) 2%, transparent));
+  border: 1px solid color-mix(in srgb, var(--icy) 10%, transparent); backdrop-filter: blur(8px);
+  transition: transform .5s var(--ease), border-color .5s, background .5s;
+}
+.exp:hover { transform: translateY(-8px); border-color: color-mix(in srgb, var(--mint) 35%, transparent) }
+.exp::before {
+  content: ""; position: absolute; top: -60px; right: -60px; width: 180px; height: 180px;
+  border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--mint) 14%, transparent), transparent 70%);
+  opacity: 0; transition: opacity .6s;
+}
+.exp:hover::before { opacity: 1 }
+.exp .ico { margin-bottom: 26px }
+.exp .s-mint { stroke: var(--mint) }
+.exp .s-violet { stroke: var(--violet) }
+.exp h3 { font-family: var(--serif); font-weight: 400; font-size: 26px; margin-bottom: 12px }
+.exp p { font-size: 13.5px; line-height: 1.9; color: var(--icy-dim) }
+.exp .tno { position: absolute; top: 26px; right: 28px; font-family: var(--serif); font-style: italic; color: var(--icy-faint); font-size: 15px }
+.exp .temp {
+  display: inline-block; margin-top: 20px; font-size: 11px; letter-spacing: .2em;
+  color: var(--mint); border: 1px solid color-mix(in srgb, var(--mint) 30%, transparent); border-radius: 99px; padding: 6px 14px;
+}
+
+/* forecast band */
+#forecast { max-width: none; background: linear-gradient(180deg, var(--night) 0%, var(--night2) 50%, var(--night) 100%) }
+.fc-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: center }
+.gauge-wrap { display: flex; align-items: center; gap: 36px; margin-top: 50px }
+#gauge { filter: drop-shadow(0 0 30px color-mix(in srgb, var(--mint) 20%, transparent)) }
+#gauge text { font-family: var(--sans) }
+#gauge .gauge-num { font-family: var(--serif) }
+.fc-note { font-size: 13px; line-height: 1.9; color: var(--icy-dim); max-width: 380px }
+.fc-note b { color: var(--mint); font-weight: 400 }
+.fc-stats { display: flex; flex-direction: column; gap: 22px }
+.fc-stat { border-left: 1px solid color-mix(in srgb, var(--mint) 25%, transparent); padding-left: 20px }
+.fc-stat .v { font-family: var(--serif); font-size: 30px; font-style: italic; color: var(--icy) }
+.fc-stat .k { font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--icy-faint); margin-top: 4px }
+
+/* rooms */
+.rooms { margin-top: 70px; display: flex; flex-direction: column }
+.room {
+  display: grid; grid-template-columns: 110px 1fr auto; gap: 30px; align-items: center;
+  padding: 32px 10px; border-top: 1px solid color-mix(in srgb, var(--icy) 9%, transparent); text-decoration: none; color: var(--icy);
+  transition: background .4s, padding-left .4s;
+}
+.room:last-child { border-bottom: 1px solid color-mix(in srgb, var(--icy) 9%, transparent) }
+.room:hover { background: color-mix(in srgb, var(--icy) 3%, transparent); padding-left: 26px }
+.room .no { font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--icy-faint) }
+.room h3 { font-family: var(--serif); font-weight: 400; font-size: 28px }
+.room p { font-size: 12.5px; color: var(--icy-dim); margin-top: 6px; line-height: 1.7 }
+.room .end { display: flex; align-items: center; gap: 26px }
+.room .pr { font-size: 12px; letter-spacing: .2em; color: var(--mint); white-space: nowrap }
+.room .arrow { color: var(--icy-faint); transition: transform .4s var(--ease), color .4s; font-size: 20px }
+.room:hover .arrow { transform: translateX(8px); color: var(--mint) }
+
+footer { border-top: 1px solid color-mix(in srgb, var(--icy) 8%, transparent); padding: 70px 46px 46px; background: var(--night2) }
+.foot-grid { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; align-items: flex-end }
+footer p { font-size: 12px; color: var(--icy-faint); line-height: 2; letter-spacing: .06em }
+footer .address { margin-top: 16px }
+footer a { color: var(--icy-dim); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--mint) 35%, transparent); transition: color .3s }
+footer a:hover { color: var(--mint) }
+
+.hub-chip {
+  position: fixed; bottom: 20px; left: 20px; z-index: 70; font-size: 10px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--icy-dim); text-decoration: none; background: color-mix(in srgb, var(--night) 60%, transparent);
+  backdrop-filter: blur(10px); border: 1px solid color-mix(in srgb, var(--icy) 14%, transparent); padding: 9px 15px; border-radius: 99px;
+  opacity: .55; transition: opacity .3s, border-color .3s;
+}
+.hub-chip:hover { opacity: 1; border-color: var(--mint) }
+
+@media (max-width: 900px) {
+  nav { padding: 20px 22px } .nav-links { display: none }
+  section { padding: 96px 22px }
+  .coord { left: 22px } .hero-scroll { right: 22px }
+  .fc-inner { grid-template-columns: 1fr; gap: 40px }
+  .room { grid-template-columns: 1fr auto; grid-template-rows: auto auto }
+  .room .no { display: none }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important }
+  html { scroll-behavior: auto }
+  .rv { opacity: 1; transform: none }
+}

@@ -1,0 +1,50 @@
+/* obsidian — design tokens. Override any of these per site via `theme` (inline on <html>). */
+:root {
+  --ink: #0a0a0c;
+  --ink2: #101014;
+  --ink3: #17171c;
+  --ink4: #0d0d11;
+  --gold: #c9a24b;
+  --gold-hi: #f0d089;
+  --gold-lo: #8a6a28;
+  --gold-mid: #e7c268;
+  --gold-deep: #6b5220;
+  --bone: #e9e4d8;
+  --bone-dim: #9b968b;
+  --bone-faint: #5d5a52;
+  --scroll-thumb: #2a2a30;
+
+  /* hero fallback gradient (visible while WebGL is unavailable) */
+  --hero-glow: #3a2c10;
+  --hero-mid: #14100a;
+
+  /* raymarch shader colors, quantised from the original GLSL vec3 constants */
+  --gl-gold: #c79438;
+  --gl-spec: #ffd980;
+  --gl-rim: #ffe699;
+  --gl-bg-far: #131210;
+  --gl-bg-near: #070709;
+  --gl-bloom: #0d0903;
+
+  /* watch dials */
+  --dial-edge: #050506;
+  --dial-obsidian-face: #0b0b0e;
+  --dial-obsidian-face2: #1a1a20;
+  --dial-obsidian-idx: var(--gold);
+  --dial-obsidian-hand: var(--bone);
+  --dial-obsidian-sec: var(--gold);
+  --dial-meteor-face: #2c2c31;
+  --dial-meteor-face2: #45454c;
+  --dial-meteor-idx: var(--bone);
+  --dial-meteor-hand: var(--bone);
+  --dial-meteor-sec: var(--gold);
+  --dial-forest-face: #0d1f16;
+  --dial-forest-face2: #1c3a2a;
+  --dial-forest-idx: var(--gold);
+  --dial-forest-hand: var(--bone);
+  --dial-forest-sec: #e06a4a;
+
+  --serif: "Cormorant Garamond", serif;
+  --sans: "Inter", sans-serif;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}

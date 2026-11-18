@@ -1,0 +1,32 @@
+/* aurora — design tokens. Override any of these per site via `theme` (inline on <html>). */
+:root {
+  --night: #060b18;
+  --night2: #0a1226;
+  --night3: #101b36;
+  --mint: #78e6c8;
+  --mint-hi: #a4ecd4;
+  --violet: #9d8bf0;
+  --icy: #d7e8f5;
+  --icy-dim: #8fa5bd;
+  --icy-faint: #54677f;
+  --scroll-thumb: #1c2a4a;
+
+  /* mountain ridges and KP gauge */
+  --ridge-far: #04070f;
+  --ridge-near: #02040a;
+  --gauge-track: #182645;
+  --gauge-tick-off: #2a3a5c;
+
+  /* aurora shader colors, quantised from the original GLSL vec3 constants */
+  --gl-sky-low: #020409;
+  --gl-sky-high: #060b1a;
+  --gl-star: #cce6ff;
+  --gl-curtain: #2ef2a8;
+  --gl-curtain-hi: #8059f2;
+  --gl-fringe: #e64d8c;
+  --gl-horizon: #0d1f1f;
+
+  --serif: "Cormorant", serif;
+  --sans: "Outfit", sans-serif;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}

@@ -1,0 +1,11 @@
+/* monolith — design tokens. Override any of these per site via `theme` (inline on <html>). */
+:root {
+  --bg: #f1efe9;
+  --blk: #111111;
+  --red: #ff2b00;
+  --mute: #777777;
+  --white: #ffffff;
+  --disp: "Anybody", sans-serif;
+  --grot: "Space Grotesk", sans-serif;
+  --mono: "Space Mono", monospace;
+}

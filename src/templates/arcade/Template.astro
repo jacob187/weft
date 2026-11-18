@@ -1,0 +1,163 @@
+---
+import Page from '~/layouts/Page.astro';
+import type { TemplateProps } from '~/templates/types';
+import type { Content } from './content';
+import meta from './meta';
+import { spriteShadow } from './sprites';
+import './theme.css';
+import './style.css';
+
+type Props = TemplateProps<Content>;
+const { content: c, theme, seo, showcase } = Astro.props;
+
+/** Reveal-delay class for the nth staggered element (none for 0). */
+const delay = (n: number) => (n ? `d${n}` : '');
+---
+
+<Page
+  seo={{ ...c.seo, themeColor: meta.themeColor, favicon: meta.favicon, ...seo }}
+  fontsHref={meta.fontsHref}
+  theme={theme}
+>
+  <nav id="nav">
+    <a class="logo" href="#" set:html={c.logoHtml} />
+    <ul class="nav-links">
+      {c.nav.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+    </ul>
+    <button class="coin" id="coinBtn">{c.coin.label}</button>
+  </nav>
+
+  <header>
+    <canvas id="stars" aria-hidden="true"></canvas>
+    <div class="sun" aria-hidden="true"></div>
+    <canvas id="grid" aria-hidden="true"></canvas>
+    <div class="hero-content">
+      <div class="sign rv">
+        <span class="open">{c.hero.open}</span>
+        <h1 set:html={c.hero.headingHtml} />
+      </div>
+      <p class="hero-tag rv d1" set:html={c.hero.taglineHtml} />
+    </div>
+    <span
+      class="credits"
+      id="creditsTxt"
+      data-prefix={c.coin.credits}
+      data-warning={c.coin.warning}
+      data-unlocked={c.coin.unlocked}>{c.coin.credits} 0</span
+    >
+  </header>
+
+  <section id="games">
+    <span class="kicker rv">{c.games.kicker}</span>
+    <h2 class="rv d1" set:html={c.games.headingHtml} />
+    <div class="cabs">
+      {
+        c.games.cabinets.map((cab, i) => (
+          <div class={`cab rv ${delay(i)}`} style={`--c:var(--${cab.accent})`}>
+            <div class="sprite">
+              <div class="pixel" style={`box-shadow:${spriteShadow(cab.sprite)}`} />
+            </div>
+            <h3 set:html={cab.titleHtml} />
+            <div class="genre">{cab.genre}</div>
+            <div class="hi">
+              {cab.hi}
+              <small>{cab.note}</small>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section id="events">
+    <div class="ev-inner">
+      <span class="kicker rv">{c.events.kicker}</span>
+      <h2 class="rv d1" set:html={c.events.headingHtml} />
+      <div class="ev-rows rv d2">
+        {
+          c.events.items.map((e) => (
+            <div class="ev">
+              <span class="day">
+                {e.day}
+                <br />
+                {e.time}
+              </span>
+              <span>
+                <h3>{e.title}</h3>
+                <p>{e.text}</p>
+              </span>
+              <span class="fee">{e.fee}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="menu">
+    <span class="kicker rv">{c.menu.kicker}</span>
+    <h2 class="rv d1" set:html={c.menu.headingHtml} />
+    <div class="menu-grid rv d2">
+      {
+        c.menu.columns.map((col) => (
+          <div class="menu-col">
+            <h3>{col.title}</h3>
+            {col.items.map((m) => (
+              <div class="mi">
+                <div>
+                  <div class="nm">{m.name}</div>
+                  <div class="sub">{m.sub}</div>
+                </div>
+                <span class="dots" />
+                <span class="pr">{m.price}</span>
+              </div>
+            ))}
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="#" set:html={c.logoHtml} />
+        <p class="address" set:html={c.footer.addressHtml} />
+        <div class="gameover">{c.footer.gameOver}</div>
+      </div>
+      <p>
+        <Fragment set:html={c.footer.creditHtml} />
+        {
+          showcase && c.showcase && (
+            <>
+              <br />
+              <Fragment set:html={c.showcase.footerHtml} />
+            </>
+          )
+        }
+      </p>
+    </div>
+  </footer>
+
+  {showcase && c.showcase && <a class="hub-chip" href={c.showcase.chipHref}>{c.showcase.chipLabel}</a>}
+</Page>
+
+<script>
+  import { reveal, scrolledClass } from '~/lib/motion';
+  import { initCoin } from './coin';
+  import { initPerspectiveGrid } from './perspectiveGrid';
+  import { initStarfield } from './starfield';
+
+  const stars = document.getElementById('stars');
+  if (stars instanceof HTMLCanvasElement) initStarfield(stars);
+  const grid = document.getElementById('grid');
+  if (grid instanceof HTMLCanvasElement) initPerspectiveGrid(grid);
+
+  const coin = document.getElementById('coinBtn');
+  const credits = document.getElementById('creditsTxt');
+  if (coin && credits) initCoin(coin, credits);
+
+  const nav = document.getElementById('nav');
+  if (nav) scrolledClass(nav);
+  reveal('.rv', { threshold: 0.15 });
+</script>

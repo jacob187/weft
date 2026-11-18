@@ -1,0 +1,155 @@
+---
+import Page from '~/layouts/Page.astro';
+import type { TemplateProps } from '~/templates/types';
+import type { Content } from './content';
+import meta from './meta';
+import './theme.css';
+import './style.css';
+
+type Props = TemplateProps<Content>;
+const { content: c, theme, seo, showcase } = Astro.props;
+
+const MARQUEE_COPIES = 6;
+const sliders = [
+  { axis: 'wdth', slider: c.tester.width },
+  { axis: 'wght', slider: c.tester.weight },
+  { axis: 'size', slider: c.tester.size },
+];
+---
+
+<Page
+  seo={{ ...c.seo, themeColor: meta.themeColor, favicon: meta.favicon, ...seo }}
+  fontsHref={meta.fontsHref}
+  theme={theme}
+>
+  <nav>
+    <a class="logo" href="#" set:html={c.logoHtml} />
+    <div class="nav-mid" id="ticker" data-messages={JSON.stringify(c.ticker)}>{c.ticker[0]}</div>
+    <div class="nav-links">
+      {c.nav.map((l) => <a href={l.href}>{l.label}</a>)}
+    </div>
+  </nav>
+
+  <header>
+    <div id="heroType" aria-label={c.hero.ariaLabel}>
+      <div class="ln1">{c.hero.line1}</div>
+      <div class="ln2">{c.hero.line2}</div>
+    </div>
+    <div class="hero-hint">{c.hero.hint}</div>
+    <div class="hero-meta">
+      {c.hero.meta.map((m) => <div>{m.label}<b>{m.value}</b></div>)}
+    </div>
+  </header>
+
+  <div class="marq" aria-hidden="true">
+    <div class="marq-track">
+      {
+        Array.from({ length: MARQUEE_COPIES }, () => (
+          <span>
+            {c.marquee.map((item) => (
+              <Fragment>
+                {item}
+                {' '}
+                <i>●</i>
+                {' '}
+              </Fragment>
+            ))}
+          </span>
+        ))
+      }
+    </div>
+  </div>
+
+  <section id="catalog">
+    <div class="sec-head"><h2>{c.catalog.head.title}</h2><span class="idx">{c.catalog.head.idx}</span></div>
+    {
+      c.catalog.families.map((f) => (
+        <div class={`spec-row look-${f.look}`} data-scramble-row>
+          <span class="nm" data-scramble>{f.name}</span>
+          <div class="meta">{f.meta.map((m) => <span>{m}</span>)}</div>
+          <span class="tag">{c.catalog.specimenLabel}</span>
+        </div>
+      ))
+    }
+  </section>
+
+  <section id="tester">
+    <div class="sec-head"><h2>{c.tester.head.title}</h2><span class="idx">{c.tester.head.idx}</span></div>
+    <div class="tester-grid">
+      <div id="testerText" contenteditable="true" spellcheck="false">{c.tester.text}</div>
+      <div class="tester-ctrl">
+        {
+          sliders.map(({ axis, slider }) => (
+            <div class="ctl">
+              <label>{slider.label} <output>{slider.value}</output></label>
+              <input type="range" data-axis={axis} min={slider.min} max={slider.max} value={slider.value} aria-label={slider.label} />
+            </div>
+          ))
+        }
+        <div class="ctl-note" set:html={c.tester.noteHtml} />
+      </div>
+    </div>
+  </section>
+
+  <div class="facts">
+    {
+      c.facts.map((f) => (
+        <div class="fact"><span class="n" data-count={f.value}>0</span><span class="l">{f.label}</span></div>
+      ))
+    }
+  </div>
+
+  <section id="license">
+    <div class="sec-head"><h2>{c.license.head.title}</h2><span class="idx">{c.license.head.idx}</span></div>
+    <div class="lic">
+      {
+        c.license.plans.map((p) => (
+          <div class={`lic-col${p.badge ? ' hot' : ''}`}>
+            {p.badge && <span class="hot-tag">{p.badge}</span>}
+            <h3>{p.name}</h3>
+            <span class="pr">{p.price}<small>{' '}{p.unit}</small></span>
+            <ul>{p.features.map((feat) => <li>{feat}</li>)}</ul>
+            <a href={p.cta.href} class="lic-btn">{p.cta.label}</a>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-giant" set:html={c.footer.giantHtml} />
+    <div class="foot-meta">
+      <div set:html={c.footer.addressHtml} />
+      <div>
+        <Fragment set:html={c.footer.creditHtml} />
+        {
+          showcase && c.showcase && (
+            <>
+              <br />
+              <Fragment set:html={c.showcase.footerHtml} />
+            </>
+          )
+        }
+      </div>
+    </div>
+  </footer>
+
+  {showcase && c.showcase && <a class="hub-chip" href={c.showcase.chipHref}>{c.showcase.chipLabel}</a>}
+</Page>
+
+<script>
+  import { initCountUp, initHeroType, initScramble, initTester, initTicker } from './interactions';
+
+  const hero = document.getElementById('heroType');
+  if (hero) initHeroType(hero);
+
+  const ticker = document.getElementById('ticker');
+  if (ticker) initTicker(ticker);
+
+  initScramble(document.querySelectorAll<HTMLElement>('[data-scramble-row]'));
+
+  const text = document.getElementById('testerText');
+  if (text) initTester(text, document.querySelectorAll<HTMLInputElement>('input[data-axis]'));
+
+  initCountUp(document.querySelectorAll<HTMLElement>('[data-count]'));
+</script>

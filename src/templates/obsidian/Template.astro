@@ -1,0 +1,211 @@
+---
+import Page from '~/layouts/Page.astro';
+import type { TemplateProps } from '~/templates/types';
+import type { Content } from './content';
+import meta from './meta';
+import './theme.css';
+import './style.css';
+
+type Props = TemplateProps<Content>;
+const { content: c, theme, seo, showcase } = Astro.props;
+
+/** Reveal-delay class for the nth staggered element (none for 0). */
+const delay = (n: number) => (n ? `d${n}` : '');
+const MARQUEE_COPIES = 6;
+const LEFT = 2;
+---
+
+<Page
+  seo={{ ...c.seo, themeColor: meta.themeColor, favicon: meta.favicon, ...seo }}
+  fontsHref={meta.fontsHref}
+  theme={theme}
+>
+  <nav id="nav">
+    <a class="wordmark" href="#" set:html={c.wordmarkHtml} />
+    <ul class="nav-links">
+      {c.nav.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+    </ul>
+  </nav>
+
+  <header>
+    <div class="hero-fallback"></div>
+    <canvas id="gl" aria-hidden="true"></canvas>
+    <div class="hero-inner">
+      <h1 class="rv" set:html={c.hero.headingHtml} />
+      <div class="hero-side rv d2">
+        <p>{c.hero.body}</p>
+        <a class="btn" data-magnetic href={c.hero.cta.href}><span>{c.hero.cta.label}</span></a>
+      </div>
+    </div>
+    <div class="hero-scroll">{c.hero.scrollLabel}</div>
+  </header>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      {
+        Array.from({ length: MARQUEE_COPIES }, () => (
+          <span>
+            {c.marquee.map((item) => (
+              <Fragment>
+                {item}
+                {' '}
+                <i>·</i>
+                {' '}
+              </Fragment>
+            ))}
+          </span>
+        ))
+      }
+    </div>
+  </div>
+
+  <section id="craft">
+    <span class="kicker rv">{c.craft.kicker}</span>
+    <h2 class="rv d1" set:html={c.craft.headingHtml} />
+    <div class="craft-grid">
+      <div>
+        {
+          c.craft.items.slice(0, LEFT).map((it, i) => (
+            <div class={`craft-item rv ${delay(i)}`}>
+              <span class="num">{it.num}</span>
+              <h3>{it.title}</h3>
+              <p>{it.text}</p>
+            </div>
+          ))
+        }
+      </div>
+      <div
+        class="watch-wrap rv d2"
+        data-watch
+        data-live
+        data-dial="obsidian"
+        data-size="340"
+        data-brand={c.dial.brand}
+        data-place={c.dial.place}
+      >
+      </div>
+      <div>
+        {
+          c.craft.items.slice(LEFT).map((it, i) => (
+            <div class={`craft-item rv ${delay(i + 1)}`}>
+              <span class="num">{it.num}</span>
+              <h3>
+                {it.title}
+                {it.clock && (
+                  <>
+                    {' '}
+                    <span class="clock" id="clockTxt">—</span>
+                  </>
+                )}
+              </h3>
+              <p>{it.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="collection">
+    <div class="col-inner">
+      <span class="kicker rv">{c.collection.kicker}</span>
+      <h2 class="rv d1" set:html={c.collection.headingHtml} />
+      <div class="cards">
+        {
+          c.collection.watches.map((w, i) => (
+            <div class={`card rv ${delay(i)}`} data-tilt>
+              <div
+                class="cwatch"
+                data-watch
+                data-dial={w.dial}
+                data-size="190"
+                data-brand={c.dial.brand}
+                data-place={c.dial.place}
+              />
+              <h3>{w.name}</h3>
+              <div class="ref">{w.ref}</div>
+              <div class="price">{w.price}</div>
+              <div class="line" />
+              <span class="enquire">{c.collection.enquireLabel}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="manifesto">
+    <blockquote class="rv" set:html={c.manifesto.quoteHtml} />
+    <cite class="rv d1">{c.manifesto.cite}</cite>
+  </section>
+
+  <section id="atelier">
+    <span class="kicker rv">{c.specs.kicker}</span>
+    <h2 class="rv d1" set:html={c.specs.headingHtml} />
+    <dl class="specs rv d2">
+      {
+        c.specs.rows.map((r) => (
+          <div class="spec-row">
+            <dt>{r.label}</dt>
+            <dd set:html={r.valueHtml} />
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <footer>
+    <div class="foot-grid">
+      <div>
+        <a class="wordmark" href="#" set:html={c.wordmarkHtml} />
+        <p class="address" set:html={c.footer.addressHtml} />
+      </div>
+      <p>
+        <Fragment set:html={c.footer.creditHtml} />
+        {
+          showcase && c.showcase && (
+            <>
+              <br />
+              <Fragment set:html={c.showcase.footerHtml} />
+            </>
+          )
+        }
+      </p>
+    </div>
+  </footer>
+
+  {showcase && c.showcase && <a class="hub-chip" href={c.showcase.chipHref}>{c.showcase.chipLabel}</a>}
+</Page>
+
+<script>
+  import { reveal, scrolledClass } from '~/lib/motion';
+  import { initLiquidGold } from './liquidGold';
+  import { buildWatch } from './watch';
+  import { initClockText, initMagnetic, initTilt } from './interactions';
+
+  const gl = document.getElementById('gl');
+  if (gl instanceof HTMLCanvasElement) initLiquidGold(gl);
+
+  document.querySelectorAll<HTMLElement>('[data-watch]').forEach((el, i) => {
+    el.appendChild(
+      buildWatch({
+        size: Number(el.dataset.size),
+        dial: el.dataset.dial ?? 'obsidian',
+        brand: el.dataset.brand ?? '',
+        place: el.dataset.place ?? '',
+        uid: String(i),
+        live: 'live' in el.dataset,
+      }),
+    );
+  });
+
+  const clock = document.getElementById('clockTxt');
+  if (clock) initClockText(clock);
+
+  const nav = document.getElementById('nav');
+  if (nav) scrolledClass(nav);
+
+  reveal('.rv', { threshold: 0.15 });
+  initTilt(document.querySelectorAll<HTMLElement>('[data-tilt]'));
+  initMagnetic(document.querySelectorAll<HTMLElement>('[data-magnetic]'));
+</script>

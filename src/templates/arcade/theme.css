@@ -1,0 +1,19 @@
+/* arcade — design tokens. Override any of these per site via `theme` (inline on <html>). */
+:root {
+  --void: #0d0518;
+  --void2: #150a26;
+  --void3: #1e0f38;
+  --void-dusk: #1c0b33;
+  --void-glow: #2d1052;
+  --vignette: #04000c;
+  --pink: #ff3ec8;
+  --cyan: #38e8ff;
+  --yellow: #ffe14d;
+  --purple: #8b5cf6;
+  --white: #f4ecff;
+  --dim: #9d8fc0;
+  --faint: #584a80;
+  --px: "Press Start 2P", monospace;
+  --orb: "Orbitron", sans-serif;
+  --chk: "Chakra Petch", sans-serif;
+}
