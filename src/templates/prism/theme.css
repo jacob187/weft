@@ -1,0 +1,23 @@
+/* prism — design tokens. Override any of these per site via `theme` (inline on <html>). */
+:root {
+  --bg: #0b0e16;
+  --glass: rgba(255, 255, 255, .055);
+  --glass-brd: rgba(255, 255, 255, .12);
+  --mint: #7ce7d8;
+  --mint-light: #9ceee2;
+  --on-mint: #06251f;
+  --vio: #b48bf2;
+  --rose: #f28bb4;
+  --amber: #f2c94c;
+  --tx: #eef2fa;
+  --dim: #94a0b8;
+  --faint: #525e78;
+  --scroll-thumb: #232c42;
+  /* background gradient-mesh blobs */
+  --blob1: #2b3f8a;
+  --blob2: #127a6d;
+  --blob3: #6d3b8f;
+  --sora: "Sora", sans-serif;
+  --mono: "IBM Plex Mono", monospace;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}
