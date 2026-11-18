@@ -1,0 +1,34 @@
+/* tempo — design tokens. Override any of these per site via `theme` (inline on <html>). */
+:root {
+  --base: #17181d;
+  --panel: #1d1f26;
+  --panel2: #22242c;
+  --scroll-thumb: #2b2d38;
+  /* Neumorphic highlight and shadow (neutral white/black). */
+  --hi: rgba(255, 255, 255, .045);
+  --lo: rgba(0, 0, 0, .55);
+
+  --violet: #a06bff;
+  --violet2: #c9aaff;
+  --mint: #6bffc9;
+  --tx: #e8e6f0;
+  --dim: #8f8da3;
+  --faint: #4e4c60;
+
+  /* Piano keys: top → bottom gradient stops per state. */
+  --key-top: #2a2c36;
+  --key-bot: #232530;
+  --key-hover-top: #31333f;
+  --key-hover-bot: #282a36;
+  --key-down-top: #3d2f63;
+  --key-down-bot: #32284f;
+  --bkey-top: #101116;
+  --bkey-bot: #16171d;
+  --bkey-down-top: #2c2153;
+  --bkey-down-bot: #241a44;
+  --bkey-label: #5e5c72;
+
+  --disp: "Chakra Petch", sans-serif;
+  --body: "DM Sans", sans-serif;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}

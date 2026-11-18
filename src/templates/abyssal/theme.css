@@ -1,0 +1,31 @@
+/* abyssal — design tokens. Override any of these per site via `theme` (inline on <html>). */
+:root {
+  --bg: #03222b;
+  --ink: #021118;
+  --glow: #54e0e8;
+  --glow2: #7ff0c9;
+  --violet: #9c7ff0;
+  --tx: #dff5f7;
+  --dim: #8fb6bd;
+  --faint: #4a6d75;
+  --scroll-thumb: #0d3b46;
+
+  /* Water column: the fixed background gradient, shallow (1) to deepest (6). */
+  --sea-1: #0a5568;
+  --sea-2: #064050;
+  --sea-3: #03222b;
+  --sea-4: #021118;
+  --sea-5: #01070c;
+  --sea-6: #000305;
+  /* Height the gradient is stretched over while scrolling (read by depth.ts). */
+  --sea-span: 5200px;
+
+  --ray: #7edce6;
+  --hull: #3d6b78;
+  --hull-fill: #0a1e28;
+  --bone: #e8fbff;
+
+  --disp: "Gruppo", sans-serif;
+  --body: "Albert Sans", sans-serif;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}

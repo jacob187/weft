@@ -1,0 +1,173 @@
+---
+import Page from '~/layouts/Page.astro';
+import type { TemplateProps } from '~/templates/types';
+import { formatCutoff, formatEcho } from './controls';
+import type { Content } from './content';
+import meta from './meta';
+import './theme.css';
+import './style.css';
+
+type Props = TemplateProps<Content>;
+const { content: c, theme, seo, showcase } = Astro.props;
+
+const { cutoff, echo, waveforms, defaultWave, keys, status } = c.synth;
+const delays = ['', 'd1', 'd2'];
+const whiteWidth = 100 / keys.white.length;
+// Black keys sit over the gap to the right of their white key.
+const blackLeft = (after: number) => `left:calc(${(after + 1) * whiteWidth}% - 3.1% + 5px)`;
+---
+
+<Page
+  seo={{ ...c.seo, themeColor: meta.themeColor, favicon: meta.favicon, ...seo }}
+  fontsHref={meta.fontsHref}
+  theme={theme}
+>
+  <nav id="nav">
+    <a class="logo" href="#" set:html={c.logoHtml} />
+    <ul class="nav-links">
+      {c.nav.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+    </ul>
+  </nav>
+
+  <main>
+    <header>
+      <div class="hero-wrap">
+        <div class="hero-head">
+          <h1 set:html={c.hero.headingHtml} />
+          <p class="hero-sub" set:html={c.hero.subHtml} />
+        </div>
+        <div class="synth" id="synth">
+          <div class="synth-top">
+            <div id="scope-wrap"><canvas id="scope"></canvas></div>
+            <div class="controls">
+              <div class="knob-group">
+                <div
+                  class="knob"
+                  id="cutKnob"
+                  role="slider"
+                  aria-label={cutoff.ariaLabel}
+                  aria-valuemin={cutoff.min}
+                  aria-valuemax={cutoff.max}
+                  data-value={cutoff.value}
+                  data-unit={cutoff.unit}
+                  tabindex="0"
+                >
+                  <div class="mark"></div>
+                </div>
+                <label>{cutoff.label}</label><output id="cutOut">{formatCutoff(cutoff.value, cutoff.unit)}</output>
+              </div>
+              <div class="knob-group">
+                <div
+                  class="knob"
+                  id="delKnob"
+                  role="slider"
+                  aria-label={echo.ariaLabel}
+                  aria-valuemin={echo.min}
+                  aria-valuemax={echo.max}
+                  data-value={echo.value}
+                  data-unit={echo.unit}
+                  tabindex="0"
+                >
+                  <div class="mark"></div>
+                </div>
+                <label>{echo.label}</label><output id="delOut">{formatEcho(echo.value, echo.unit)}</output>
+              </div>
+              <div class="wave-group" role="group" aria-label="Waveform">
+                {
+                  waveforms.map((w) => (
+                    <button class:list={['wv', { on: w.type === defaultWave }]} data-w={w.type}>
+                      {w.label}
+                    </button>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+          <div class="keys" id="keys">
+            {
+              keys.white.map((k) => (
+                <div class="key" data-note={k.name} data-freq={k.freq} data-key={k.key}>
+                  <span class="kb">{k.key}</span>
+                </div>
+              ))
+            }
+            {
+              keys.black.map((k) => (
+                <div
+                  class="key black-key"
+                  data-note={k.name}
+                  data-freq={k.freq}
+                  data-key={k.key}
+                  style={blackLeft(k.after)}
+                >
+                  <span class="kb">{k.key}</span>
+                </div>
+              ))
+            }
+          </div>
+          <div class="synth-foot">
+            <span class="led"><i></i>{status.ready}</span>
+            <span>{status.model}</span>
+            <span id="noteRead">{status.idleNote}</span>
+          </div>
+        </div>
+        <p class="hint" set:html={c.synth.hintHtml} />
+      </div>
+    </header>
+
+    <section id={c.engine.id}>
+      <span class="kicker rv">{c.engine.kicker}</span>
+      <h2 class="rv d1" set:html={c.engine.headingHtml} />
+      <div class="specs">
+        {
+          c.engine.specs.map((s, i) => (
+            <div class:list={['spec', 'rv', delays[i % 3]]}>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id={c.why.id}>
+      <span class="kicker rv">{c.why.kicker}</span>
+      <h2 class="rv d1" set:html={c.why.headingHtml} />
+      <p class="why-copy rv d2">{c.why.body}</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="#" set:html={c.logoHtml} />
+        <p class="foot-note" set:html={c.footer.noteHtml} />
+      </div>
+      <p>
+        <Fragment set:html={c.footer.creditHtml} />
+        {
+          showcase && (
+            <>
+              <br />
+              Part of the <a href="/">Fable Showcase</a> — 25 sites, 25 styles.
+            </>
+          )
+        }
+      </p>
+    </div>
+  </footer>
+
+  {showcase && <a class="hub-chip" href="/">← Fable Showcase</a>}
+</Page>
+
+<script>
+  import { reveal, scrolledClass } from '~/lib/motion';
+  import { initInstrument } from './instrument';
+
+  const synth = document.getElementById('synth');
+  if (synth) initInstrument(synth);
+
+  const nav = document.getElementById('nav');
+  if (nav) scrolledClass(nav);
+  reveal('.rv', { threshold: 0.15 });
+</script>
