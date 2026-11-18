@@ -1,0 +1,16 @@
+/* rosewood — design tokens. Override any of these per site via `theme` (inline on <html>). */
+:root {
+  --emerald: #0b2b22;
+  --emerald2: #0e352a;
+  --emerald3: #124434;
+  --emerald-mid: #123c2f;
+  --gold: #d4af6a;
+  --gold-hi: #f0d9a8;
+  --gold-lo: #9a7a3e;
+  --cream: #f3ecdc;
+  --cream-dim: #c9bfa8;
+  --cream-faint: #7d8a7c;
+  --serif: "Marcellus", serif;
+  --sans: "Montserrat", sans-serif;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}

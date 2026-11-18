@@ -1,0 +1,138 @@
+---
+import Page from '~/layouts/Page.astro';
+import type { TemplateProps } from '~/templates/types';
+import type { Content } from './content';
+import { brandMarkSvg, decoTopSvg, glyphSvg, liftDialSvg, sunburstSvg } from './deco';
+import meta from './meta';
+import './theme.css';
+import './style.css';
+
+type Props = TemplateProps<Content>;
+const { content: c, theme, seo, showcase = false } = Astro.props;
+
+const delay = (i: number) => (i > 0 ? ` d${Math.min(i, 3)}` : '');
+---
+
+<Page
+  seo={{ ...c.seo, themeColor: meta.themeColor, favicon: meta.favicon, ...seo }}
+  fontsHref={meta.fontsHref}
+  theme={theme}
+>
+  <nav id="nav">
+    <a class="wordmark" href="#">
+      <Fragment set:html={brandMarkSvg(20)} />
+      {c.brand}
+    </a>
+    <ul class="nav-links">
+      {c.nav.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+    </ul>
+  </nav>
+
+  <div class="lift" aria-hidden="true">
+    <div class="dial">
+      <svg id="liftDial" width="56" height="56" viewBox="0 0 56 56" set:html={liftDialSvg()} />
+    </div>
+    <span class="floor" id="liftFloor" data-floors={JSON.stringify(c.floors)}>{c.floors[0]}</span>
+  </div>
+
+  <header>
+    <svg id="sunburst" width="900" height="900" viewBox="0 0 900 900" aria-hidden="true" set:html={sunburstSvg()} />
+    <div class="hero-inner">
+      <div class="deco-top rv" set:html={decoTopSvg} />
+      <p class="est rv">{c.hero.est}</p>
+      <h1 class="rv d1" set:html={c.hero.headingHtml} />
+      <p class="hero-sub rv d2">{c.hero.sub}</p>
+      <a class="btn rv d3" href={c.hero.cta.href}>{c.hero.cta.label}</a>
+    </div>
+    <div class="hero-foot">{c.hero.foot}</div>
+  </header>
+
+  <section id={c.suites.id}>
+    <span class="kicker rv">{c.suites.kicker}</span>
+    <h2 class="rv d1" set:html={c.suites.headingHtml} />
+    <div class="suites">
+      {
+        c.suites.items.map((s, i) => (
+          <div class={`suite rv${delay(i)}`}>
+            <i class="corner c1" />
+            <i class="corner c2" />
+            <i class="corner c3" />
+            <i class="corner c4" />
+            <div class="glyph" set:html={glyphSvg(s.glyph)} />
+            <h3>{s.name}</h3>
+            <div class="fl">{s.floor}</div>
+            <p>{s.description}</p>
+            <div class="rate">{s.rate}</div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section id={c.evenings.id}>
+    <div class="ev-inner">
+      <span class="kicker rv">{c.evenings.kicker}</span>
+      <h2 class="rv d1" set:html={c.evenings.headingHtml} />
+      <div class="amen rv d2">
+        {
+          c.evenings.items.map((e) => (
+            <div class="am">
+              <span class="hour">{e.hour}</span>
+              <h3>{e.name}</h3>
+              <p>{e.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id={c.quote.id}>
+    <blockquote class="rv" set:html={c.quote.quoteHtml} />
+    <cite class="rv d1">{c.quote.cite}</cite>
+  </section>
+
+  <footer>
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="wordmark" href="#">
+          <Fragment set:html={brandMarkSvg(18)} />
+          {c.brand}
+        </a>
+        <p set:html={c.footer.noteHtml} />
+      </div>
+      <p>
+        <Fragment set:html={c.footer.creditHtml} />
+        {
+          showcase && (
+            <>
+              <br />
+              Part of the <a href="/">Fable Showcase</a> — 25 sites, 25 styles.
+            </>
+          )
+        }
+      </p>
+    </div>
+  </footer>
+
+  {showcase && <a class="hub-chip" href="/">← Fable Showcase</a>}
+</Page>
+
+<script>
+  import { reveal, scrolledClass } from '~/lib/motion';
+  import { initLiftDial, spinSunburst } from './effects';
+
+  const nav = document.getElementById('nav');
+  if (nav) scrolledClass(nav);
+
+  const sunburst = document.getElementById('sunburst');
+  if (sunburst instanceof SVGElement) spinSunburst(sunburst);
+
+  const dial = document.getElementById('liftDial');
+  const floor = document.getElementById('liftFloor');
+  if (dial instanceof SVGElement && floor) {
+    initLiftDial(dial, floor, JSON.parse(floor.dataset.floors ?? '[]'));
+  }
+
+  reveal('.rv', { threshold: 0.15 });
+</script>
