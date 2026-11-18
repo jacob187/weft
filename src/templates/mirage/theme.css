@@ -1,0 +1,39 @@
+/* mirage — design tokens. Override any of these per site via `theme` (inline on <html>). */
+:root {
+  --dusk: #1a0b2e;
+  --dusk2: #241040;
+  --horizon: #3c1a63;
+  --night: #12081f;
+  --pink: #ff5e9e;
+  --peach: #ffd97a;
+  --cyan: #58e6e6;
+  --lilac: #b79df0;
+  --tx: #f4eefc;
+  --dim: #a893c9;
+  --faint: #5f4d85;
+  --white: #fff;
+
+  /* Hero sky: between --dusk2 (top) and the horizon glow. */
+  --sky-1: #5b2472;
+  --sky-2: #a04586;
+  --sun-deep: #c23a8f;
+  --floor: #2a1250;
+
+  /* Chrome title gradient (middle and bottom bands; top bands use --white, --cyan, --lilac). */
+  --chrome-mid: #2e7ea8;
+  --chrome-low: #7a5bbf;
+
+  /* Marble statue */
+  --marble-hi: #f2ecfa;
+  --marble-mid: #c9b8e8;
+  --marble-lo: #8f74c4;
+
+  /* Drop cover backdrops, one per art kind */
+  --art-cassette: #2b1552;
+  --art-vhs: #40195e;
+  --art-minidisc: #1c2a5e;
+
+  --neon: "Monoton", cursive;
+  --body: "Poppins", sans-serif;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}
