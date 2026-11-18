@@ -1,0 +1,158 @@
+---
+import Page from '~/layouts/Page.astro';
+import type { TemplateProps } from '~/templates/types';
+import type { Content } from './content';
+import meta from './meta';
+import './theme.css';
+import './style.css';
+
+type Props = TemplateProps<Content>;
+const { content: c, theme, seo, showcase } = Astro.props;
+const delay = (i: number) => (i ? `rv d${i}` : 'rv');
+---
+
+<Page
+  seo={{ ...c.seo, themeColor: meta.themeColor, favicon: meta.favicon, ...seo }}
+  fontsHref={meta.fontsHref}
+  theme={theme}
+>
+  <canvas id="petals" aria-hidden="true"></canvas>
+
+  <nav id="nav">
+    <a class="wordmark" href="#"><span class="kanji">{c.brand.kanji}</span><span class="roman">{c.brand.navName}</span></a>
+    <ul class="nav-links">
+      {c.nav.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+    </ul>
+  </nav>
+
+  <header>
+    <div class="hero-left">
+      <h1 class="rv" set:html={c.hero.headingHtml} />
+      <p class="hero-sub rv d1">{c.hero.sub}</p>
+      <a class="btn rv d2" href={c.hero.cta.href}>{c.hero.cta.label}</a>
+    </div>
+    <div class="enso-wrap" aria-hidden="true">
+      <svg id="enso" viewBox="0 0 430 430">
+        <circle cx="215" cy="215" r="182"></circle>
+      </svg>
+      <span class="enso-kanji">{c.brand.kanji}</span>
+    </div>
+    <div class="hero-right" aria-hidden="true">
+      <span class="vtext accent">{c.hero.vertical.accent}</span>
+      {c.hero.vertical.columnsHtml.map((col) => <span class="vtext" set:html={col} />)}
+    </div>
+    <div class="hero-foot">
+      <span>{c.hero.foot}</span>
+    </div>
+  </header>
+
+  <section id={c.ceremony.id}>
+    <span class="kicker rv">{c.ceremony.kicker}</span>
+    <h2 class="rv d1" set:html={c.ceremony.headingHtml} />
+    <div class="steps">
+      {
+        c.ceremony.steps.map((s, i) => (
+          <div class={`step ${delay(i)}`}>
+            <span class="min">{s.duration}</span>
+            <span class="no">{s.numeral}</span>
+            <h3>{s.title}</h3>
+            <div class="jp">{s.jp}</div>
+            <p>{s.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section id={c.menu.id}>
+    <div class="menu-inner">
+      <span class="kicker rv">{c.menu.kicker}</span>
+      <h2 class="rv d1">{c.menu.heading}</h2>
+      <div class="tea-rows rv d2">
+        {
+          c.menu.teas.map((t) => (
+            <div class="tea">
+              <span class="jp">{t.jp}</span>
+              <div>
+                <h3>{t.name}</h3>
+                <p>{t.description}</p>
+              </div>
+              <span class="stamp">{c.brand.kanji}</span>
+              <span class="pr">{t.price}</span>
+            </div>
+          ))
+        }
+      </div>
+      <p class="season-note">{c.menu.note}</p>
+    </div>
+  </section>
+
+  <section id={c.garden.id}>
+    <span class="kicker rv">{c.garden.kicker}</span>
+    <h2 class="rv d1" set:html={c.garden.headingHtml} />
+    <div class="garden-grid">
+      <div class="karesansui rv"><canvas id="sand"></canvas></div>
+      <div class="garden-copy rv d1">
+        {c.garden.paragraphsHtml.map((p) => <p set:html={p} />)}
+        <div class="haiku">
+          {c.garden.haiku.lines.map((line, i) => (<>{i > 0 && <br />}{line}</>))}
+          <span>{c.garden.haiku.note}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id={c.visit.id}>
+    <span class="kicker rv">{c.visit.kicker}</span>
+    <h2 class="rv d1" set:html={c.visit.headingHtml} />
+    <div class="visit-grid rv d2">
+      {
+        c.visit.items.map((it) => (
+          <div class="vi">
+            <span class="k">{it.label}</span>
+            <div class="v" set:html={it.valueHtml} />
+            <p>{it.note}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-grid">
+      <div>
+        <a class="wordmark" href="#"><span class="kanji">{c.brand.kanji}</span><span class="roman">{c.brand.footerName}</span></a>
+        <p class="foot-note">{c.footer.note}</p>
+      </div>
+      {
+        (c.footer.creditHtml || showcase) && (
+          <p>
+            {c.footer.creditHtml && <Fragment set:html={c.footer.creditHtml} />}
+            {c.footer.creditHtml && showcase && <br />}
+            {showcase && (<>Part of the <a href="/">Fable Showcase</a> — 25 sites, 25 styles.</>)}
+          </p>
+        )
+      }
+    </div>
+  </footer>
+
+  {showcase && <a class="hub-chip" href="/">← Fable Showcase</a>}
+</Page>
+
+<script>
+  import { reveal, scrolledClass } from '~/lib/motion';
+  import { initBrushHeads } from './brush';
+  import { initPetals } from './petals';
+  import { initSand } from './sand';
+
+  initBrushHeads(document.querySelectorAll('h2 em'));
+
+  const sand = document.getElementById('sand');
+  if (sand instanceof HTMLCanvasElement) initSand(sand);
+  const petals = document.getElementById('petals');
+  if (petals instanceof HTMLCanvasElement) initPetals(petals);
+
+  const nav = document.getElementById('nav');
+  if (nav) scrolledClass(nav);
+  reveal('.rv', { threshold: 0.15 });
+</script>
