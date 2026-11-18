@@ -1,0 +1,154 @@
+---
+import Page from '~/layouts/Page.astro';
+import type { TemplateProps } from '~/templates/types';
+import type { Content } from './content';
+import meta from './meta';
+import './theme.css';
+import './style.css';
+
+type Props = TemplateProps<Content>;
+const { content: c, theme, seo, showcase } = Astro.props;
+
+const delays = ['', 'd1', 'd2'];
+const position = (f: Content['hero']['floaters'][number]) =>
+  [
+    f.top && `top:${f.top}`,
+    f.right && `right:${f.right}`,
+    f.bottom && `bottom:${f.bottom}`,
+    f.left && `left:${f.left}`,
+    `transform:rotate(${f.rotate}deg)`,
+  ]
+    .filter(Boolean)
+    .join(';');
+---
+
+<Page
+  seo={{ ...c.seo, themeColor: meta.themeColor, favicon: meta.favicon, ...seo }}
+  fontsHref={meta.fontsHref}
+  theme={theme}
+>
+  <nav id="nav">
+    <a class="logo" href="#" set:html={c.logoHtml} />
+    <ul class="nav-links">
+      {c.nav.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+    </ul>
+  </nav>
+
+  <main>
+    <header>
+      <div class="collage">
+        <div class="scrap main-scrap" data-torn>
+          <span class="tape hero-l"></span>
+          <span class="tape hero-r"></span>
+          <h1>
+            {
+              c.hero.lines.map((l, i) => (
+                <>
+                  {i > 0 && <br />}
+                  {l.tone || l.ghost ? (
+                    <span class:list={[l.tone, { offset: l.ghost }]} data-t={l.ghost ? l.text : undefined}>
+                      {l.text}
+                    </span>
+                  ) : (
+                    l.text
+                  )}
+                </>
+              ))
+            }
+          </h1>
+        </div>
+        <p class="hero-hand" set:html={c.hero.handHtml} />
+        {c.hero.floaters.map((f) => <div class="float-scrap" style={position(f)}>{f.text}</div>)}
+        <div class="sticker" set:html={c.hero.stickerHtml} />
+      </div>
+    </header>
+
+    <section id={c.issues.id}>
+      <div class="sec-title">
+        <h2 class="rv" set:html={c.issues.headingHtml} />
+        <span class="sec-hand rv d1">{c.issues.hand}</span>
+      </div>
+      <div class="zines">
+        {
+          c.issues.zines.map((z, i) => (
+            <div class:list={['zine', 'rv', delays[i % 3]]} style={`transform:rotate(${z.tilt}deg)`}>
+              <div class="cover" style={`background:var(--${z.paper})`} data-torn>
+                <span class="staple" />
+                <span class="znum">{z.numberLabel}</span>
+                <div class="zart" data-zart={z.art} />
+                <h3 set:html={z.titleHtml} />
+              </div>
+              <div class="meta">
+                <span>{z.kind}</span>
+                <span class="pr">{z.price}</span>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id={c.about.id}>
+      <div class="sec-title">
+        <h2 class="rv" set:html={c.about.headingHtml} />
+        <span class="sec-hand rv d1">{c.about.hand}</span>
+      </div>
+      <div class="letter rv d1" data-torn>
+        <span class="tape letter-t"></span>
+        {c.about.paragraphsHtml.map((p) => <p set:html={p} />)}
+        <span class="sig" set:html={c.about.signatureHtml} />
+      </div>
+    </section>
+
+    <section id={c.stockists.id}>
+      <div class="sec-title">
+        <h2 class="rv" set:html={c.stockists.headingHtml} />
+        <span class="sec-hand rv d1">{c.stockists.hand}</span>
+      </div>
+      <div class="stockists rv d1">
+        {c.stockists.shops.map((s) => <span class="stock">{s.name} <i>· {s.place}</i></span>)}
+      </div>
+    </section>
+
+    <section id={c.submit.id}>
+      <h2 class="rv" set:html={c.submit.headingHtml} />
+      <p class="rv d1">{c.submit.body}</p>
+      <a class="submit-btn rv d2" href={c.submit.cta.href}>{c.submit.cta.label}</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="#" set:html={c.logoHtml} />
+        <p class="foot-note" set:html={c.footer.noteHtml} />
+      </div>
+      <p>
+        <Fragment set:html={c.footer.creditHtml} />
+        {
+          showcase && (
+            <>
+              <br />
+              Part of the <a href="/">Fable Showcase</a> — 25 sites, 25 styles.
+            </>
+          )
+        }
+      </p>
+    </div>
+  </footer>
+
+  {showcase && <a class="hub-chip" href="/">← Fable Showcase</a>}
+</Page>
+
+<script>
+  import { reveal, scrolledClass } from '~/lib/motion';
+  import { tearEdges } from './torn';
+  import { zineArt } from './zart';
+
+  tearEdges(document.querySelectorAll<HTMLElement>('[data-torn]'));
+  zineArt(document.querySelectorAll<HTMLElement>('[data-zart]'));
+
+  const nav = document.getElementById('nav');
+  if (nav) scrolledClass(nav);
+  reveal('.rv', { threshold: 0.15 });
+</script>

@@ -1,0 +1,27 @@
+/* papercut — design tokens. Override any of these per site via `theme` (inline on <html>). */
+:root {
+  --kraft: #d9c7a8;
+  --kraft2: #cbb691;
+  --cream: #f5eede;
+  --ink: #2a2620;
+  --ink-soft: #6d5f4d;
+  --tape: #ffebaa;
+
+  /* Riso ink drums */
+  --riso-red: #ff4b33;
+  --riso-blue: #2244cc;
+  --riso-green: #00a06a;
+  --riso-pink: #ff7bac;
+
+  /* Zine cover papers (see Zine.paper in content.ts) */
+  --peach: #ffe3d6;
+  --sky: #dbe4ff;
+  --blush: #ffd9ec;
+  --white: #fff;
+
+  --hand: "Caveat", cursive;
+  --arch: "Archivo", sans-serif;
+  --type: "Courier Prime", monospace;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --spring: cubic-bezier(.34, 1.56, .64, 1);
+}
