@@ -1,0 +1,51 @@
+---
+/**
+ * Document shell shared by every template: <head> (SEO, favicon, fonts) and theme overrides.
+ * Templates render their own <body> contents into the default slot and may add extra
+ * <head> tags (e.g. an importmap or preload) via slot="head".
+ */
+import type { Seo, ThemeOverrides } from '~/templates/types';
+
+interface Props {
+  seo: Seo;
+  fontsHref?: string;
+  theme?: ThemeOverrides;
+  lang?: string;
+  /** Extra attributes for <body> (e.g. class). */
+  bodyClass?: string;
+}
+
+const { seo, fontsHref, theme, lang = 'en', bodyClass } = Astro.props;
+const themeStyle = theme
+  ? Object.entries(theme)
+      .map(([k, v]) => `${k}:${v}`)
+      .join(';')
+  : undefined;
+---
+
+<!doctype html>
+<html lang={lang} style={themeStyle}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{seo.title}</title>
+    <meta name="description" content={seo.description} />
+    {seo.themeColor && <meta name="theme-color" content={seo.themeColor} />}
+    <meta property="og:title" content={seo.ogTitle ?? seo.title} />
+    <meta property="og:description" content={seo.ogDescription ?? seo.description} />
+    {seo.favicon && <link rel="icon" href={seo.favicon} />}
+    {
+      fontsHref && (
+        <>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link href={fontsHref} rel="stylesheet" />
+        </>
+      )
+    }
+    <slot name="head" />
+  </head>
+  <body class={bodyClass}>
+    <slot />
+  </body>
+</html>

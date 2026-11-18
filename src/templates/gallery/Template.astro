@@ -1,0 +1,97 @@
+---
+import Page from '~/layouts/Page.astro';
+import type { TemplateProps } from '~/templates/types';
+import type { Content } from './content';
+import meta from './meta';
+import './theme.css';
+import './style.css';
+
+type Props = TemplateProps<Content>;
+const { content: c, theme, seo } = Astro.props;
+
+// Background threads sample every other swatch color across all items.
+const threadColors = c.items.flatMap((i) => i.swatch).filter((_, i) => i % 2 === 0);
+---
+
+<Page
+  seo={{ ...c.seo, themeColor: meta.themeColor, favicon: meta.favicon, ...seo }}
+  fontsHref={meta.fontsHref}
+  theme={theme}
+>
+  <canvas id="weave" aria-hidden="true" data-colors={JSON.stringify(threadColors)}></canvas>
+
+  <nav id="nav">
+    <a class="wordmark" href="#" set:html={c.wordmarkHtml} />
+    <ul class="nav-links">
+      {c.nav.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+    </ul>
+  </nav>
+
+  <main>
+    <header>
+      <div>
+        <p class="hero-kick">{c.hero.kicker}</p>
+        <h1 set:html={c.hero.headingHtml} />
+        <p class="hero-sub" set:html={c.hero.subHtml} />
+        <div class="hero-cta">
+          <a class="btn-a" href={c.hero.primary.href}>{c.hero.primary.label}</a>
+          {c.hero.secondary && <a class="btn-b" href={c.hero.secondary.href}>{c.hero.secondary.label}</a>}
+        </div>
+        {c.hero.note && <p class="hero-note">{c.hero.note}</p>}
+      </div>
+    </header>
+
+    <div class="grid-wrap" id={c.gridId}>
+      <div class="grid">
+        {
+          c.items.map((it) => (
+            <a class="site rv" href={it.href}>
+              <div class="swatch">
+                <div class="pal">
+                  {it.swatch.map((col) => (
+                    <i style={`background:${col}`} />
+                  ))}
+                </div>
+                <span class="no">{it.no}</span>
+                <span class="tech">{it.tag}</span>
+              </div>
+              <div class="body">
+                <h3>
+                  {it.name}
+                  <span class="arr">→</span>
+                </h3>
+                <p>{it.summary}</p>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="about">
+      <h2 class="rv" set:html={c.about.headingHtml} />
+      <p class="rv" set:html={c.about.bodyHtml} />
+    </div>
+  </main>
+
+  <footer>
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="wordmark" href="#" set:html={c.wordmarkHtml} />
+        <p set:html={c.footer.brandNoteHtml} />
+      </div>
+      <p set:html={c.footer.creditHtml} />
+    </div>
+  </footer>
+</Page>
+
+<script>
+  import { reveal, scrolledClass } from '~/lib/motion';
+  import { weave } from './weave';
+
+  const canvas = document.getElementById('weave');
+  if (canvas instanceof HTMLCanvasElement) weave(canvas);
+  const nav = document.getElementById('nav');
+  if (nav) scrolledClass(nav);
+  reveal('.rv', { stagger: 0.07 });
+</script>
