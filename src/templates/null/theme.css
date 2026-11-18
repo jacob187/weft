@@ -1,0 +1,21 @@
+/* null — design tokens. Override any of these per site via `theme` (inline on <html>). */
+:root {
+  --void: #020803;
+  --panel: #03160c;
+  --ph: #33ff66;
+  --ph-bright: #9dffb8;
+  --ph-dim: #1d9c44;
+  --ph-faint: #0e5b28;
+  --ph-soft: #7fbf96;
+  --amber: #ffb347;
+  --amber-soft: #d9c39a;
+  --red: #ff4d4d;
+  --tx: #c7ffd9;
+  --vignette: #000401;
+  /* terminal window traffic-light dots */
+  --dot-close: #ff5f56;
+  --dot-min: #ffbd2e;
+  --dot-max: #27c93f;
+  --mono: "JetBrains Mono", monospace;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}

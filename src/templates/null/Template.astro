@@ -1,0 +1,125 @@
+---
+import Page from '~/layouts/Page.astro';
+import type { TemplateProps } from '~/templates/types';
+import type { Content } from './content';
+import meta from './meta';
+import './theme.css';
+import './style.css';
+
+type Props = TemplateProps<Content>;
+const { content: c, theme, seo, showcase } = Astro.props;
+const { title, hintHtml, ...script } = c.terminal;
+const stripItem = c.stripHtml.map((h) => `${h} <i>//</i> `).join('');
+const delay = (i: number) => (i ? `rv d${i}` : 'rv');
+---
+
+<Page
+  seo={{ ...c.seo, themeColor: meta.themeColor, favicon: meta.favicon, ...seo }}
+  fontsHref={meta.fontsHref}
+  theme={theme}
+>
+  <canvas id="rain" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <nav>
+    <a class="logo" href="#">{c.brand.first}<span>{c.brand.second}</span></a>
+    <ul class="nav-links">
+      {c.nav.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+    </ul>
+    <span class="status"><i></i>{c.status}</span>
+  </nav>
+
+  <main>
+    <header>
+      <div class="hero-wrap">
+        <div class="term" id="term">
+          <div class="term-bar">
+            <i></i><i></i><i></i>
+            <span class="t">{title}</span>
+          </div>
+          <div id="termBody" data-script={JSON.stringify(script)}></div>
+        </div>
+        <p class="hero-hint" set:html={hintHtml} />
+      </div>
+    </header>
+
+    <div class="strip" aria-hidden="true">
+      <div class="strip-track">
+        {Array.from({ length: 6 }, () => <span set:html={stripItem} />)}
+      </div>
+    </div>
+
+    <section id={c.services.id}>
+      <span class="sec-tag rv">{c.services.tag}</span>
+      <h2 class="rv d1" set:html={c.services.headingHtml} />
+      <div class="svc-grid">
+        {
+          c.services.items.map((s, i) => (
+            <div class={`svc ${delay(i)}`}>
+              <div class="head"><b>{s.file}</b><span>{s.flag}</span></div>
+              <div class="body">
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
+                <div class="out">{s.output.key}: <b>{s.output.value}</b></div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id={c.disclosure.id}>
+      <span class="sec-tag rv">{c.disclosure.tag}</span>
+      <h2 class="rv d1" set:html={c.disclosure.headingHtml} />
+      <div class="disc rv d2">
+        <h3>{c.disclosure.policyTitle}</h3>
+        <p set:html={c.disclosure.bodyHtml} />
+      </div>
+    </section>
+
+    <section id={c.contact.id}>
+      <span class="sec-tag rv">{c.contact.tag}</span>
+      <h2 class="rv d1" set:html={c.contact.headingHtml} />
+      <div class="disc shell rv d2">
+        <p>
+          {c.contact.shell.map((cmd, i) => (<>{i > 0 && <br />}<span class="sh">$</span> {cmd}</>))}
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="#">{c.brand.first}<span>{c.brand.second}</span></a>
+        <p class="foot-note" set:html={c.footer.noteHtml} />
+      </div>
+      {
+        (c.footer.creditHtml || showcase) && (
+          <p>
+            {c.footer.creditHtml && <Fragment set:html={c.footer.creditHtml} />}
+            {c.footer.creditHtml && showcase && <br />}
+            {showcase && (<>Part of the <a href="/">Fable Showcase</a> — 25 sites, 25 styles.</>)}
+          </p>
+        )
+      }
+    </div>
+  </footer>
+
+  {showcase && <a class="hub-chip" href="/">← fable_showcase</a>}
+</Page>
+
+<script>
+  import { reveal } from '~/lib/motion';
+  import type { TerminalScript } from './content';
+  import { initRain } from './rain';
+  import { initTerminal } from './terminal';
+
+  const rain = document.getElementById('rain');
+  if (rain instanceof HTMLCanvasElement) initRain(rain);
+
+  const termBody = document.getElementById('termBody');
+  if (termBody) initTerminal(termBody, JSON.parse(termBody.dataset.script ?? '{}') as TerminalScript);
+
+  reveal('.rv', { threshold: 0.15 });
+</script>
