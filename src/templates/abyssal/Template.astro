@@ -1,0 +1,112 @@
+---
+import Page from '~/layouts/Page.astro';
+import type { TemplateProps } from '~/templates/types';
+import type { Content } from './content';
+import meta from './meta';
+import './theme.css';
+import './style.css';
+
+type Props = TemplateProps<Content>;
+const { content: c, theme, seo, showcase } = Astro.props;
+---
+
+<Page
+  seo={{ ...c.seo, themeColor: meta.themeColor, favicon: meta.favicon, ...seo }}
+  fontsHref={meta.fontsHref}
+  theme={theme}
+>
+  <div id="depthBg" aria-hidden="true"></div>
+  <canvas id="sea" aria-hidden="true"></canvas>
+
+  <div class="meter" aria-hidden="true">
+    <span class="read" id="depthRead" data-max={c.depth.max} data-unit={c.depth.unit}>
+      0 {c.depth.unit}
+    </span>
+    <div class="scale"><div class="fill" id="depthFill"></div></div>
+  </div>
+
+  <nav id="nav">
+    <a class="wordmark" href="#" set:html={c.wordmarkHtml} />
+    <ul class="nav-links">
+      {c.nav.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+    </ul>
+  </nav>
+
+  <main>
+    <header>
+      <div>
+        <span class="zone-tag">{c.hero.zoneTag}</span>
+        <h1 set:html={c.hero.headingHtml} />
+        <p class="hero-sub" set:html={c.hero.subHtml} />
+        <a class="descend" href={c.hero.descend.href}>{c.hero.descend.label}<span class="arr"></span></a>
+      </div>
+    </header>
+
+    {
+      c.zones.map((z) => (
+        <section id={z.id}>
+          <div class:list={['zone', { flip: z.flip }]}>
+            <div class="z-copy">
+              <span class="depth-label rv">{z.depthLabel}</span>
+              <h2 class="rv d1" set:html={z.headingHtml} />
+              <p class="rv d1" set:html={z.bodyHtml} />
+              <div class="z-fact rv d1">{z.fact}</div>
+            </div>
+            <div class="z-art rv" data-creature={z.creature} />
+          </div>
+        </section>
+      ))
+    }
+
+    <section id={c.trench.id}>
+      <h2 class="rv" set:html={c.trench.headingHtml} />
+      <p class="rv d1">{c.trench.body}</p>
+      <a class="btn rv d1" href={c.trench.cta.href}>{c.trench.cta.label}</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot-grid">
+      <div>
+        <a class="wordmark" href="#" set:html={c.wordmarkHtml} />
+        <p class="foot-note" set:html={c.footer.noteHtml} />
+      </div>
+      <p>
+        <Fragment set:html={c.footer.creditHtml} />
+        {
+          showcase && (
+            <>
+              <br />
+              Part of the <a href="/">Fable Showcase</a> — 25 sites, 25 styles.
+            </>
+          )
+        }
+      </p>
+    </div>
+  </footer>
+
+  {showcase && <a class="hub-chip" href="/">← Fable Showcase</a>}
+</Page>
+
+<script>
+  import { reveal, scrolledClass } from '~/lib/motion';
+  import { creatures } from './creatures';
+  import { depthMeter } from './depth';
+  import { sea } from './sea';
+
+  const byId = <T extends HTMLElement>(id: string) => document.getElementById(id) as T | null;
+
+  const canvas = byId<HTMLCanvasElement>('sea');
+  if (canvas) sea(canvas);
+
+  const read = byId('depthRead');
+  const fill = byId('depthFill');
+  const bg = byId('depthBg');
+  if (read && fill && bg) depthMeter({ read, fill, bg });
+
+  creatures(document.querySelectorAll<HTMLElement>('[data-creature]'));
+
+  const nav = byId('nav');
+  if (nav) scrolledClass(nav);
+  reveal('.rv', { threshold: 0.2 });
+</script>
