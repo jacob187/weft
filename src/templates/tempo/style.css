@@ -1,0 +1,176 @@
+/* tempo — layout & components. Colors come from theme.css tokens only. */
+* { margin: 0; padding: 0; box-sizing: border-box }
+html { scroll-behavior: smooth }
+body {
+  background: var(--base); color: var(--tx); font-family: var(--body); font-weight: 300;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+::selection { background: var(--violet); color: var(--base) }
+::-webkit-scrollbar { width: 10px }
+::-webkit-scrollbar-track { background: var(--base) }
+::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 5px }
+::-webkit-scrollbar-thumb:hover { background: var(--violet) }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50; display: flex; align-items: center;
+  justify-content: space-between; padding: 22px 42px; transition: all .5s var(--ease);
+}
+nav.scrolled {
+  background: color-mix(in srgb, var(--base) 80%, transparent); backdrop-filter: blur(14px); padding: 14px 42px;
+  border-bottom: 1px solid color-mix(in srgb, var(--tx) 6%, transparent);
+}
+.logo {
+  font-family: var(--disp); font-weight: 700; font-size: 19px; letter-spacing: .22em;
+  color: var(--tx); text-decoration: none;
+}
+.logo i { color: var(--violet); font-style: normal; text-shadow: 0 0 14px color-mix(in srgb, var(--violet) 60%, transparent) }
+.nav-links { display: flex; gap: 30px; list-style: none }
+.nav-links a {
+  color: var(--dim); text-decoration: none; font-size: 11.5px; letter-spacing: .24em;
+  text-transform: uppercase; transition: color .3s;
+}
+.nav-links a:hover { color: var(--violet2) }
+
+main { position: relative; z-index: 2 }
+header { min-height: 100vh; display: grid; place-items: center; padding: 120px 24px 70px }
+.hero-wrap { width: min(920px, 100%) }
+.hero-head { text-align: center; margin-bottom: 40px }
+h1 { font-family: var(--disp); font-weight: 700; font-size: clamp(34px, 5.4vw, 62px); line-height: 1.1; letter-spacing: .04em }
+h1 em { font-style: normal; color: var(--violet); text-shadow: 0 0 26px color-mix(in srgb, var(--violet) 45%, transparent) }
+.hero-sub { margin-top: 16px; font-size: 14.5px; color: var(--dim); line-height: 1.9 }
+.hero-sub b { color: var(--tx); font-weight: 500 }
+
+/* ===== the instrument ===== */
+.synth {
+  background: var(--panel); border-radius: 28px; padding: 30px;
+  box-shadow: 14px 14px 34px var(--lo), -8px -8px 24px var(--hi), inset 0 1px 0 rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .04);
+}
+.synth-top { display: grid; grid-template-columns: 1fr auto; gap: 24px; margin-bottom: 26px }
+#scope-wrap { background: var(--base); border-radius: 16px; padding: 10px; box-shadow: inset 6px 6px 16px var(--lo), inset -3px -3px 10px var(--hi) }
+#scope { width: 100%; height: 120px; display: block; border-radius: 10px }
+.controls { display: flex; gap: 22px; align-items: center }
+.knob-group { text-align: center }
+.knob {
+  width: 74px; height: 74px; border-radius: 50%; background: var(--panel2); position: relative;
+  box-shadow: 8px 8px 18px var(--lo), -5px -5px 14px var(--hi); cursor: grab;
+  border: 1px solid rgba(255, 255, 255, .05); margin: 0 auto; touch-action: none;
+}
+.knob:active { cursor: grabbing }
+.knob .mark {
+  position: absolute; left: 50%; top: 7px; width: 4px; height: 20px; border-radius: 3px;
+  background: var(--violet); transform-origin: 50% 30px; transform: translateX(-50%) rotate(0);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--violet) 60%, transparent);
+}
+.knob-group label {
+  display: block; margin-top: 12px; font-family: var(--disp); font-size: 10px;
+  letter-spacing: .24em; color: var(--dim); text-transform: uppercase;
+}
+.knob-group output { font-size: 10.5px; color: var(--violet2) }
+.wave-group { display: flex; flex-direction: column; gap: 8px }
+.wv {
+  font-family: var(--disp); font-size: 10.5px; letter-spacing: .2em; padding: 9px 18px;
+  border-radius: 10px; background: var(--panel2); color: var(--dim); border: 1px solid rgba(255, 255, 255, .05);
+  cursor: pointer; box-shadow: 4px 4px 10px var(--lo), -2px -2px 8px var(--hi);
+  transition: all .2s; text-transform: uppercase;
+}
+.wv:hover { color: var(--tx) }
+.wv.on {
+  color: var(--mint); box-shadow: inset 4px 4px 10px var(--lo), inset -2px -2px 8px var(--hi);
+  text-shadow: 0 0 12px color-mix(in srgb, var(--mint) 50%, transparent);
+}
+
+/* keys */
+.keys {
+  position: relative; height: 190px; display: flex; border-radius: 14px; overflow: hidden;
+  box-shadow: inset 5px 5px 14px var(--lo), inset -3px -3px 8px var(--hi);
+  background: var(--base); padding: 10px; gap: 5px;
+}
+.key {
+  flex: 1; background: linear-gradient(180deg, var(--key-top), var(--key-bot)); border-radius: 0 0 9px 9px;
+  position: relative; cursor: pointer; border: 1px solid rgba(255, 255, 255, .05);
+  transition: background .08s, transform .08s;
+}
+.key:hover { background: linear-gradient(180deg, var(--key-hover-top), var(--key-hover-bot)) }
+.key.down {
+  background: linear-gradient(180deg, var(--key-down-top), var(--key-down-bot)); transform: translateY(2px);
+  box-shadow: inset 0 -3px 12px color-mix(in srgb, var(--violet) 40%, transparent);
+}
+.key .kb {
+  position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+  font-family: var(--disp); font-size: 10px; color: var(--faint); letter-spacing: .06em;
+}
+.key.black-key {
+  position: absolute; width: 6.2%; height: 58%; top: 10px; z-index: 2;
+  background: linear-gradient(180deg, var(--bkey-top), var(--bkey-bot)); border-radius: 0 0 7px 7px;
+  border: 1px solid rgba(255, 255, 255, .07);
+}
+.key.black-key.down { background: linear-gradient(180deg, var(--bkey-down-top), var(--bkey-down-bot)) }
+.key.black-key .kb { color: var(--bkey-label) }
+.synth-foot {
+  display: flex; justify-content: space-between; align-items: center; margin-top: 20px;
+  font-family: var(--disp); font-size: 10px; letter-spacing: .22em; color: var(--faint);
+  text-transform: uppercase; flex-wrap: wrap; gap: 10px;
+}
+.synth-foot .led { display: inline-flex; align-items: center; gap: 8px }
+.synth-foot .led i {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--mint);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--mint) 70%, transparent); font-style: normal; animation: pulse 2.4s infinite;
+}
+@keyframes pulse { 50% { opacity: .35 } }
+.hint { text-align: center; margin-top: 22px; font-size: 12.5px; color: var(--faint); letter-spacing: .1em }
+.hint b { color: var(--dim); font-weight: 500; font-family: var(--disp) }
+
+section { padding: 120px 42px; max-width: 1150px; margin: 0 auto }
+.kicker { font-size: 10px; letter-spacing: .5em; text-transform: uppercase; color: var(--mint); display: block; margin-bottom: 20px }
+h2 { font-family: var(--disp); font-weight: 600; font-size: clamp(26px, 3.6vw, 44px); line-height: 1.2 }
+h2 em { font-style: normal; color: var(--violet) }
+.rv { opacity: 0; transform: translateY(30px); transition: opacity 1s var(--ease), transform 1s var(--ease) }
+.rv.in { opacity: 1; transform: none }
+.rv.d1 { transition-delay: .12s }
+.rv.d2 { transition-delay: .24s }
+
+.specs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; margin-top: 60px }
+.spec {
+  background: var(--panel); border-radius: 20px; padding: 34px 30px;
+  box-shadow: 10px 10px 24px var(--lo), -6px -6px 18px var(--hi);
+  border: 1px solid rgba(255, 255, 255, .04); transition: transform .4s var(--ease);
+}
+.spec:hover { transform: translateY(-6px) }
+.spec h3 { font-family: var(--disp); font-weight: 600; font-size: 17px; letter-spacing: .06em; margin-bottom: 12px; color: var(--violet2) }
+.spec p { font-size: 13px; line-height: 1.9; color: var(--dim) }
+.why-copy { margin-top: 26px; max-width: 56ch; font-size: 14.5px; line-height: 2; color: var(--dim) }
+
+footer { border-top: 1px solid color-mix(in srgb, var(--tx) 6%, transparent); padding: 64px 42px 44px; background: var(--panel) }
+.foot-grid {
+  max-width: 1150px; margin: 0 auto; display: flex; justify-content: space-between;
+  gap: 40px; flex-wrap: wrap; align-items: flex-end;
+}
+footer p { font-size: 12px; color: var(--faint); line-height: 2 }
+footer .foot-note { margin-top: 14px }
+footer a { color: var(--dim); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--violet) 40%, transparent); transition: color .3s }
+footer a:hover { color: var(--violet2) }
+
+.hub-chip {
+  position: fixed; bottom: 20px; left: 20px; z-index: 70; font-size: 10px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--dim); text-decoration: none; background: color-mix(in srgb, var(--base) 80%, transparent);
+  backdrop-filter: blur(10px); border: 1px solid color-mix(in srgb, var(--tx) 10%, transparent); padding: 9px 15px; border-radius: 99px;
+  opacity: .55; transition: opacity .3s, border-color .3s;
+}
+.hub-chip:hover { opacity: 1; border-color: var(--violet) }
+
+@media (max-width: 900px) {
+  nav { padding: 16px 20px }
+  .nav-links { display: none }
+  section { padding: 90px 20px }
+  .synth { padding: 18px }
+  .synth-top { grid-template-columns: 1fr }
+  .controls { justify-content: center }
+  .keys { height: 150px }
+  .key .kb { display: none }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important }
+  html { scroll-behavior: auto }
+  .rv { opacity: 1; transform: none }
+}
