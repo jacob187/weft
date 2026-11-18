@@ -1,0 +1,22 @@
+/* meridian — design tokens. Override any of these per site via `theme` (inline on <html>). */
+:root {
+  --paper: #fafaf7;
+  --ink: #101010;
+  --ink2: #3c3c3a;
+  --ink3: #8a8a85;
+  --blue: #0031c6;
+  --rule: #d8d8d2;
+  --card: #fff;
+  /* cover figure (departure-board illustration) */
+  --blue-deep: #001a68;
+  --blue-light: #3b63ff;
+  --board: #050b18;
+  --board-ink: #f2f6ff;
+  --board-off: #20304f;
+  --alert: #c73e1d;
+  --cable: #0a1430;
+  --floor: #001048;
+  --tight: "Inter Tight", sans-serif;
+  --body: "Inter", sans-serif;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}

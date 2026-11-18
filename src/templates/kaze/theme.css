@@ -1,0 +1,18 @@
+/* kaze — design tokens. Override any of these per site via `theme` (inline on <html>). */
+:root {
+  --washi: #f5f1e6;
+  --washi2: #ede7d6;
+  --ink: #1c1b18;
+  --ink-soft: #4c4a43;
+  --ink-faint: #8b877b;
+  --verm: #c73e1d;
+  --moss: #6b7d5e;
+  --gold: #a8863c;
+  --scroll-thumb: #cfc8b4;
+  --stone-hi: #7a766b;
+  --stone-mid: #55524a;
+  --stone-lo: #3d3b35;
+  --min: "Shippori Mincho", serif;
+  --got: "Zen Kaku Gothic New", sans-serif;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}

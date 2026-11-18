@@ -1,0 +1,128 @@
+---
+import Page from '~/layouts/Page.astro';
+import type { TemplateProps } from '~/templates/types';
+import type { Content } from './content';
+import meta from './meta';
+import './theme.css';
+import './style.css';
+
+type Props = TemplateProps<Content>;
+const { content: c, theme, seo, showcase } = Astro.props;
+const stagger = ['rv', 'rv d1', 'rv d2'];
+const last = c.colophon.length - 1;
+---
+
+<Page
+  seo={{ ...c.seo, themeColor: meta.themeColor, favicon: meta.favicon, ...seo }}
+  fontsHref={meta.fontsHref}
+  theme={theme}
+>
+  <div id="prog"></div>
+  <div class="gridlines" aria-hidden="true">
+    <div class="container">
+      {Array.from({ length: 12 }, () => <i />)}
+    </div>
+  </div>
+
+  <header class="masthead">
+    <div class="container">
+      <div class="mast-top">
+        <span class="issue">{c.masthead.issue}</span>
+        <span>{c.masthead.season}</span>
+        <div class="barcode" aria-hidden="true">
+          {Array.from({ length: 18 }, () => <i />)}
+        </div>
+      </div>
+      <div class="mast-title">
+        <h1>{c.masthead.name}<span>{c.masthead.mark}</span></h1>
+        <div class="tag" set:html={c.masthead.taglineHtml} />
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section class="lead">
+        <div class="lead-copy">
+          <span class="cat rv">{c.lead.category}</span>
+          <h2 class="rv d1" set:html={c.lead.headingHtml} />
+          <p class="standfirst rv d2">{c.lead.standfirst}</p>
+          <div class="byline rv d3" set:html={c.lead.bylineHtml} />
+          <a class="read rv d3" href={c.lead.cta.href}>{c.lead.cta.label} <span>→</span></a>
+        </div>
+        <figure class="figure rv d2">
+          <div class="fig-img" id="fig1"></div>
+          <figcaption class="fig-cap">
+            <span><b>{c.lead.figure.label}</b> — {c.lead.figure.caption}</span>
+            <span>{c.lead.figure.note}</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <div class="sec-rule rv"><h3>{c.features.title}</h3><span>{c.features.note}</span></div>
+      <section class="stories">
+        {
+          c.features.stories.map((s, i) => (
+            <a class={`story ${stagger[i % 3]}`} href={s.href}>
+              <span class="no">{s.no}</span>
+              <h4>{s.title}</h4>
+              <p>{s.summary}</p>
+              <div class="meta">{s.meta}</div>
+            </a>
+          ))
+        }
+      </section>
+    </div>
+
+    <section class="quote-band">
+      <div class="container">
+        <blockquote class="rv" set:html={c.quote.textHtml} />
+        <cite class="rv d1">{c.quote.cite}</cite>
+      </div>
+    </section>
+
+    <div class="container">
+      <section class="index-sec" id={c.index.id}>
+        <div class="index-head"><h3 class="rv" set:html={c.index.headingHtml} /></div>
+        <div class="index-list rv d1">
+          {c.index.rows.map((r) => <div class="ix"><span>{r.label}</span><span class="v">{r.value}</span></div>)}
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="colophon">
+        {
+          c.colophon.map((b, i) => (
+            <div class={`col-block ${stagger[i % 3]}`}>
+              <span class="k">{b.label}</span>
+              <p>
+                <Fragment set:html={b.bodyHtml} />
+                {i === last && showcase && (<><br />Part of the <a href="/">Fable Showcase</a> — 25 sites, 25 styles.</>)}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </footer>
+
+  {showcase && <a class="hub-chip" href="/">← Fable Showcase</a>}
+</Page>
+
+<script>
+  import { reveal } from '~/lib/motion';
+  import { initFigure } from './figure';
+  import { initMasthead } from './progress';
+
+  const bar = document.getElementById('prog');
+  const masthead = document.querySelector('.masthead');
+  if (bar && masthead) initMasthead(bar, masthead);
+
+  const fig = document.getElementById('fig1');
+  if (fig) initFigure(fig);
+
+  reveal('.rv', { threshold: 0.12 });
+</script>

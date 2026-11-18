@@ -1,0 +1,12 @@
+---
+/** The prism logo mark (a triangle split by a vertical ray). */
+interface Props {
+  size: number;
+}
+const { size } = Astro.props;
+---
+
+<svg width={size} height={size} viewBox="0 0 32 32">
+  <path class="mark-a" d="M16 4 L28 25 L4 25 Z"></path>
+  <path class="mark-b" d="M16 4 L16 25"></path>
+</svg>

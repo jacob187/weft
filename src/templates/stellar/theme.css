@@ -1,0 +1,17 @@
+/* stellar — design tokens. Override any of these per site via `theme` (inline on <html>). */
+:root {
+  --space: #070514;
+  --space2: #0d0a20;
+  --space3: #151033;
+  --star: #f0eefc;
+  --lav: #b3a8f7;
+  --lav-pale: #d9d3fb;
+  --gold: #ffd98a;
+  --dim: #8d86b3;
+  --faint: #4c4670;
+  /* cool (non-gold) particles in the hero cosmos */
+  --particle: #c8c0fa;
+  --disp: "Unbounded", sans-serif;
+  --body: "Manrope", sans-serif;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}

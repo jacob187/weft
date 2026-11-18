@@ -1,0 +1,177 @@
+/* meridian — layout & components. Colors come from theme.css tokens only. */
+* { margin: 0; padding: 0; box-sizing: border-box }
+html { scroll-behavior: smooth }
+body {
+  background: var(--paper); color: var(--ink); font-family: var(--body); font-weight: 300;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+::selection { background: var(--blue); color: var(--paper) }
+::-webkit-scrollbar { width: 10px }
+::-webkit-scrollbar-track { background: var(--paper) }
+::-webkit-scrollbar-thumb { background: var(--rule) }
+::-webkit-scrollbar-thumb:hover { background: var(--blue) }
+
+/* scroll progress */
+#prog { position: fixed; top: 0; left: 0; height: 3px; background: var(--blue); z-index: 99; width: 0 }
+
+.container { max-width: 1320px; margin: 0 auto; padding: 0 40px }
+
+/* masthead */
+.masthead { border-bottom: 2px solid var(--ink); position: sticky; top: 0; background: var(--paper); z-index: 50 }
+.mast-top {
+  display: flex; justify-content: space-between; align-items: center; padding: 14px 0;
+  font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink2);
+}
+.mast-top .issue { color: var(--blue); font-weight: 500 }
+.barcode { display: flex; gap: 2px; align-items: stretch; height: 16px }
+.barcode i { display: block; background: var(--ink); width: 2px }
+.barcode i:nth-child(3n) { width: 1px } .barcode i:nth-child(4n) { width: 3px }
+.mast-title {
+  display: flex; justify-content: space-between; align-items: baseline;
+  border-top: 1px solid var(--ink); padding: 10px 0 14px; transition: padding .45s var(--ease);
+}
+.mast-title h1 {
+  font-family: var(--tight); font-weight: 900; font-size: clamp(44px, 7.2vw, 96px);
+  letter-spacing: -.045em; line-height: .9; transition: font-size .45s var(--ease);
+}
+.masthead.compact .mast-top { display: none }
+.masthead.compact .mast-title { padding: 10px 0; border-top: none }
+.masthead.compact .mast-title h1 { font-size: 26px }
+.masthead.compact .tag { font-size: 9px; line-height: 1.5 }
+.mast-title h1 span { color: var(--blue) }
+.mast-title .tag {
+  font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink3); text-align: right; line-height: 1.8; display: none;
+}
+@media (min-width: 760px) { .mast-title .tag { display: block } }
+
+/* grid overlay feel: vertical rules */
+.gridlines { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: .5 }
+.gridlines .container { height: 100%; display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px }
+.gridlines .container i { border-left: 1px solid var(--rule); height: 100% }
+.gridlines .container i:first-child { border-left: none }
+
+main { position: relative; z-index: 2 }
+
+/* lead */
+.lead { display: grid; grid-template-columns: 7fr 5fr; gap: 20px; padding: 54px 0 64px; align-items: start }
+.lead-copy .cat {
+  font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--blue);
+  font-weight: 500; display: block; margin-bottom: 18px;
+}
+.lead-copy h2 {
+  font-family: var(--tight); font-weight: 800; font-size: clamp(38px, 5vw, 72px);
+  line-height: .98; letter-spacing: -.035em; max-width: 11em;
+}
+.lead-copy h2 em { font-style: italic; font-weight: 300 }
+.standfirst { margin-top: 26px; font-size: 17px; line-height: 1.75; color: var(--ink2); max-width: 34em; font-weight: 300 }
+.byline { margin-top: 24px; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink3) }
+.byline b { color: var(--ink); font-weight: 500 }
+.read {
+  display: inline-flex; align-items: center; gap: 10px; margin-top: 30px; padding: 13px 26px;
+  background: var(--ink); color: var(--paper); text-decoration: none; font-size: 11px; font-weight: 500;
+  letter-spacing: .2em; text-transform: uppercase; transition: background .25s, gap .25s;
+}
+.read:hover { background: var(--blue); gap: 18px }
+.figure { position: relative }
+.fig-img { aspect-ratio: 4/5; position: relative; overflow: hidden; background: var(--ink) }
+.fig-img svg { position: absolute; inset: 0; width: 100%; height: 100% }
+.fig-cap {
+  display: flex; justify-content: space-between; padding-top: 10px; font-size: 10.5px;
+  color: var(--ink3); letter-spacing: .06em; border-top: 1px solid var(--ink); margin-top: 0;
+}
+.fig-cap b { color: var(--blue); font-weight: 500 }
+
+/* section head */
+.sec-rule {
+  border-top: 2px solid var(--ink); display: flex; justify-content: space-between;
+  align-items: baseline; padding: 12px 0 0; margin-top: 20px;
+}
+.sec-rule h3 { font-family: var(--tight); font-weight: 800; font-size: 13px; letter-spacing: .2em; text-transform: uppercase }
+.sec-rule span { font-size: 11px; color: var(--ink3); letter-spacing: .12em }
+
+/* stories grid */
+.stories { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 20px; padding: 34px 0 70px }
+.story {
+  border-top: 1px solid var(--ink); padding: 20px 0 8px; text-decoration: none; color: var(--ink);
+  display: block; transition: none; position: relative;
+}
+.story .no { font-family: var(--tight); font-weight: 900; font-size: 13px; color: var(--blue) }
+.story h4 {
+  font-family: var(--tight); font-weight: 600; font-size: 23px; letter-spacing: -.02em;
+  line-height: 1.12; margin: 12px 0 12px; transition: color .25s;
+}
+.story:hover h4 { color: var(--blue) }
+.story p { font-size: 13px; line-height: 1.75; color: var(--ink2) }
+.story .meta { margin-top: 16px; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink3) }
+.story::after {
+  content: "→"; position: absolute; top: 20px; right: 0; font-family: var(--tight);
+  font-weight: 300; font-size: 18px; color: var(--ink3); transition: transform .3s var(--ease), color .3s;
+}
+.story:hover::after { transform: translateX(6px); color: var(--blue) }
+
+/* quote band */
+.quote-band { background: var(--blue); color: var(--paper); padding: 90px 0; margin: 20px 0 0 }
+.quote-band blockquote {
+  font-family: var(--tight); font-weight: 300; font-style: italic;
+  font-size: clamp(26px, 3.8vw, 48px); line-height: 1.25; max-width: 22em; letter-spacing: -.015em;
+}
+.quote-band blockquote b { font-weight: 800; font-style: normal }
+.quote-band cite {
+  display: block; margin-top: 30px; font-style: normal; font-size: 11px;
+  letter-spacing: .22em; text-transform: uppercase; opacity: .7;
+}
+
+/* the index */
+.index-sec { display: grid; grid-template-columns: 4fr 8fr; gap: 20px; padding: 70px 0 }
+.index-head h3 {
+  font-family: var(--tight); font-weight: 900; font-size: clamp(30px, 3.6vw, 52px);
+  letter-spacing: -.03em; line-height: 1; position: sticky; top: 150px;
+}
+.index-head h3 span { color: var(--blue) }
+.index-list { border-top: 2px solid var(--ink) }
+.ix {
+  display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: baseline;
+  padding: 17px 0; border-bottom: 1px solid var(--rule); font-size: 14.5px; line-height: 1.6;
+}
+.ix:hover { background: var(--card) }
+.ix .v {
+  font-family: var(--tight); font-weight: 800; font-size: 19px; color: var(--blue);
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+
+/* colophon */
+footer { border-top: 2px solid var(--ink); margin-top: 30px; background: var(--paper) }
+.colophon { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 44px 0 80px }
+.col-block .k {
+  font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--blue);
+  font-weight: 500; display: block; margin-bottom: 12px;
+}
+.col-block p { font-size: 12px; line-height: 1.9; color: var(--ink2) }
+.col-block a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--blue); text-underline-offset: 3px }
+.col-block a:hover { color: var(--blue) }
+
+.rv { opacity: 0; transform: translateY(26px); transition: opacity .9s var(--ease), transform .9s var(--ease) }
+.rv.in { opacity: 1; transform: none }
+.rv.d1 { transition-delay: .1s } .rv.d2 { transition-delay: .2s } .rv.d3 { transition-delay: .3s }
+
+.hub-chip {
+  position: fixed; bottom: 20px; left: 20px; z-index: 95; font-size: 10px; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--ink2); text-decoration: none;
+  background: color-mix(in srgb, var(--paper) 90%, transparent);
+  border: 1px solid var(--rule); padding: 9px 15px; opacity: .7; transition: all .2s;
+}
+.hub-chip:hover { opacity: 1; border-color: var(--blue); color: var(--blue) }
+
+@media (max-width: 900px) {
+  .container { padding: 0 22px }
+  .lead { grid-template-columns: 1fr; gap: 44px }
+  .index-sec { grid-template-columns: 1fr; gap: 30px }
+  .index-head h3 { position: static }
+  .gridlines { display: none }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important }
+  html { scroll-behavior: auto }
+  .rv { opacity: 1; transform: none }
+}

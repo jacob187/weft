@@ -1,0 +1,177 @@
+---
+import Page from '~/layouts/Page.astro';
+import type { TemplateProps } from '~/templates/types';
+import type { Content } from './content';
+import Mark from './Mark.astro';
+import meta from './meta';
+import './theme.css';
+import './style.css';
+
+type Props = TemplateProps<Content>;
+const { content: c, theme, seo, showcase } = Astro.props;
+const { balance, spending, activity } = c.hero.dashboard;
+const delay = (i: number) => (i ? `rv d${i}` : 'rv');
+const segments = spending.categories.map((k) => ({ percent: k.percent, tone: k.tone }));
+---
+
+<Page
+  seo={{ ...c.seo, themeColor: meta.themeColor, favicon: meta.favicon, ...seo }}
+  fontsHref={meta.fontsHref}
+  theme={theme}
+>
+  <div class="mesh" aria-hidden="true">
+    <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  </div>
+
+  <nav id="nav">
+    <a class="wordmark" href="#">
+      <Mark size={22} />
+      {c.brand}
+    </a>
+    <ul class="nav-links">
+      {c.nav.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      <li><a class="cta-sm" href={c.navCta.href}>{c.navCta.label}</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <header>
+      <div>
+        <h1 class="rv" set:html={c.hero.headingHtml} />
+        <p class="hero-sub rv d1">{c.hero.sub}</p>
+        <div class="hero-ctas rv d2">
+          <a class="btn-a" href={c.hero.primary.href}>{c.hero.primary.label}</a>
+          <a class="btn-b" href={c.hero.secondary.href}>{c.hero.secondary.label}</a>
+        </div>
+        <p class="trust rv d3">{c.hero.trust}</p>
+      </div>
+      <div class="dash rv d2" id="dash">
+        <div class="card balance">
+          <span class="lbl">{balance.label}</span>
+          <div class="amount">{balance.currency}<span data-end={balance.amount} data-grouped>0</span><small>{balance.cents}</small></div>
+          <span class="delta">{balance.delta}</span>
+          <svg id="chart" viewBox="0 0 520 110" preserveAspectRatio="none"></svg>
+        </div>
+        <div class="card donut-card">
+          <span class="lbl">{spending.label}</span>
+          <svg
+            id="donut"
+            width="120"
+            height="120"
+            viewBox="0 0 120 120"
+            data-segments={JSON.stringify(segments)}
+            data-total={spending.total}
+            data-caption={spending.caption}></svg>
+          <div class="leg">
+            {
+              spending.categories.map((k) => (
+                <span style={`--tone:var(--${k.tone})`}><i></i>{k.name} — {k.percent}%</span>
+              ))
+            }
+          </div>
+        </div>
+        <div class="card tx-card">
+          <span class="lbl">{activity.label}</span>
+          {
+            activity.transactions.map((t) => (
+              <div class="tx">
+                <span class="who"><i style={`--tone:var(--${t.tone})`}>{t.icon}</i>{t.who}</span>
+                <span class:list={['amt', { pos: t.credit }]}>{t.amount}</span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </header>
+
+    <section id={c.features.id}>
+      <span class="kicker rv">{c.features.kicker}</span>
+      <h2 class="rv d1" set:html={c.features.headingHtml} />
+      <div class="feats">
+        {
+          c.features.items.map((f, i) => (
+            <div class={`feat ${delay(i)}`}>
+              <div class="glow" style={`--tone:var(--${f.tone})`}></div>
+              <span class="num">{f.no}</span>
+              <h3>{f.title}</h3>
+              <p>{f.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id={c.numbers.id}>
+      <span class="kicker rv">{c.numbers.kicker}</span>
+      <h2 class="rv d1" set:html={c.numbers.headingHtml} />
+      <div class="stats">
+        {
+          c.numbers.stats.map((s, i) => (
+            <div class={`stat ${delay(i)}`}>
+              <div class="v">
+                {s.highlight ? <b data-end={s.value}>0</b> : <span data-end={s.value}>0</span>}{s.unit}
+              </div>
+              <div class="k">{s.label}</div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id={c.security.id}>
+      <span class="kicker rv">{c.security.kicker}</span>
+      <h2 class="rv d1" set:html={c.security.headingHtml} />
+      <div class="sec-band rv d2">
+        <div>
+          <h3 set:html={c.security.bandHeadingHtml} />
+          <p>{c.security.body}</p>
+        </div>
+        <a class="btn-b" href={c.security.cta.href}>{c.security.cta.label}</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot-grid">
+      <div>
+        <a class="wordmark" href="#">
+          <Mark size={20} />
+          {c.brand}
+        </a>
+        <p class="foot-note">{c.footer.note}</p>
+      </div>
+      {
+        (c.footer.creditHtml || showcase) && (
+          <p>
+            {c.footer.creditHtml && <Fragment set:html={c.footer.creditHtml} />}
+            {c.footer.creditHtml && showcase && <br />}
+            {showcase && (<>Part of the <a href="/">Fable Showcase</a> — 25 sites, 25 styles.</>)}
+          </p>
+        )
+      }
+    </div>
+  </footer>
+
+  {showcase && <a class="hub-chip" href="/">← Fable Showcase</a>}
+</Page>
+
+<script>
+  import { reveal, scrolledClass } from '~/lib/motion';
+  import { initChart } from './chart';
+  import { initCountUps } from './countup';
+  import { initDonut } from './donut';
+  import { initTilt } from './tilt';
+
+  const chart = document.getElementById('chart');
+  if (chart instanceof SVGSVGElement) initChart(chart);
+  const donut = document.getElementById('donut');
+  if (donut instanceof SVGSVGElement) initDonut(donut);
+  initCountUps(document.querySelectorAll<HTMLElement>('[data-end]'));
+
+  const nav = document.getElementById('nav');
+  if (nav) scrolledClass(nav);
+  reveal('.rv', { threshold: 0.15 });
+
+  const dash = document.getElementById('dash');
+  if (dash) initTilt(dash);
+</script>
