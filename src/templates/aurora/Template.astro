@@ -1,0 +1,186 @@
+---
+import Page from '~/layouts/Page.astro';
+import type { TemplateProps } from '~/templates/types';
+import type { Content } from './content';
+import meta from './meta';
+import './theme.css';
+import './style.css';
+
+type Props = TemplateProps<Content>;
+const { content: c, theme, seo, showcase } = Astro.props;
+
+/** Reveal-delay class for the nth staggered element (none for 0). */
+const delay = (n: number) => (n ? `d${n}` : '');
+const stats = [{ value: String(c.forecast.kp), label: c.forecast.kpLabel }, ...c.forecast.stats];
+---
+
+<Page
+  seo={{ ...c.seo, themeColor: meta.themeColor, favicon: meta.favicon, ...seo }}
+  fontsHref={meta.fontsHref}
+  theme={theme}
+>
+  <nav id="nav">
+    <a class="wordmark" href="#" set:html={c.wordmarkHtml} />
+    <ul class="nav-links">
+      {c.nav.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+    </ul>
+  </nav>
+
+  <header>
+    <canvas id="sky" aria-hidden="true"></canvas>
+    <svg class="mountains" viewBox="0 0 1440 240" preserveAspectRatio="none" width="100%" height="240" aria-hidden="true">
+      <path
+        class="far"
+        d="M0 240 L0 150 L180 70 L340 160 L520 40 L700 170 L880 90 L1080 190 L1260 110 L1440 170 L1440 240 Z"
+      ></path>
+      <path
+        class="near"
+        d="M0 240 L0 190 L240 130 L430 200 L640 120 L850 210 L1060 150 L1250 220 L1440 180 L1440 240 Z"
+      ></path>
+    </svg>
+    <div class="hero-content">
+      <p class="hero-kicker rv">{c.hero.kicker}</p>
+      <h1 class="rv d1" set:html={c.hero.headingHtml} />
+      <p class="hero-sub rv d2">{c.hero.sub}</p>
+      <a class="btn rv d3" href={c.hero.cta.href}>{c.hero.cta.label}</a>
+    </div>
+    <span class="coord">{c.hero.coord}</span>
+    <span class="hero-scroll">{c.hero.scrollLabel}</span>
+  </header>
+
+  <section id="experience">
+    <span class="kicker rv">{c.experience.kicker}</span>
+    <h2 class="rv d1" set:html={c.experience.headingHtml} />
+    <div class="exp-grid">
+      {
+        c.experience.items.map((e, i) => (
+          <div class={`exp rv ${delay(i)}`}>
+            <span class="tno">{e.no}</span>
+            <div class="ico">
+              {e.icon === 'sauna' && (
+                <svg width="54" height="54" viewBox="0 0 54 54" fill="none">
+                  <rect x="9" y="22" width="36" height="24" rx="3" class="s-mint" stroke-width="1.6" />
+                  <path d="M9 22 L27 8 L45 22" class="s-mint" stroke-width="1.6" stroke-linejoin="round" />
+                  <path d="M20 38 Q22 34 20 30 M27 40 Q29 35 27 30 M34 38 Q36 34 34 30" class="s-violet" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+              )}
+              {e.icon === 'plunge' && (
+                <svg width="54" height="54" viewBox="0 0 54 54" fill="none">
+                  <circle cx="27" cy="27" r="19" class="s-mint" stroke-width="1.6" />
+                  <path d="M12 27 Q19 22 27 27 Q35 32 42 27" class="s-violet" stroke-width="1.5" stroke-linecap="round" />
+                  <path d="M16 34 Q22 30 27 34 Q32 38 38 34" class="s-violet" stroke-width="1.2" stroke-linecap="round" opacity=".6" />
+                </svg>
+              )}
+              {e.icon === 'lodge' && (
+                <svg width="54" height="54" viewBox="0 0 54 54" fill="none">
+                  <path
+                    d="M27 8 C34 16 44 20 44 31 C44 41 36 47 27 47 C18 47 10 41 10 31 C10 20 20 16 27 8 Z"
+                    class="s-mint"
+                    stroke-width="1.6"
+                    stroke-linejoin="round"
+                  />
+                  <line x1="18" y1="30" x2="36" y2="30" class="s-violet" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+              )}
+            </div>
+            <h3>{e.title}</h3>
+            <p>{e.text}</p>
+            <span class="temp">{e.temp}</span>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section id="forecast">
+    <div class="fc-inner">
+      <div>
+        <span class="kicker rv">{c.forecast.kicker}</span>
+        <h2 class="rv d1" set:html={c.forecast.headingHtml} />
+        <div class="gauge-wrap">
+          <svg
+            id="gauge"
+            width="214"
+            height="190"
+            viewBox="0 0 214 190"
+            class="rv d2"
+            data-kp={c.forecast.kp}
+            data-label={c.forecast.gaugeLabel}
+          >
+          </svg>
+          <p class="fc-note rv d3" set:html={c.forecast.noteHtml} />
+        </div>
+      </div>
+      <div class="fc-stats rv d2">
+        {
+          stats.map((s) => (
+            <div class="fc-stat">
+              <div class="v">{s.value}</div>
+              <div class="k">{s.label}</div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="rooms">
+    <span class="kicker rv">{c.rooms.kicker}</span>
+    <h2 class="rv d1" set:html={c.rooms.headingHtml} />
+    <div class="rooms rv d2">
+      {
+        c.rooms.items.map((r) => (
+          <a class="room" href={r.href}>
+            <span class="no">{r.no}</span>
+            <span>
+              <h3>{r.name}</h3>
+              <p>{r.description}</p>
+            </span>
+            <span class="end">
+              <span class="pr">{r.price}</span>
+              <span class="arrow">→</span>
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-grid">
+      <div>
+        <a class="wordmark" href="#" set:html={c.wordmarkHtml} />
+        <p class="address" set:html={c.footer.addressHtml} />
+      </div>
+      <p>
+        <Fragment set:html={c.footer.creditHtml} />
+        {
+          showcase && c.showcase && (
+            <>
+              <br />
+              <Fragment set:html={c.showcase.footerHtml} />
+            </>
+          )
+        }
+      </p>
+    </div>
+  </footer>
+
+  {showcase && c.showcase && <a class="hub-chip" href={c.showcase.chipHref}>{c.showcase.chipLabel}</a>}
+</Page>
+
+<script>
+  import { reveal, scrolledClass } from '~/lib/motion';
+  import { initGauge } from './gauge';
+  import { initSky } from './sky';
+
+  const sky = document.getElementById('sky');
+  if (sky instanceof HTMLCanvasElement) initSky(sky);
+
+  const gauge = document.getElementById('gauge');
+  if (gauge instanceof SVGSVGElement) initGauge(gauge);
+
+  const nav = document.getElementById('nav');
+  if (nav) scrolledClass(nav);
+  reveal('.rv', { threshold: 0.15 });
+</script>
