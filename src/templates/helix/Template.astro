@@ -1,0 +1,145 @@
+---
+import Page from '~/layouts/Page.astro';
+import type { TemplateProps } from '~/templates/types';
+import type { Content } from './content';
+import meta from './meta';
+import './theme.css';
+import './style.css';
+
+type Props = TemplateProps<Content>;
+const { content: c, theme, seo, showcase = false } = Astro.props;
+---
+
+<Page
+  seo={{ ...c.seo, themeColor: meta.themeColor, favicon: meta.favicon, ...seo }}
+  fontsHref={meta.fontsHref}
+  theme={theme}
+>
+  <canvas id="stage" aria-label={c.stageLabel}></canvas>
+  <div class="grain" aria-hidden="true"></div>
+
+  <nav id="nav">
+    <a class="wordmark" href="#" set:html={c.brandHtml} />
+    <ul class="nav-links">
+      {c.nav.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      <li><a class="nav-cta" href={c.navCta.href}>{c.navCta.label}</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="panel-sec hero" id={c.hero.id}>
+      <div class="hero-block">
+        <span class="kicker rv">{c.hero.kicker}</span>
+        <h1 class="rv d1">{c.hero.title}</h1>
+        <p class="sub rv d2">{c.hero.sub}</p>
+        <div class="price-row rv d3">
+          <a class="btn" href={c.hero.cta.href}>{c.hero.cta.label}</a>
+          <div class="price">{c.hero.price}<small>{c.hero.priceNote}</small></div>
+        </div>
+      </div>
+      <span class="scroll-cue">{c.hero.scrollCue}</span>
+    </section>
+
+    <section class="panel-sec" id={c.design.id}>
+      <div class="spec-block rv">
+        <span class="kicker">{c.design.kicker}</span>
+        <h2 set:html={c.design.headingHtml} />
+        <p set:html={c.design.bodyHtml} />
+        <div class="spec-rows">
+          {
+            c.design.specs.map((s) => (
+              <div class="srow">
+                <span class="k">{s.label}</span>
+                <span class="v" set:html={s.valueHtml} />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="panel-sec" id={c.finishes.id}>
+      <div class="fin-block rv">
+        <span class="kicker">{c.finishes.kicker}</span>
+        <h2 set:html={c.finishes.headingHtml} />
+        <p>{c.finishes.body}</p>
+        <div class="swatches" role="group" aria-label={c.finishes.groupLabel}>
+          {
+            c.finishes.options.map((f, i) => (
+              <button
+                class={i === 0 ? 'sw on' : 'sw'}
+                data-fin={f.id}
+                data-color={f.color}
+                data-metalness={f.metalness}
+                data-roughness={f.roughness}
+                data-accent={f.accent}
+              >
+                <span class="dot" style={`background:${f.dot}`} />
+                <span class="nm">{f.name}</span>
+              </button>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="panel-sec" id={c.preorder.id}>
+      <div class="pre-block rv">
+        <span class="kicker">{c.preorder.kicker}</span>
+        <h2 set:html={c.preorder.headingHtml} />
+        <p>{c.preorder.body}</p>
+        <a class="btn" href={c.preorder.cta.href}>{c.preorder.cta.label}</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="wordmark" href="#" set:html={c.brandHtml} />
+        <p set:html={c.footer.noteHtml} />
+      </div>
+      <p>
+        <Fragment set:html={c.footer.creditHtml} />
+        {
+          showcase && (
+            <>
+              <br />
+              Part of the <a href="/">Fable Showcase</a> — 25 sites, 25 styles.
+            </>
+          )
+        }
+      </p>
+    </div>
+  </footer>
+
+  {showcase && <a class="hub-chip" href="/">← Fable Showcase</a>}
+</Page>
+
+<script>
+  import { reveal, scrolledClass } from '~/lib/motion';
+  import { initStage, type FinishSpec } from './stage';
+
+  const nav = document.getElementById('nav');
+  if (nav) scrolledClass(nav);
+  reveal('.rv', { threshold: 0.15 });
+
+  const canvas = document.getElementById('stage');
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>('.sw')];
+  if (canvas instanceof HTMLCanvasElement && buttons.length) {
+    const finishes: FinishSpec[] = buttons.map((b) => ({
+      id: b.dataset.fin ?? '',
+      color: b.dataset.color ?? '',
+      metalness: Number(b.dataset.metalness),
+      roughness: Number(b.dataset.roughness),
+      accent: b.dataset.accent,
+    }));
+    const stage = initStage(canvas, finishes);
+    for (const btn of buttons) {
+      btn.addEventListener('click', () => {
+        for (const b of buttons) b.classList.toggle('on', b === btn);
+        stage.setFinish(btn.dataset.fin ?? '');
+      });
+    }
+  }
+</script>
