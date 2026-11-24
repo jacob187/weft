@@ -2,5 +2,17 @@
   "name": "weft",
   "version": "0.1.0",
   "description": "27 code-only website styles (WebGL, canvas, generative SVG, Web Audio) as full Astro templates or drop-in style kits for existing projects.",
-  "keywords": ["design", "frontend", "styling", "templates", "astro", "design-tokens", "webgl"]
+  "keywords": [
+    "design",
+    "frontend",
+    "styling",
+    "templates",
+    "astro",
+    "design-tokens",
+    "webgl"
+  ],
+  "author": {
+    "name": "Weft contributors"
+  },
+  "license": "MIT"
 }

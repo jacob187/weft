@@ -1,7 +1,9 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "weft",
-  "owner": { "name": "weft" },
+  "owner": {
+    "name": "Weft"
+  },
   "metadata": {
     "description": "Website styles and templates for Claude Code."
   },
@@ -12,7 +14,17 @@
       "description": "27 code-only website styles (WebGL, canvas, generative SVG, Web Audio) as full Astro templates or drop-in style kits for existing projects.",
       "version": "0.1.0",
       "category": "design",
-      "tags": ["design", "frontend", "styling", "templates", "astro"]
+      "tags": [
+        "design",
+        "frontend",
+        "styling",
+        "templates",
+        "astro"
+      ],
+      "license": "MIT",
+      "author": {
+        "name": "Weft contributors"
+      }
     }
   ]
 }

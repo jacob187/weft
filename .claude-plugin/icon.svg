@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Weft">
+  <rect width="64" height="64" rx="14" fill="#08080d"/>
+  <g fill="none" stroke-width="2.6" stroke-linecap="round">
+    <path d="M8 22 C18 12 26 32 36 22 S50 12 56 20" stroke="#e8c168"/>
+    <path d="M8 32 C18 22 26 42 36 32 S50 22 56 30" stroke="#78e6c8"/>
+    <path d="M8 42 C18 32 26 52 36 42 S50 32 56 40" stroke="#ff3ec8"/>
+  </g>
+  <g stroke="#ecebe6" stroke-opacity=".18" stroke-width="1.4">
+    <path d="M20 10 V54 M32 10 V54 M44 10 V54"/>
+  </g>
+</svg>
