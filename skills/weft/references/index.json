@@ -1,0 +1,877 @@
+[
+  {
+    "slug": "obsidian",
+    "no": "01",
+    "name": "OBSIDIAN",
+    "summary": "Haute horlogerie under raymarched liquid gold — an SDF metaball shader with studio lighting.",
+    "technique": "RAYMARCH GLSL",
+    "tags": [
+      "luxury",
+      "dark",
+      "gold",
+      "premium",
+      "minimal",
+      "3d",
+      "shader",
+      "watch",
+      "jewelry"
+    ],
+    "bestFor": [
+      "luxury goods",
+      "watches & jewelry",
+      "premium product launches"
+    ],
+    "swatch": [
+      "#0a0a0c",
+      "#c9a24b",
+      "#f0d089"
+    ],
+    "fonts": [
+      "Cormorant Garamond",
+      "Inter"
+    ],
+    "three": false
+  },
+  {
+    "slug": "botanica",
+    "no": "02",
+    "name": "BOTANICA",
+    "summary": "A perfumery whose garden grows down the page — generative SVG vines drawn by your scroll.",
+    "technique": "SCROLL-GROWN SVG",
+    "tags": [
+      "organic",
+      "natural",
+      "light",
+      "botanical",
+      "illustrated",
+      "scroll",
+      "soft",
+      "beauty"
+    ],
+    "bestFor": [
+      "beauty & skincare",
+      "perfume",
+      "florists",
+      "wellness brands"
+    ],
+    "swatch": [
+      "#f2ecdd",
+      "#3c4d34",
+      "#c4694a"
+    ],
+    "fonts": [
+      "Fraunces",
+      "Karla"
+    ],
+    "three": false
+  },
+  {
+    "slug": "monolith",
+    "no": "03",
+    "name": "MONOLITH",
+    "summary": "A brutalist type foundry with a live variable-font specimen — width and weight follow your cursor.",
+    "technique": "VARIABLE FONTS",
+    "tags": [
+      "brutalist",
+      "typography",
+      "bold",
+      "grid",
+      "red",
+      "monochrome",
+      "editorial",
+      "tech"
+    ],
+    "bestFor": [
+      "type foundries",
+      "design studios",
+      "developer tools",
+      "bold agencies"
+    ],
+    "swatch": [
+      "#f1efe9",
+      "#111111",
+      "#ff2b00"
+    ],
+    "fonts": [
+      "Anybody",
+      "Space Grotesk",
+      "Space Mono"
+    ],
+    "three": false
+  },
+  {
+    "slug": "aurora",
+    "no": "04",
+    "name": "AURORA",
+    "summary": "An Arctic retreat beneath a live aurora — fbm noise curtains, stars, and a KP-index gauge.",
+    "technique": "FBM SHADER",
+    "tags": [
+      "nature",
+      "calm",
+      "night",
+      "travel",
+      "hospitality",
+      "atmospheric",
+      "shader",
+      "nordic"
+    ],
+    "bestFor": [
+      "hotels & retreats",
+      "travel",
+      "outdoor brands",
+      "wellness"
+    ],
+    "swatch": [
+      "#060b18",
+      "#78e6c8",
+      "#9d8bf0"
+    ],
+    "fonts": [
+      "Cormorant",
+      "Outfit"
+    ],
+    "three": false
+  },
+  {
+    "slug": "arcade",
+    "no": "05",
+    "name": "NEON DISTRICT",
+    "summary": "A synthwave arcade bar: CRT scanlines, perspective grid floor, and box-shadow pixel sprites.",
+    "technique": "CANVAS + CRT",
+    "tags": [
+      "retro",
+      "synthwave",
+      "neon",
+      "80s",
+      "gaming",
+      "nightlife",
+      "playful",
+      "pixel"
+    ],
+    "bestFor": [
+      "bars & nightlife",
+      "gaming",
+      "events",
+      "entertainment"
+    ],
+    "swatch": [
+      "#0d0518",
+      "#ff3ec8",
+      "#38e8ff"
+    ],
+    "fonts": [
+      "Press Start 2P",
+      "Orbitron",
+      "Chakra Petch"
+    ],
+    "three": false
+  },
+  {
+    "slug": "kaze",
+    "no": "06",
+    "name": "KAZE 風",
+    "summary": "A Kyoto tea house — enso drawn on load, raked karesansui canvas, vertical typography.",
+    "technique": "INK & CANVAS",
+    "tags": [
+      "japanese",
+      "zen",
+      "minimal",
+      "calm",
+      "ink",
+      "traditional",
+      "light",
+      "craft"
+    ],
+    "bestFor": [
+      "restaurants",
+      "tea & coffee",
+      "spas",
+      "craft studios"
+    ],
+    "swatch": [
+      "#f5f1e6",
+      "#1c1b18",
+      "#c73e1d"
+    ],
+    "fonts": [
+      "Shippori Mincho",
+      "Zen Kaku Gothic New"
+    ],
+    "three": false
+  },
+  {
+    "slug": "meridian",
+    "no": "07",
+    "name": "MERIDIAN",
+    "summary": "A Swiss editorial quarterly on a strict 12-column grid, set in IKB blue with a collapsing masthead.",
+    "technique": "EDITORIAL GRID",
+    "tags": [
+      "editorial",
+      "swiss",
+      "magazine",
+      "grid",
+      "journalism",
+      "light",
+      "typographic"
+    ],
+    "bestFor": [
+      "magazines",
+      "blogs",
+      "reports",
+      "think tanks"
+    ],
+    "swatch": [
+      "#fafaf7",
+      "#101010",
+      "#0031c6"
+    ],
+    "fonts": [
+      "Inter Tight",
+      "Inter"
+    ],
+    "three": false
+  },
+  {
+    "slug": "stellar",
+    "no": "08",
+    "name": "STELLAR",
+    "summary": "A planetarium of 1,900 particles that morph between a word, Orion, a galaxy and the dome.",
+    "technique": "PARTICLE MORPH",
+    "tags": [
+      "space",
+      "science",
+      "particles",
+      "dark",
+      "education",
+      "cosmic",
+      "museum"
+    ],
+    "bestFor": [
+      "museums & planetariums",
+      "science & education",
+      "events"
+    ],
+    "swatch": [
+      "#070514",
+      "#b3a8f7",
+      "#ffd98a"
+    ],
+    "fonts": [
+      "Unbounded",
+      "Manrope"
+    ],
+    "three": false
+  },
+  {
+    "slug": "prism",
+    "no": "09",
+    "name": "PRISM",
+    "summary": "A glass bank dashboard — animated gradient mesh, live drifting chart, honest axes.",
+    "technique": "GLASSMORPHISM",
+    "tags": [
+      "fintech",
+      "saas",
+      "dashboard",
+      "glass",
+      "gradient",
+      "startup",
+      "dark",
+      "modern"
+    ],
+    "bestFor": [
+      "fintech",
+      "SaaS products",
+      "dashboards",
+      "startups"
+    ],
+    "swatch": [
+      "#0b0e16",
+      "#7ce7d8",
+      "#b48bf2"
+    ],
+    "fonts": [
+      "Sora",
+      "IBM Plex Mono"
+    ],
+    "three": false
+  },
+  {
+    "slug": "null",
+    "no": "10",
+    "name": "NULLSECTOR",
+    "summary": "A security firm fronted by a working terminal — type help, run a scan, find the flag.",
+    "technique": "TERMINAL EMU",
+    "tags": [
+      "cybersecurity",
+      "hacker",
+      "terminal",
+      "developer",
+      "dark",
+      "green",
+      "interactive",
+      "matrix"
+    ],
+    "bestFor": [
+      "security firms",
+      "developer & CLI tools",
+      "hackathons"
+    ],
+    "swatch": [
+      "#020803",
+      "#33ff66",
+      "#ffb347"
+    ],
+    "fonts": [
+      "JetBrains Mono"
+    ],
+    "three": false
+  },
+  {
+    "slug": "rosewood",
+    "no": "11",
+    "name": "THE ROSEWOOD",
+    "summary": "An Art Deco grand hotel: generative sunburst, gold shimmer, and an elevator-dial scroll indicator.",
+    "technique": "DECO SVG",
+    "tags": [
+      "art deco",
+      "luxury",
+      "gold",
+      "green",
+      "vintage",
+      "elegant",
+      "hotel",
+      "1920s"
+    ],
+    "bestFor": [
+      "hotels",
+      "restaurants & cocktail bars",
+      "weddings & events"
+    ],
+    "swatch": [
+      "#0b2b22",
+      "#d4af6a",
+      "#f0d9a8"
+    ],
+    "fonts": [
+      "Marcellus",
+      "Montserrat"
+    ],
+    "three": false
+  },
+  {
+    "slug": "helix",
+    "no": "12",
+    "name": "HELIX ONE",
+    "summary": "An audio sculpture in real-time 3D — drag it, scroll-choreographed camera, live finish configurator.",
+    "technique": "THREE.JS",
+    "tags": [
+      "product",
+      "3d",
+      "three.js",
+      "hardware",
+      "audio",
+      "premium",
+      "tech",
+      "configurator"
+    ],
+    "bestFor": [
+      "hardware launches",
+      "audio products",
+      "consumer electronics"
+    ],
+    "swatch": [
+      "#101113",
+      "#c9ced6",
+      "#e8a33d"
+    ],
+    "fonts": [
+      "Michroma",
+      "Instrument Sans"
+    ],
+    "three": true
+  },
+  {
+    "slug": "doughbox",
+    "no": "13",
+    "name": "DOUGHBOX",
+    "summary": "A very serious bakery with gooey canvas blobs, sticker prices, and a live oven schedule.",
+    "technique": "GOO & SPRINGS",
+    "tags": [
+      "playful",
+      "food",
+      "bakery",
+      "colorful",
+      "friendly",
+      "cute",
+      "pastel",
+      "bouncy"
+    ],
+    "bestFor": [
+      "bakeries & cafes",
+      "food brands",
+      "kids products",
+      "playful consumer brands"
+    ],
+    "swatch": [
+      "#fff3df",
+      "#f7a6c1",
+      "#ffd166"
+    ],
+    "fonts": [
+      "Baloo 2",
+      "Nunito"
+    ],
+    "three": false
+  },
+  {
+    "slug": "riot",
+    "no": "14",
+    "name": "RIOT FEST",
+    "summary": "A festival poster that bites back — kinetic letters, opposing marquees, acid-on-black stages.",
+    "technique": "KINETIC TYPE",
+    "tags": [
+      "festival",
+      "music",
+      "bold",
+      "kinetic",
+      "poster",
+      "loud",
+      "neon",
+      "youth"
+    ],
+    "bestFor": [
+      "festivals",
+      "concerts",
+      "events",
+      "streetwear"
+    ],
+    "swatch": [
+      "#0a0a0a",
+      "#c6ff00",
+      "#ff2e88"
+    ],
+    "fonts": [
+      "Anton",
+      "Archivo"
+    ],
+    "three": false
+  },
+  {
+    "slug": "atelier",
+    "no": "15",
+    "name": "ATELIER NOIR",
+    "summary": "An architecture practice whose elevations draw themselves — pure line, monochrome, 1:200.",
+    "technique": "SELF-DRAWING SVG",
+    "tags": [
+      "architecture",
+      "minimal",
+      "monochrome",
+      "line art",
+      "portfolio",
+      "refined",
+      "light"
+    ],
+    "bestFor": [
+      "architects",
+      "interior designers",
+      "portfolios",
+      "galleries"
+    ],
+    "swatch": [
+      "#f5f5f2",
+      "#141414",
+      "#9a9a94"
+    ],
+    "fonts": [
+      "Bodoni Moda",
+      "Figtree"
+    ],
+    "three": false
+  },
+  {
+    "slug": "abyssal",
+    "no": "16",
+    "name": "ABYSSAL",
+    "summary": "A deep-sea institute where scrolling is descending — live depth meter, darkening zones, glowing fauna.",
+    "technique": "SCROLL DESCENT",
+    "tags": [
+      "ocean",
+      "science",
+      "storytelling",
+      "scroll",
+      "research",
+      "deep",
+      "blue",
+      "nonprofit"
+    ],
+    "bestFor": [
+      "research institutes",
+      "nonprofits & conservation",
+      "long-form storytelling"
+    ],
+    "swatch": [
+      "#0a5568",
+      "#54e0e8",
+      "#01070c"
+    ],
+    "fonts": [
+      "Gruppo",
+      "Albert Sans"
+    ],
+    "three": false
+  },
+  {
+    "slug": "papercut",
+    "no": "17",
+    "name": "PAPERCUT",
+    "summary": "A riso zine studio in torn paper — every ragged edge is a generated clip-path.",
+    "technique": "TORN CLIP-PATHS",
+    "tags": [
+      "zine",
+      "handmade",
+      "collage",
+      "riso",
+      "indie",
+      "craft",
+      "playful",
+      "paper"
+    ],
+    "bestFor": [
+      "indie publishers",
+      "print shops",
+      "creative studios",
+      "craft brands"
+    ],
+    "swatch": [
+      "#d9c7a8",
+      "#ff4b33",
+      "#2244cc"
+    ],
+    "fonts": [
+      "Caveat",
+      "Archivo",
+      "Courier Prime"
+    ],
+    "three": false
+  },
+  {
+    "slug": "flux",
+    "no": "18",
+    "name": "FLUX",
+    "summary": "A climate observatory: warming stripes, the temperature spiral, and the Keeling curve, hand-rolled.",
+    "technique": "DATA AS DESIGN",
+    "tags": [
+      "data visualization",
+      "charts",
+      "climate",
+      "science",
+      "report",
+      "dark",
+      "informative"
+    ],
+    "bestFor": [
+      "data stories",
+      "research reports",
+      "climate & NGOs",
+      "annual reports"
+    ],
+    "swatch": [
+      "#0e1626",
+      "#3b6fb5",
+      "#d96b4a"
+    ],
+    "fonts": [
+      "Spectral",
+      "IBM Plex Sans",
+      "IBM Plex Mono"
+    ],
+    "three": false
+  },
+  {
+    "slug": "mirage",
+    "no": "19",
+    "name": "MIRAGE",
+    "summary": "A vaporwave collective — slatted sun, chrome type, marble statue, all pure CSS and gradient.",
+    "technique": "PURE-CSS 3D",
+    "tags": [
+      "vaporwave",
+      "retro",
+      "music",
+      "nostalgic",
+      "surreal",
+      "neon",
+      "90s",
+      "dreamy"
+    ],
+    "bestFor": [
+      "record labels",
+      "musicians & merch",
+      "creative collectives"
+    ],
+    "swatch": [
+      "#1a0b2e",
+      "#ff5e9e",
+      "#58e6e6"
+    ],
+    "fonts": [
+      "Monoton",
+      "Poppins"
+    ],
+    "three": false
+  },
+  {
+    "slug": "tempo",
+    "no": "20",
+    "name": "TEMPO",
+    "summary": "A playable polyphonic synthesizer — oscillators, filter, echo, and a genuinely live oscilloscope.",
+    "technique": "WEB AUDIO",
+    "tags": [
+      "music",
+      "audio",
+      "interactive",
+      "synth",
+      "instrument",
+      "dark",
+      "tactile"
+    ],
+    "bestFor": [
+      "music tech",
+      "audio products",
+      "interactive demos"
+    ],
+    "swatch": [
+      "#17181d",
+      "#a06bff",
+      "#6bffc9"
+    ],
+    "fonts": [
+      "Chakra Petch",
+      "DM Sans"
+    ],
+    "three": false
+  },
+  {
+    "slug": "formwerk",
+    "no": "21",
+    "name": "FORMWERK",
+    "summary": "A Bauhaus poster machine — four rules, seeded compositions, downloadable SVG posters.",
+    "technique": "GENERATIVE SVG",
+    "tags": [
+      "bauhaus",
+      "generative",
+      "geometric",
+      "art",
+      "poster",
+      "primary colors",
+      "modernist"
+    ],
+    "bestFor": [
+      "design schools",
+      "art exhibitions",
+      "generative tools",
+      "studios"
+    ],
+    "swatch": [
+      "#efe9dc",
+      "#d5372c",
+      "#1d4f9e"
+    ],
+    "fonts": [
+      "Archivo Black",
+      "Work Sans"
+    ],
+    "three": false
+  },
+  {
+    "slug": "nimbus",
+    "no": "22",
+    "name": "NIMBUS",
+    "summary": "Weather for the inside of your head — fbm clouds with three switchable moods, including lightning.",
+    "technique": "CLOUD SHADER",
+    "tags": [
+      "weather",
+      "calm",
+      "dreamy",
+      "wellness",
+      "app",
+      "soft",
+      "sky",
+      "mood"
+    ],
+    "bestFor": [
+      "wellness & meditation apps",
+      "consumer apps",
+      "mood products"
+    ],
+    "swatch": [
+      "#2b3242",
+      "#f2c9a8",
+      "#e8a87c"
+    ],
+    "fonts": [
+      "Gloock",
+      "Hanken Grotesk"
+    ],
+    "three": false
+  },
+  {
+    "slug": "codex",
+    "no": "23",
+    "name": "CODEX",
+    "summary": "A library of illuminated manuscripts — animated gold leaf, generative borders, marginalia by bored monks.",
+    "technique": "ILLUMINATED SVG",
+    "tags": [
+      "medieval",
+      "books",
+      "library",
+      "heritage",
+      "illuminated",
+      "scholarly",
+      "classic",
+      "ornate"
+    ],
+    "bestFor": [
+      "libraries & bookshops",
+      "museums",
+      "heritage orgs",
+      "publishers"
+    ],
+    "swatch": [
+      "#f0e6d0",
+      "#2b3a6b",
+      "#c9a13b"
+    ],
+    "fonts": [
+      "EB Garamond",
+      "Cardo",
+      "Caveat"
+    ],
+    "three": false
+  },
+  {
+    "slug": "errata",
+    "no": "24",
+    "name": "ERRATA***",
+    "summary": "An anti-design laboratory — draggable windows, a button you shouldn’t click, calibrated chaos.",
+    "technique": "ANTI-DESIGN",
+    "tags": [
+      "anti-design",
+      "experimental",
+      "chaotic",
+      "brutalist",
+      "playful",
+      "windows",
+      "art"
+    ],
+    "bestFor": [
+      "experimental agencies",
+      "art projects",
+      "personal sites"
+    ],
+    "swatch": [
+      "#f2f0ea",
+      "#e03616",
+      "#1133cc"
+    ],
+    "fonts": [
+      "Rubik Mono One",
+      "Courier Prime",
+      "Archivo"
+    ],
+    "three": false
+  },
+  {
+    "slug": "verite",
+    "no": "25",
+    "name": "VERITÉ",
+    "summary": "A film studio on real film — live grain and scratches, letterboxed title card, rolling credits.",
+    "technique": "LIVE FILM GRAIN",
+    "tags": [
+      "film",
+      "cinema",
+      "dark",
+      "grain",
+      "studio",
+      "moody",
+      "classic"
+    ],
+    "bestFor": [
+      "film studios",
+      "production companies",
+      "photographers",
+      "film festivals"
+    ],
+    "swatch": [
+      "#0c0b09",
+      "#d8d5cd",
+      "#d9a94f"
+    ],
+    "fonts": [
+      "Playfair Display",
+      "Archivo Narrow"
+    ],
+    "three": false
+  },
+  {
+    "slug": "gallery",
+    "no": "",
+    "name": "GALLERY",
+    "summary": "A dark portfolio index — woven palette threads behind a grid of swatch cards.",
+    "technique": "WOVEN CANVAS",
+    "tags": [
+      "portfolio",
+      "index",
+      "collection",
+      "dark",
+      "grid",
+      "showcase"
+    ],
+    "bestFor": [
+      "portfolios",
+      "product catalogs",
+      "link hubs"
+    ],
+    "swatch": [
+      "#08080d",
+      "#e8c168",
+      "#ecebe6"
+    ],
+    "fonts": [
+      "Fraunces",
+      "Inter",
+      "JetBrains Mono"
+    ],
+    "three": false
+  },
+  {
+    "slug": "guide",
+    "no": "",
+    "name": "THE GUIDE",
+    "summary": "A dark long-form article page — numbered sections, callouts, code blocks and tables in a narrow reading column.",
+    "technique": "LONG-FORM ARTICLE",
+    "tags": [
+      "article",
+      "documentation",
+      "long-form",
+      "blog",
+      "dark",
+      "readable"
+    ],
+    "bestFor": [
+      "docs",
+      "case studies",
+      "blog posts"
+    ],
+    "swatch": [
+      "#08080d",
+      "#e8c168",
+      "#7ce7d8"
+    ],
+    "fonts": [
+      "Fraunces",
+      "Inter",
+      "JetBrains Mono"
+    ],
+    "three": false
+  }
+]

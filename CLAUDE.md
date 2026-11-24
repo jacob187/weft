@@ -43,13 +43,27 @@ src/
 - Fidelity bar: the demo route must look and behave like the original page — same copy, fonts,
   palette, layout at desktop and 375px, animations and interactions.
 
+## Claude Code plugin
+The repo root is the `weft` plugin (`.claude-plugin/plugin.json`) and its own marketplace
+(`.claude-plugin/marketplace.json`, plugin `source: "./"`). The plugin itself is `skills/weft/`:
+- `SKILL.md`: trigger conditions, mode choice, and the template/style workflows.
+- `scripts/weft.mjs`: `list | deal | template | style`. Zero deps, Node ≥ 18. It reads
+  `references/index.json`, copies from `src/`, and never writes into a non-empty dir.
+- `references/`: **generated** by `npm run build:skill` from `meta.ts`, `theme.css`, `content.ts`
+  and effect JSDoc. Never hand-edit it; rerun after any template change and commit the output.
+- Template-mode output pins dependency versions from this `package.json`. Style-mode output rewrites
+  `~/lib/*` and `~/templates/types` imports to relative paths.
+- `meta.ts` `tags`/`bestFor` drive `deal`. Keep them accurate when adding a template.
+- Check with `claude plugin validate .`.
+
 ## Making a new site
 `npm run new-site -- obsidian acme-watches` → edit `src/sites/acme-watches/site.ts` (content, theme
 tokens, seo). Never edit template code for one site's needs; if a site needs a new knob, add an
 optional field to the template's `Content` with the old behavior as default.
 
 ## Adding a template
-New folder following the contract + `src/pages/NN-<slug>/index.astro`. It appears in the hub automatically.
+New folder following the contract + `src/pages/NN-<slug>/index.astro` + `tags`/`bestFor` in `meta.ts`,
+then `npm run build:skill`. It appears in the hub and the plugin automatically.
 
 ## Reference
 Original pages were captured to the session scratchpad during the rebuild; they are not in the repo.

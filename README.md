@@ -30,10 +30,40 @@ Each `src/templates/<slug>/` holds `meta.ts` (gallery card), `content.ts` (typed
 separate, so a site is a content file plus token overrides, never a fork. See `CLAUDE.md` for the
 full contract.
 
+## Claude Code plugin (`weft`)
+This repo is also a Claude Code plugin and marketplace. The `weft` skill turns any of the
+templates into either:
+
+- **Template mode:** a complete standalone Astro site in a new folder, with the content model ready to fill.
+- **Style mode:** a style kit for an existing project (React, Next, Vue, plain HTML). It holds
+  `tokens.css`, the fonts, and framework-agnostic effect modules, and the skill maps them onto your
+  current components.
+
+Install from a local clone:
+```
+/plugin marketplace add /path/to/weft
+/plugin install weft@weft
+```
+After pushing to GitHub: `/plugin install weft --marketplace <owner>/<repo>`.
+
+Then ask Claude for a site ("a landing page for a natural-wine bar"), name a style ("restyle this
+app like aurora"), or run `/weft:weft list`. The skill can also be run directly:
+
+```sh
+node skills/weft/scripts/weft.mjs list
+node skills/weft/scripts/weft.mjs deal "climate nonprofit annual report"
+node skills/weft/scripts/weft.mjs template flux --out ../climate-report --name climate-report
+node skills/weft/scripts/weft.mjs style aurora --out ../my-app/src/styles/weft-aurora
+```
+
+The skill's style references (`skills/weft/references/`) are generated from `src/templates/`.
+Run `npm run build:skill` after changing a template.
+
 ## Scripts
 | | |
 |---|---|
 | `npm run dev` | dev server |
 | `npm run build` | static build to `dist/` |
 | `npm run check` | type-check `.astro` + `.ts` |
-| `npm run new-site -- <template> <name>` | scaffold a site |
+| `npm run new-site -- <template> <name>` | scaffold a site inside this repo |
+| `npm run build:skill` | regenerate the plugin's style references from the templates |
