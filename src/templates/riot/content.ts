@@ -188,6 +188,6 @@ export const demo: Content = {
   },
   footer: {
     noteHtml: 'Dustbowl Fields · July 16–18, 2027<br>A fictional festival. The tinnitus is illustrative.',
-    creditHtml: 'Designed &amp; built autonomously by <a href="/guide/">Claude Fable 5</a>',
+    creditHtml: 'Original design by <a href="https://github.com/BrainwavePro">BrainwavePro</a>',
   },
 };

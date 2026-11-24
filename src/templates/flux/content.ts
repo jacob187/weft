@@ -177,6 +177,6 @@ export const demo: Content = {
   },
   footer: {
     noteHtml: 'A fictional observatory rendering real patterns.<br>Every chart hand-rolled in canvas &amp; SVG.',
-    creditHtml: 'Designed &amp; built autonomously by <a href="/guide/">Claude Fable 5</a>',
+    creditHtml: 'Original design by <a href="https://github.com/BrainwavePro">BrainwavePro</a>',
   },
 };

@@ -41,25 +41,25 @@ export interface Content {
 
 export const demo: Content = {
   seo: {
-    title: 'The Fable Showcase — 25 Sites, 25 Styles, One Model',
+    title: 'Weft — 25 Website Styles, Woven From Code',
     description:
-      'Twenty-five fundamentally different websites — raymarched gold, particle constellations, working synthesizers, Bauhaus machines — designed and built autonomously by Claude Fable 5.',
-    ogTitle: 'The Fable Showcase — 25 Sites, 25 Styles',
-    ogDescription: 'Twenty-five fundamentally different websites, designed and built autonomously by Claude Fable 5.',
+      'Twenty-five code-only website templates — raymarched gold, particle constellations, working synthesizers, Bauhaus machines — ready to become your site, plus a Claude Code plugin that applies them.',
+    ogTitle: 'Weft — 25 Website Styles, Woven From Code',
+    ogDescription: 'Twenty-five code-only website templates and a Claude Code plugin that applies them.',
   },
-  wordmarkHtml: 'The <em>Fable</em> Showcase',
+  wordmarkHtml: '<em>Weft</em>',
   nav: [
     { label: 'The 25', href: '#sites' },
-    { label: 'How it was made', href: '/guide/' },
+    { label: 'How it works', href: '/guide/' },
   ],
   hero: {
-    kicker: 'An autonomous design experiment',
-    headingHtml: 'Twenty-five sites.<br><em>Twenty-five styles.</em><br>One model.',
+    kicker: 'A library of code-only website styles',
+    headingHtml: 'Twenty-five sites.<br><em>Twenty-five styles.</em><br>Zero images.',
     subHtml:
-      'Every site below — the raymarched gold, the particle constellations, the working synthesizer, the Bauhaus poster machine — was <b>designed, written, tested and deployed autonomously by Claude Fable 5</b>. No templates, no stock assets, no image files: every visual is code.',
+      'Every site below — the raymarched gold, the particle constellations, the working synthesizer, the Bauhaus poster machine — is a <b>reusable template</b>. Swap the content, override a few tokens, and it becomes yours. No stock assets, no image files: every visual is code.',
     primary: { label: 'Explore the collection', href: '#sites' },
     secondary: { label: 'Read the guide', href: '/guide/' },
-    note: '3 iteration passes per site · single-file builds · zero images',
+    note: 'astro templates · design tokens · claude code plugin',
   },
   gridId: 'sites',
   items: templates.map((t) => ({
@@ -71,13 +71,13 @@ export const demo: Content = {
     href: demoPath(t),
   })),
   about: {
-    headingHtml: 'The brief was simple: <em>show what you’re capable of.</em>',
+    headingHtml: 'Each style is a template: <em>change the words, keep the craft.</em>',
     bodyHtml:
-      'Each site is one self-contained HTML file with its own palette, typography and signature technique — WebGL shaders, canvas simulations, generative SVG, variable fonts, Web Audio. Nothing is shared between them except a back-link and an ambition. The full build process, including the mistakes, is documented in <b><a class="inline" href="/guide/">the guide</a></b>.',
+      'Every template has its own palette, typography and signature technique — WebGL shaders, canvas simulations, generative SVG, variable fonts, Web Audio — with content and design kept apart. Use one as a full site, or pour its style into the app you already have with the Weft plugin for Claude Code. Original designs by <b><a class="inline" href="https://github.com/BrainwavePro">BrainwavePro</a></b>; how it all fits together is in <b><a class="inline" href="/guide/">the guide</a></b>.',
   },
   footer: {
-    brandNoteHtml: 'Built July 2026 · Hosted on Netlify<br>All brands are fictional; all code is real.',
+    brandNoteHtml: 'MIT licensed · Built with Astro<br>All brands are fictional; all code is real.',
     creditHtml:
-      'Designed &amp; built autonomously by <a href="/guide/">Claude Fable 5</a> (Anthropic)<br>Commissioned by a human who said “go nuts.”',
+      'Original designs by <a href="https://github.com/BrainwavePro">BrainwavePro</a><br>Rebuilt as reusable templates · <a href="/guide/">How it works</a>',
   },
 };

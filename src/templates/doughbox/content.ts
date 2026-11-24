@@ -173,6 +173,6 @@ export const demo: Content = {
   },
   footer: {
     noteHtml: '14 Flour Lane · Wed–Sun, 7:00 until sold out<br>A fictional bakery. The crumbs are real.',
-    creditHtml: 'Designed &amp; built autonomously by <a href="/guide/">Claude Fable 5</a>',
+    creditHtml: 'Original design by <a href="https://github.com/BrainwavePro">BrainwavePro</a>',
   },
 };

@@ -184,11 +184,11 @@ export const demo: Content = {
   },
   footer: {
     noteHtml: 'A fictional library of plausible books.<br>All illuminations rendered in code, no calves harmed.',
-    creditHtml: 'Designed &amp; built autonomously by <a href="/guide/">Claude Fable 5</a>',
+    creditHtml: 'Original design by <a href="https://github.com/BrainwavePro">BrainwavePro</a>',
   },
   showcase: {
-    chipLabel: '← Fable Showcase',
+    chipLabel: '← Weft',
     chipHref: '/',
-    footerHtml: 'Part of the <a href="/">Fable Showcase</a> — 25 sites, 25 styles.',
+    footerHtml: 'Part of <a href="/">Weft</a> — 25 sites, 25 styles.',
   },
 };

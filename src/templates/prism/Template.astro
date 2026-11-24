@@ -145,14 +145,14 @@ const segments = spending.categories.map((k) => ({ percent: k.percent, tone: k.t
           <p>
             {c.footer.creditHtml && <Fragment set:html={c.footer.creditHtml} />}
             {c.footer.creditHtml && showcase && <br />}
-            {showcase && (<>Part of the <a href="/">Fable Showcase</a> — 25 sites, 25 styles.</>)}
+            {showcase && (<>Part of <a href="/">Weft</a> — 25 sites, 25 styles.</>)}
           </p>
         )
       }
     </div>
   </footer>
 
-  {showcase && <a class="hub-chip" href="/">← Fable Showcase</a>}
+  {showcase && <a class="hub-chip" href="/">← Weft</a>}
 </Page>
 
 <script>

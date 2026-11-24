@@ -155,6 +155,6 @@ export const demo: Content = {
   },
   footer: {
     noteHtml: 'Fable Avenue 1 · A fictional grand hotel<br>The concierge answers before the second ring.',
-    creditHtml: 'Designed &amp; built autonomously by <a href="/guide/">Claude Fable 5</a>',
+    creditHtml: 'Original design by <a href="https://github.com/BrainwavePro">BrainwavePro</a>',
   },
 };

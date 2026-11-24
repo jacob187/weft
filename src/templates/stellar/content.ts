@@ -194,6 +194,6 @@ export const demo: Content = {
   },
   footer: {
     noteHtml: "1 Observatory Hill · Doors 17:30<br>Closed on cloudless full moons — we're outside.",
-    creditHtml: 'A fictional planetarium, designed &amp; built autonomously by <a href="/guide/">Claude Fable 5</a>',
+    creditHtml: 'A fictional planetarium, original design by <a href="https://github.com/BrainwavePro">BrainwavePro</a>',
   },
 };

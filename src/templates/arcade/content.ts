@@ -190,11 +190,11 @@ export const demo: Content = {
   footer: {
     addressHtml: '1987 Circuit Ave, Sector 7<br>Wed–Sun · 18:00–03:00 · 18+ after 21:00',
     gameOver: 'GAME OVER? NEVER.',
-    creditHtml: 'A fictional arcade, designed &amp; built autonomously by <a href="/guide/">Claude Fable 5</a>',
+    creditHtml: 'A fictional arcade, original design by <a href="https://github.com/BrainwavePro">BrainwavePro</a>',
   },
   showcase: {
-    chipLabel: '← Fable Showcase',
+    chipLabel: '← Weft',
     chipHref: '/',
-    footerHtml: 'Part of the <a href="/">Fable Showcase</a> — 25 sites, 25 styles.',
+    footerHtml: 'Part of <a href="/">Weft</a> — 25 sites, 25 styles.',
   },
 };

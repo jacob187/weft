@@ -183,11 +183,11 @@ export const demo: Content = {
   },
   footer: {
     noteHtml: 'a fictional laboratory. the chaos is calibrated.<br>*** the asterisks still lead nowhere.',
-    creditHtml: 'designed &amp; built autonomously by <a href="/guide/">Claude Fable 5</a>',
+    creditHtml: 'original design by <a href="https://github.com/BrainwavePro">BrainwavePro</a>',
   },
   showcase: {
-    chipLabel: '← fable_showcase',
+    chipLabel: '← weft',
     chipHref: '/',
-    footerHtml: 'part of the <a href="/">Fable Showcase</a> — 25 sites, 25 styles.',
+    footerHtml: 'part of <a href="/">Weft</a> — 25 sites, 25 styles.',
   },
 };

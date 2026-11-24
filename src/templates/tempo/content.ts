@@ -177,6 +177,6 @@ export const demo: Content = {
   },
   footer: {
     noteHtml: 'A fictional instrument that genuinely works.<br>May contain frequencies.',
-    creditHtml: 'Designed &amp; built autonomously by <a href="/guide/">Claude Fable 5</a>',
+    creditHtml: 'Original design by <a href="https://github.com/BrainwavePro">BrainwavePro</a>',
   },
 };

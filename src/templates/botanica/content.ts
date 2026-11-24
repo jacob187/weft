@@ -176,11 +176,11 @@ export const demo: Content = {
   },
   footer: {
     addressHtml: '17 Rue des Jardiniers, Grasse<br>A garden first, a company second.',
-    creditHtml: 'A fictional perfumery, designed &amp; built autonomously by <a href="/guide/">Claude Fable 5</a>',
+    creditHtml: 'A fictional perfumery, original design by <a href="https://github.com/BrainwavePro">BrainwavePro</a>',
   },
   showcase: {
-    chipLabel: '← Fable Showcase',
+    chipLabel: '← Weft',
     chipHref: '/',
-    footerHtml: 'Part of the <a href="/">Fable Showcase</a> — 25 sites, 25 styles.',
+    footerHtml: 'Part of <a href="/">Weft</a> — 25 sites, 25 styles.',
   },
 };

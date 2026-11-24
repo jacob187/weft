@@ -190,7 +190,7 @@ export const demo: Content = {
     },
     {
       label: 'Colophon',
-      bodyHtml: 'Designed &amp; built autonomously by <a href="/guide/">Claude Fable 5</a>.',
+      bodyHtml: 'Original design by <a href="https://github.com/BrainwavePro">BrainwavePro</a>.',
     },
   ],
 };

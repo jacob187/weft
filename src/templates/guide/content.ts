@@ -44,134 +44,116 @@ export interface Content {
 
 export const demo: Content = {
   seo: {
-    title: 'The Guide — How the Fable Showcase Was Built',
+    title: 'The Guide — How Weft Works',
     description:
-      'How 25 fundamentally different websites were designed, built, tested and deployed autonomously by Claude Fable 5 — the workflow, the techniques, the bugs, and how to do it yourself.',
-    ogTitle: 'How the Fable Showcase Was Built',
-    ogDescription: 'The workflow, the techniques, the bugs, and how to do it yourself.',
+      'How Weft turns 25 code-only website designs into reusable templates and a Claude Code plugin: the template contract, design tokens, the two plugin modes, and lessons from the rebuild.',
+    ogTitle: 'How Weft Works',
+    ogDescription: 'Templates, tokens, the Claude Code plugin, and lessons from the rebuild.',
   },
-  wordmarkHtml: 'The <em>Fable</em> Showcase',
+  wordmarkHtml: '<em>Weft</em>',
   wordmarkHref: '/',
   back: { label: '← Back to the 25', href: '/' },
   hero: {
     kicker: 'The Guide',
-    headingHtml: 'How this was built —<br><em>and how you can do it too.</em>',
-    ledeHtml: `Everything in this showcase — 25 sites, this hub, and the page you're reading — was designed, coded, reviewed and deployed <b>autonomously by Claude Fable 5</b> running in Claude Code, from a single prompt. One human wrote the brief and came back later. This page documents the exact workflow so you can reproduce it.`,
+    headingHtml: 'How Weft works —<br><em>and how to make it yours.</em>',
+    ledeHtml: `Weft is a library of 25 single-page website designs, rebuilt as <b>reusable templates</b> from the original showcase by <a href="https://github.com/BrainwavePro">BrainwavePro</a>. Every visual is code. Every word is content you can replace. This page explains how the pieces fit, so you can turn any style into your own site.`,
   },
   sections: [
     {
-      num: '01 · THE BRIEF',
-      title: 'Start with taste, not tasks',
+      num: '01 · THE IDEA',
+      title: 'A style is a template, not a screenshot',
       blocks: [
         {
           type: 'paragraph',
-          textHtml: `The prompt didn't specify pages, sections or color schemes. It set a <b>quality bar</b> ("extreme capabilities in web design, taste, and artistic flavor"), demanded <b>fundamental variety</b> (every site must differ in technique, not just palette), and mandated a <b>review discipline</b>: at least three fine-toothed iteration passes per site before calling it done. Constraints breed style; vagueness breeds templates.`,
+          textHtml: `Each of the 25 designs started as one self-contained HTML file. Weft splits every one into the same parts: <b>content</b> (copy, brands, lists, links), <b>tokens</b> (colors and font stacks), <b>styles</b>, <b>markup</b> and a <b>signature effect</b>. The original demo brand becomes the default content, so each route still looks exactly like the original, and a new site is just different content plus a few token overrides.`,
         },
         {
           type: 'callout',
-          textHtml: `<b>Reusable prompt skeleton:</b> "Build N sites that are fundamentally different from each other. For each: a distinct signature technique, palette, and typographic voice. After building each one, make three review passes — composition, complexity, polish — before moving on. Deploy everything and document the process at /guide."`,
+          textHtml: `<b>Rule of thumb:</b> if a change is specific to one site, it belongs in content or tokens. If it is a new capability, it becomes an optional field on the template, with the old behavior as the default.`,
         },
       ],
     },
     {
-      num: '02 · THE PLAN',
-      title: 'Design the collection before the sites',
-      blocks: [
-        {
-          type: 'paragraph',
-          textHtml: `Before writing any HTML, the full roster was planned in a table: number, name, concept, signature technique, palette, and type pairing for all 25. That plan lived in a <code>PLAN.md</code> file the model kept updating — along with a <code>PROGRESS.md</code> status tracker, which is what let the build survive context limits and session restarts without losing its place.`,
-        },
-        {
-          type: 'list',
-          itemsHtml: [
-            `<b>Spread the techniques deliberately:</b> raymarching, fbm shaders, particle systems, Three.js, Web Audio, variable fonts, generative SVG, CSS-only 3D, canvas simulation, terminal emulation, seeded generators. No two sites share a headline trick.`,
-            `<b>Spread the moods too:</b> luxury, botanical, brutalist, cozy, chaotic, medieval, cinematic. Alternate light/dark, serious/playful, dense/airy as you go.`,
-            `<b>Fictional brands with real voices.</b> Every site got written copy with a specific personality — a bakery that names its sourdough starter, a security firm with a flag to find. Copy is half the design.`,
-          ],
-        },
-      ],
-    },
-    {
-      num: '03 · THE RULES',
-      title: 'Constraints that kept 25 sites coherent',
-      blocks: [
-        {
-          type: 'list',
-          itemsHtml: [
-            `<b>One self-contained HTML file per site.</b> Inline CSS and JS. No build step, no frameworks, no npm dependencies at runtime (Three.js vendored locally as the one exception).`,
-            `<b>Zero image files.</b> Every visual is code: WebGL, canvas, SVG, gradients, CSS filters. This forces genuine design skill instead of stock-photo styling.`,
-            `<b>A shared skeleton, restyled every time:</b> fixed nav that condenses on scroll, IntersectionObserver reveals, a consistent back-to-hub chip, <code>prefers-reduced-motion</code> respect, meta/OG tags, an inline SVG favicon in each site's palette.`,
-            `<b>Fonts from Google Fonts, everything else local.</b> 21 distinct type pairings across the collection.`,
-          ],
-        },
-      ],
-    },
-    {
-      num: '04 · THE LOOP',
-      title: 'Build → screenshot → critique → fix ×3',
-      blocks: [
-        {
-          type: 'paragraph',
-          textHtml: 'The core workflow, per site. This is where the quality actually comes from:',
-        },
-        {
-          type: 'code',
-          codeHtml: `<b>1.</b> Write the complete v1 (all sections, motion, responsive, ~600–900 lines).
-<b>2.</b> Serve locally:            npx serve site -l 5757
-<b>3.</b> Screenshot it headlessly:  Playwright → full-page sweep,
-                               desktop (1280×800) + mobile (375×812)
-<b>4.</b> READ the screenshots and critique like a reviewer:
-   composition, overlap, contrast, spacing rhythm, dead zones
-<b>5.</b> Fix. Re-shoot. Repeat — minimum three passes.
-<b>6.</b> Test interactions in the same headless browser:
-   click buttons, type in terminals, press synth keys, drag windows.
-   Assert on real outcomes (a note plays, a window spawns).`,
-        },
-        {
-          type: 'paragraph',
-          textHtml: `The screenshot step is non-negotiable. Nearly every real bug was caught by <b>looking at pixels</b>, not by re-reading code.`,
-        },
-      ],
-    },
-    {
-      num: '05 · THE BUGS',
-      title: 'Mistakes worth knowing about in advance',
+      num: '02 · THE CONTRACT',
+      title: 'Six files per template',
       blocks: [
         {
           type: 'table',
-          head: ['Bug', 'Lesson'],
+          head: ['File', 'Role'],
           rowsHtml: [
-            [
-              'canvas 704px wide',
-              `An absolutely-positioned <code>&lt;canvas&gt;</code> with only <code>left:0;right:0</code> keeps its <b>intrinsic size</b>. Always set explicit <code>width:100%;height:100%</code>. This bit twice (a grid floor and a full-screen 3D stage).`,
-            ],
-            [
-              'fonts 400',
-              `Google Fonts variable-axis URLs fail silently as "400: Invalid selector" if a range is wrong (Anybody's width axis is 50..150, not 10..400) — and then <b>every font in the URL falls back</b>. Curl-verify the CSS URL before trusting it.`,
-            ],
-            [
-              'frozen compositor',
-              `A full-viewport <code>mix-blend-mode</code> overlay froze screenshot capture entirely. Use pre-tinted low-opacity textures instead of blend modes over the whole page.`,
-            ],
-            [
-              'portrait shaders',
-              `A shader composition that's perfect at 16:9 puts the hero blob behind your headline at 9:19. Pass the aspect ratio in and <b>art-direct portrait separately</b>.`,
-            ],
-            [
-              'inline spans',
-              `Width and height silently do nothing on inline elements — color swatch dots need <code>display:block</code>.`,
-            ],
+            ['meta.ts', 'Gallery card, tags, fonts URL, favicon. Never imports CSS, because the hub globs it.'],
+            ['content.ts', 'A JSDoc’d <code>Content</code> interface plus the <code>demo</code> object. Every visible string lives here.'],
+            ['theme.css', 'Design tokens on <code>:root</code>. The only file with raw colors.'],
+            ['style.css', 'Layout and components, using <code>var(--token)</code> only; alpha via <code>color-mix()</code>.'],
+            ['Template.astro', 'Markup. Renders the shared <code>Page</code> shell and mounts the effects.'],
+            ['*.ts effects', 'Shaders, particles, audio. They read colors from tokens at init and never hardcode a palette.'],
           ],
+        },
+      ],
+    },
+    {
+      num: '03 · THE TOKENS',
+      title: 'Recolor a shader with one line',
+      blocks: [
+        {
+          type: 'paragraph',
+          textHtml: `Canvas and WebGL can’t see CSS variables, so effects call <code>tokenVec3('--gold')</code> or <code>tokenRgba('--accent', .4)</code> when they start. Override a token and the CSS, the SVG and the shader all change together:`,
+        },
+        {
+          type: 'code',
+          codeHtml: `<b>// src/sites/acme/site.ts</b>
+export const theme: ThemeOverrides = {
+  '--gold': '#7cc4ff',        // raymarched metal turns ice-blue
+  '--ink':  '#05070d',
+};`,
+        },
+      ],
+    },
+    {
+      num: '04 · MAKE A SITE',
+      title: 'Pick a style, write the content',
+      blocks: [
+        {
+          type: 'code',
+          codeHtml: `<b>npm run new-site</b> -- obsidian acme-watches
+<b>→</b> src/sites/acme-watches/site.ts        content · theme · seo
+<b>→</b> src/pages/sites/acme-watches/          route at /sites/acme-watches/`,
+        },
+        {
+          type: 'paragraph',
+          textHtml: `<code>site.ts</code> starts as a copy of the demo. TypeScript flags any field you miss, and the JSDoc on <code>Content</code> explains what each one does.`,
+        },
+      ],
+    },
+    {
+      num: '05 · THE PLUGIN',
+      title: 'Weft inside Claude Code',
+      blocks: [
+        {
+          type: 'paragraph',
+          textHtml: `The repository is also a Claude Code plugin. Describe the site you want, and the <code>weft</code> skill suggests three matching styles, then works in one of two modes:`,
+        },
+        {
+          type: 'list',
+          itemsHtml: [
+            `<b>Template mode:</b> scaffolds a complete standalone Astro site and fills the content model with your real copy.`,
+            `<b>Style mode:</b> drops <code>tokens.css</code>, the fonts and the framework-agnostic effects into an existing project, then maps them onto your components.`,
+          ],
+        },
+        {
+          type: 'code',
+          codeHtml: `<b>/plugin marketplace add</b> &lt;owner&gt;/weft
+<b>/plugin install</b> weft@weft`,
         },
       ],
     },
     {
       num: '06 · THE TECHNIQUES',
-      title: 'What powers each site',
+      title: 'What powers each style',
       blocks: [
         {
           type: 'table',
-          head: ['Site', 'Signature technique'],
+          head: ['Style', 'Signature technique'],
           rowsHtml: [
             ['01 Obsidian', 'Raymarched SDF metaballs (raw GLSL), smooth-min blending, fresnel gold shading'],
             ['02 Botanica', 'Seeded SVG vine, <code>stroke-dashoffset</code> driven by scroll; leaves spring in at thresholds'],
@@ -203,48 +185,55 @@ export const demo: Content = {
       ],
     },
     {
-      num: '07 · THE SHIP',
-      title: 'Deploying',
+      num: '07 · LESSONS',
+      title: 'What the rebuild taught us',
       blocks: [
         {
-          type: 'paragraph',
-          textHtml: `The whole collection is one static folder — hub at the root, each site in a numbered subdirectory, this guide at <code>/guide/</code>. Netlify serves it with zero configuration beyond a publish directory:`,
-        },
-        {
-          type: 'code',
-          codeHtml: `<b>netlify sites:create</b> --name your-showcase
-<b>netlify deploy</b> --prod --dir site`,
-        },
-        {
-          type: 'paragraph',
-          textHtml: `Deploy early with a placeholder to de-risk the pipeline, then keep shipping batches — by the time the last site was finished, the first seventeen had already been live for hours.`,
+          type: 'table',
+          head: ['Bug', 'Lesson'],
+          rowsHtml: [
+            [
+              'fallback word',
+              `Particles that trace text drawn on a canvas sample whichever font is loaded <b>at that moment</b>. Wait for <code>document.fonts.load()</code> and re-sample, or the word comes out in the fallback face.`,
+            ],
+            [
+              'CSS bleed',
+              `In Astro, glob-importing every <code>Template.astro</code> bundles every template’s global CSS into every page. The hub globs only <code>meta.ts</code>; each template gets its own route file.`,
+            ],
+            [
+              'tokens in canvas',
+              `CSS variables never reach WebGL on their own. Effects read tokens once at init. Live theme switching would need a re-init hook.`,
+            ],
+            [
+              'virtual time',
+              `Headless Chrome’s <code>--virtual-time-budget</code> pauses while network requests are pending, so animated pages can get far fewer frames than you expect. Compare animations in real time.`,
+            ],
+          ],
         },
       ],
     },
     {
-      num: '08 · DO IT YOURSELF',
-      title: 'The short version',
+      num: '08 · ADD A STYLE',
+      title: 'Grow the library',
       blocks: [
         {
           type: 'list',
           ordered: true,
           itemsHtml: [
-            `Give a capable model a brief about <b>taste and variety</b>, not features.`,
-            `Demand a <b>named signature technique</b> per site — it prevents template convergence.`,
-            `Give it <b>eyes</b>: a headless browser it can screenshot and read. This is the single highest-leverage tool in the loop.`,
-            `Enforce <b>three critique passes</b> per site, including mobile.`,
-            `Keep durable <b>plan and progress files</b> so long runs survive interruptions.`,
-            `Let it deploy, then get out of the way.`,
+            `Create <code>src/templates/&lt;slug&gt;/</code> following the six-file contract.`,
+            `Add <code>tags</code> and <code>bestFor</code> to <code>meta.ts</code>; the plugin uses them to match briefs to styles.`,
+            `Add a route at <code>src/pages/NN-&lt;slug&gt;/index.astro</code>. It appears in the hub automatically.`,
+            `Run <code>npm run build:skill</code> to regenerate the plugin’s style references.`,
           ],
         },
       ],
     },
   ],
   cta: {
-    title: 'Now go look at what the process produced.',
-    body: 'Twenty-five sites, three passes each, zero images, one very patient model.',
-    button: { label: 'Browse the showcase →', href: '/' },
+    title: 'Now pick a style.',
+    body: 'Twenty-five designs, zero images, every one ready to become your site.',
+    button: { label: 'Browse the collection →', href: '/' },
   },
   footerHtml:
-    'Designed, built &amp; written autonomously by Claude Fable 5 (Anthropic) · July 2026<br>Hosted on Netlify · All brands fictional, all code real',
+    'Weft · MIT licensed · Original designs by <a href="https://github.com/BrainwavePro">BrainwavePro</a><br>All brands fictional, all code real',
 };

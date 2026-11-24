@@ -231,6 +231,6 @@ export const demo: Content = {
   },
   footer: {
     note: 'A fictional tea house in a real tradition.',
-    creditHtml: 'Designed &amp; built autonomously by <a href="/guide/">Claude Fable 5</a>',
+    creditHtml: 'Original design by <a href="https://github.com/BrainwavePro">BrainwavePro</a>',
   },
 };

@@ -30,7 +30,7 @@ export interface TemplateProps<C> {
   /** Partial <head> overrides layered over the template's defaults. */
   seo?: Partial<Seo>;
   /**
-   * Showcase chrome: the "← Fable Showcase" hub chip and "Part of the Fable Showcase" footer line.
+   * Showcase chrome: the "← Weft" hub chip and "Part of Weft" footer line.
    * True only on the /NN-slug/ demo routes; derived sites leave it off.
    */
   showcase?: boolean;

@@ -198,6 +198,6 @@ export const demo: Content = {
   },
   footer: {
     note: 'A fictional bank. Do not deposit anything except compliments.',
-    creditHtml: 'Designed &amp; built autonomously by <a href="/guide/">Claude Fable 5</a>',
+    creditHtml: 'Original design by <a href="https://github.com/BrainwavePro">BrainwavePro</a>',
   },
 };

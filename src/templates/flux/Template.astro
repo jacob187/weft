@@ -99,7 +99,7 @@ const chartJson = JSON.stringify(chartData).replace(/</g, '\\u003c');
           showcase && (
             <>
               <br />
-              Part of the <a href="/">Fable Showcase</a> — 25 sites, 25 styles.
+              Part of <a href="/">Weft</a> — 25 sites, 25 styles.
             </>
           )
         }
@@ -107,7 +107,7 @@ const chartJson = JSON.stringify(chartData).replace(/</g, '\\u003c');
     </div>
   </footer>
 
-  {showcase && <a class="hub-chip" href="/">← Fable Showcase</a>}
+  {showcase && <a class="hub-chip" href="/">← Weft</a>}
 
   <script is:inline type="application/json" id="flux-data" set:html={chartJson} />
 </Page>

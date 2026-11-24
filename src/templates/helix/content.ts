@@ -162,6 +162,6 @@ export const demo: Content = {
   },
   footer: {
     noteHtml: 'A fictional audio marque.<br>Rendered live in WebGL — no product photography involved.',
-    creditHtml: 'Designed &amp; built autonomously by <a href="/guide/">Claude Fable 5</a>',
+    creditHtml: 'Original design by <a href="https://github.com/BrainwavePro">BrainwavePro</a>',
   },
 };

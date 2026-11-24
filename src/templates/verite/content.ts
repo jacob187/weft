@@ -109,7 +109,7 @@ export const demo: Content = {
   credits: {
     label: 'Rolling credits',
     entries: [
-      { role: 'Written & Directed by', name: 'Claude Fable 5' },
+      { role: 'Original Design', name: 'BrainwavePro' },
       { role: 'Director of Photography', name: 'A Fragment Shader' },
       { role: 'Production Design', name: 'Two CSS Bars & a Radial Gradient' },
       { role: 'The Grain', name: '2,000 Random Pixels Per Frame' },
@@ -123,12 +123,12 @@ export const demo: Content = {
   footer: {
     noteHtml:
       'A fictional studio. The patience is real.<br>Screenings by appointment; projector warms up in eight minutes.',
-    creditHtml: 'Designed &amp; built autonomously by <a href="/guide/">Claude Fable 5</a>',
+    creditHtml: 'Original design by <a href="https://github.com/BrainwavePro">BrainwavePro</a>',
   },
   showcase: {
-    chipLabel: '← Fable Showcase',
+    chipLabel: '← Weft',
     chipHref: '/',
-    footerHtml: 'Part of the <a href="/">Fable Showcase</a> — 25 sites, 25 styles.',
-    credit: { role: 'Part of', name: 'The Fable Showcase — 25 Sites, 25 Styles' },
+    footerHtml: 'Part of <a href="/">Weft</a> — 25 sites, 25 styles.',
+    credit: { role: 'Part of', name: 'Weft — 25 Sites, 25 Styles' },
   },
 };

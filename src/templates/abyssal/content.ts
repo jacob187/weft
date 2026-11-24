@@ -117,6 +117,6 @@ export const demo: Content = {
   },
   footer: {
     noteHtml: 'RV Fable Deep, Pier 9 · A fictional institute<br>The ocean, however, is real and enormous.',
-    creditHtml: 'Designed &amp; built autonomously by <a href="/guide/">Claude Fable 5</a>',
+    creditHtml: 'Original design by <a href="https://github.com/BrainwavePro">BrainwavePro</a>',
   },
 };

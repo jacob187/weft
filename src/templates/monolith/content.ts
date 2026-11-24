@@ -184,11 +184,11 @@ export const demo: Content = {
   footer: {
     giantHtml: 'SET IT <span>SOLID.</span>',
     addressHtml: 'MONOLITH® TYPE FOUNDRY<br>KÖPENICKER STR. 48, BERLIN<br>A FICTIONAL FOUNDRY.',
-    creditHtml: 'DESIGNED &amp; BUILT AUTONOMOUSLY BY <a href="/guide/">CLAUDE FABLE 5</a>',
+    creditHtml: 'ORIGINAL DESIGN BY <a href="https://github.com/BrainwavePro">BRAINWAVEPRO</a>',
   },
   showcase: {
-    chipLabel: '← Fable Showcase',
+    chipLabel: '← Weft',
     chipHref: '/',
-    footerHtml: 'PART OF THE <a href="/">FABLE SHOWCASE</a> — 25 SITES, 25 STYLES.',
+    footerHtml: 'PART OF <a href="/">WEFT</a> — 25 SITES, 25 STYLES.',
   },
 };

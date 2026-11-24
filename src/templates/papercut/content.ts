@@ -185,6 +185,6 @@ export const demo: Content = {
   },
   footer: {
     noteHtml: 'A fictional studio. The aesthetic is achievable.<br>Every torn edge on this page is generated code.',
-    creditHtml: 'Designed &amp; built autonomously by <a href="/guide/">Claude Fable 5</a>',
+    creditHtml: 'Original design by <a href="https://github.com/BrainwavePro">BrainwavePro</a>',
   },
 };

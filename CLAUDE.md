@@ -1,6 +1,6 @@
 # weft — website template library
 
-A rebuild of the Fable Showcase (hub + guide + 25 single-page designs) as **reusable templates**.
+A library of 25 single-page website designs (plus a hub and a guide), rebuilt as **reusable templates** from the original showcase by BrainwavePro (https://github.com/BrainwavePro).
 Each design is a template you build new websites from: the original demo brand is just its default
 content. Astro 7 static output, no UI framework, no image files (every visual is code).
 
@@ -34,7 +34,7 @@ src/
 | `content.ts` | `export interface Content` (JSDoc every field) + `export const demo: Content` reproducing the original copy exactly. All user-visible text, brand names, nav, lists, prices, links, SEO title/description live here. |
 | `theme.css` | `:root` tokens only: every color and font stack. The only file with raw palette values. |
 | `style.css` | Layout/components using `var(--token)`. Alpha variants via `color-mix(in srgb, var(--x) N%, transparent)`, not hardcoded rgba of palette colors. Neutral black/white shadows may stay literal. |
-| `Template.astro` | `type Props = TemplateProps<Content>`; renders `<Page>`; imports `./theme.css`, `./style.css`; one processed `<script>` that imports the effect modules. Showcase chrome (hub chip, "Part of the Fable Showcase" line) only when `showcase` is true. |
+| `Template.astro` | `type Props = TemplateProps<Content>`; renders `<Page>`; imports `./theme.css`, `./style.css`; one processed `<script>` that imports the effect modules. Showcase chrome (hub chip, "Part of Weft" line) only when `showcase` is true. |
 | `*.ts` effects | Export `init`-style functions taking elements. Read colors with `token()/tokenVec3()/tokenRgba()` from `~/lib/tokens` at init — never hardcode palette. Text drawn to canvas comes from content via `data-*` attributes. Use `~/lib/motion` and `~/lib/canvas` instead of re-writing reveal/raf/resize code. |
 
 - Fields named `*Html` are trusted author HTML rendered with `set:html` (inline `<em> <b> <i> <br> <a> <span>` only). Everything else renders as text.
