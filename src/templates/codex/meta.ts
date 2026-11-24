@@ -6,6 +6,8 @@ const meta: TemplateMeta = {
   name: 'CODEX',
   summary: 'A library of illuminated manuscripts — animated gold leaf, generative borders, marginalia by bored monks.',
   technique: 'ILLUMINATED SVG',
+  tags: ['medieval', 'books', 'library', 'heritage', 'illuminated', 'scholarly', 'classic', 'ornate'],
+  bestFor: ['libraries & bookshops', 'museums', 'heritage orgs', 'publishers'],
   swatch: ['#f0e6d0', '#2b3a6b', '#c9a13b'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cardo:ital@0;1&family=Caveat:wght@500&display=swap',

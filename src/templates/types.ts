@@ -47,6 +47,10 @@ export interface TemplateMeta {
   summary: string;
   /** Signature technique tag, e.g. "RAYMARCH GLSL". */
   technique: string;
+  /** Mood/genre keywords used to match a brief to this template (plugin `deal`). */
+  tags?: string[];
+  /** Kinds of websites this template suits. */
+  bestFor?: string[];
   /** Three swatch colors for the gallery card (bg, primary, accent). */
   swatch: [string, string, string];
   /** Google Fonts stylesheet href (or undefined when the template uses system fonts). */

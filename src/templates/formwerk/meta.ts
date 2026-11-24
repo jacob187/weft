@@ -6,6 +6,8 @@ const meta: TemplateMeta = {
   name: 'FORMWERK',
   summary: 'A Bauhaus poster machine — four rules, seeded compositions, downloadable SVG posters.',
   technique: 'GENERATIVE SVG',
+  tags: ['bauhaus', 'generative', 'geometric', 'art', 'poster', 'primary colors', 'modernist'],
+  bestFor: ['design schools', 'art exhibitions', 'generative tools', 'studios'],
   swatch: ['#efe9dc', '#d5372c', '#1d4f9e'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=Archivo+Black&family=Work+Sans:ital,wght@0,300;0,400;0,600;1,400&display=swap',

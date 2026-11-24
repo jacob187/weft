@@ -6,6 +6,8 @@ const meta: TemplateMeta = {
   name: 'DOUGHBOX',
   summary: 'A very serious bakery with gooey canvas blobs, sticker prices, and a live oven schedule.',
   technique: 'GOO & SPRINGS',
+  tags: ['playful', 'food', 'bakery', 'colorful', 'friendly', 'cute', 'pastel', 'bouncy'],
+  bestFor: ['bakeries & cafes', 'food brands', 'kids products', 'playful consumer brands'],
   swatch: ['#fff3df', '#f7a6c1', '#ffd166'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap',

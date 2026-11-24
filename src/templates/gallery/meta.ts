@@ -7,6 +7,8 @@ const meta: TemplateMeta = {
   name: 'GALLERY',
   summary: 'A dark portfolio index — woven palette threads behind a grid of swatch cards.',
   technique: 'WOVEN CANVAS',
+  tags: ['portfolio', 'index', 'collection', 'dark', 'grid', 'showcase'],
+  bestFor: ['portfolios', 'product catalogs', 'link hubs'],
   swatch: ['#08080d', '#e8c168', '#ecebe6'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap',

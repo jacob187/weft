@@ -6,6 +6,8 @@ const meta: TemplateMeta = {
   name: 'ATELIER NOIR',
   summary: 'An architecture practice whose elevations draw themselves — pure line, monochrome, 1:200.',
   technique: 'SELF-DRAWING SVG',
+  tags: ['architecture', 'minimal', 'monochrome', 'line art', 'portfolio', 'refined', 'light'],
+  bestFor: ['architects', 'interior designers', 'portfolios', 'galleries'],
   swatch: ['#f5f5f2', '#141414', '#9a9a94'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Figtree:wght@300;400;500&display=swap',

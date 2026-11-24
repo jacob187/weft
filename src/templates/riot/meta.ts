@@ -6,6 +6,8 @@ const meta: TemplateMeta = {
   name: 'RIOT FEST',
   summary: 'A festival poster that bites back — kinetic letters, opposing marquees, acid-on-black stages.',
   technique: 'KINETIC TYPE',
+  tags: ['festival', 'music', 'bold', 'kinetic', 'poster', 'loud', 'neon', 'youth'],
+  bestFor: ['festivals', 'concerts', 'events', 'streetwear'],
   swatch: ['#0a0a0a', '#c6ff00', '#ff2e88'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,600;0,800;1,400&display=swap',

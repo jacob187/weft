@@ -6,6 +6,8 @@ const meta: TemplateMeta = {
   name: 'HELIX ONE',
   summary: 'An audio sculpture in real-time 3D — drag it, scroll-choreographed camera, live finish configurator.',
   technique: 'THREE.JS',
+  tags: ['product', '3d', 'three.js', 'hardware', 'audio', 'premium', 'tech', 'configurator'],
+  bestFor: ['hardware launches', 'audio products', 'consumer electronics'],
   swatch: ['#101113', '#c9ced6', '#e8a33d'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=Michroma&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap',

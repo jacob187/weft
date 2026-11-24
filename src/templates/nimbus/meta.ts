@@ -6,6 +6,8 @@ const meta: TemplateMeta = {
   name: 'NIMBUS',
   summary: 'Weather for the inside of your head — fbm clouds with three switchable moods, including lightning.',
   technique: 'CLOUD SHADER',
+  tags: ['weather', 'calm', 'dreamy', 'wellness', 'app', 'soft', 'sky', 'mood'],
+  bestFor: ['wellness & meditation apps', 'consumer apps', 'mood products'],
   swatch: ['#2b3242', '#f2c9a8', '#e8a87c'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=Gloock&family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;1,300&display=swap',

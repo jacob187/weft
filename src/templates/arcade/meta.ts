@@ -6,6 +6,8 @@ const meta: TemplateMeta = {
   name: 'NEON DISTRICT',
   summary: 'A synthwave arcade bar: CRT scanlines, perspective grid floor, and box-shadow pixel sprites.',
   technique: 'CANVAS + CRT',
+  tags: ['retro', 'synthwave', 'neon', '80s', 'gaming', 'nightlife', 'playful', 'pixel'],
+  bestFor: ['bars & nightlife', 'gaming', 'events', 'entertainment'],
   swatch: ['#0d0518', '#ff3ec8', '#38e8ff'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;600;800&family=Chakra+Petch:wght@300;400;600&display=swap',

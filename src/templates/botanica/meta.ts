@@ -6,6 +6,8 @@ const meta: TemplateMeta = {
   name: 'BOTANICA',
   summary: 'A perfumery whose garden grows down the page — generative SVG vines drawn by your scroll.',
   technique: 'SCROLL-GROWN SVG',
+  tags: ['organic', 'natural', 'light', 'botanical', 'illustrated', 'scroll', 'soft', 'beauty'],
+  bestFor: ['beauty & skincare', 'perfume', 'florists', 'wellness brands'],
   swatch: ['#f2ecdd', '#3c4d34', '#c4694a'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Karla:wght@300;400;500&display=swap',

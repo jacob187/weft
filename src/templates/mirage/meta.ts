@@ -6,6 +6,8 @@ const meta: TemplateMeta = {
   name: 'MIRAGE',
   summary: 'A vaporwave collective — slatted sun, chrome type, marble statue, all pure CSS and gradient.',
   technique: 'PURE-CSS 3D',
+  tags: ['vaporwave', 'retro', 'music', 'nostalgic', 'surreal', 'neon', '90s', 'dreamy'],
+  bestFor: ['record labels', 'musicians & merch', 'creative collectives'],
   swatch: ['#1a0b2e', '#ff5e9e', '#58e6e6'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=Monoton&family=Poppins:ital,wght@0,300;0,400;0,600;1,300&display=swap',

@@ -6,6 +6,8 @@ const meta: TemplateMeta = {
   name: 'VERITÉ',
   summary: 'A film studio on real film — live grain and scratches, letterboxed title card, rolling credits.',
   technique: 'LIVE FILM GRAIN',
+  tags: ['film', 'cinema', 'dark', 'grain', 'studio', 'moody', 'classic'],
+  bestFor: ['film studios', 'production companies', 'photographers', 'film festivals'],
   swatch: ['#0c0b09', '#d8d5cd', '#d9a94f'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Archivo+Narrow:wght@400;500;600&display=swap',

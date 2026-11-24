@@ -6,6 +6,8 @@ const meta: TemplateMeta = {
   name: 'MONOLITH',
   summary: 'A brutalist type foundry with a live variable-font specimen — width and weight follow your cursor.',
   technique: 'VARIABLE FONTS',
+  tags: ['brutalist', 'typography', 'bold', 'grid', 'red', 'monochrome', 'editorial', 'tech'],
+  bestFor: ['type foundries', 'design studios', 'developer tools', 'bold agencies'],
   swatch: ['#f1efe9', '#111111', '#ff2b00'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=Anybody:ital,wdth,wght@0,50..150,100..900;1,50..150,100..900&family=Space+Grotesk:wght@300..700&family=Space+Mono:wght@400;700&display=swap',

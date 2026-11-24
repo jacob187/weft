@@ -6,6 +6,8 @@ const meta: TemplateMeta = {
   name: 'STELLAR',
   summary: 'A planetarium of 1,900 particles that morph between a word, Orion, a galaxy and the dome.',
   technique: 'PARTICLE MORPH',
+  tags: ['space', 'science', 'particles', 'dark', 'education', 'cosmic', 'museum'],
+  bestFor: ['museums & planetariums', 'science & education', 'events'],
   swatch: ['#070514', '#b3a8f7', '#ffd98a'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;700&family=Manrope:wght@300;400;500&display=swap',

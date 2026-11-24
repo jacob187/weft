@@ -6,6 +6,8 @@ const meta: TemplateMeta = {
   name: 'KAZE 風',
   summary: 'A Kyoto tea house — enso drawn on load, raked karesansui canvas, vertical typography.',
   technique: 'INK & CANVAS',
+  tags: ['japanese', 'zen', 'minimal', 'calm', 'ink', 'traditional', 'light', 'craft'],
+  bestFor: ['restaurants', 'tea & coffee', 'spas', 'craft studios'],
   swatch: ['#f5f1e6', '#1c1b18', '#c73e1d'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap',

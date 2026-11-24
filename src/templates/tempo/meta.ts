@@ -6,6 +6,8 @@ const meta: TemplateMeta = {
   name: 'TEMPO',
   summary: 'A playable polyphonic synthesizer — oscillators, filter, echo, and a genuinely live oscilloscope.',
   technique: 'WEB AUDIO',
+  tags: ['music', 'audio', 'interactive', 'synth', 'instrument', 'dark', 'tactile'],
+  bestFor: ['music tech', 'audio products', 'interactive demos'],
   swatch: ['#17181d', '#a06bff', '#6bffc9'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap',

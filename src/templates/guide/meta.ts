@@ -7,6 +7,8 @@ const meta: TemplateMeta = {
   name: 'THE GUIDE',
   summary: 'A dark long-form article page — numbered sections, callouts, code blocks and tables in a narrow reading column.',
   technique: 'LONG-FORM ARTICLE',
+  tags: ['article', 'documentation', 'long-form', 'blog', 'dark', 'readable'],
+  bestFor: ['docs', 'case studies', 'blog posts'],
   swatch: ['#08080d', '#e8c168', '#7ce7d8'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap',

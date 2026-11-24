@@ -6,6 +6,8 @@ const meta: TemplateMeta = {
   name: 'FLUX',
   summary: 'A climate observatory: warming stripes, the temperature spiral, and the Keeling curve, hand-rolled.',
   technique: 'DATA AS DESIGN',
+  tags: ['data visualization', 'charts', 'climate', 'science', 'report', 'dark', 'informative'],
+  bestFor: ['data stories', 'research reports', 'climate & NGOs', 'annual reports'],
   swatch: ['#0e1626', '#3b6fb5', '#d96b4a'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400&display=swap',

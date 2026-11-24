@@ -6,6 +6,8 @@ const meta: TemplateMeta = {
   name: 'OBSIDIAN',
   summary: 'Haute horlogerie under raymarched liquid gold — an SDF metaball shader with studio lighting.',
   technique: 'RAYMARCH GLSL',
+  tags: ['luxury', 'dark', 'gold', 'premium', 'minimal', '3d', 'shader', 'watch', 'jewelry'],
+  bestFor: ['luxury goods', 'watches & jewelry', 'premium product launches'],
   swatch: ['#0a0a0c', '#c9a24b', '#f0d089'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap',

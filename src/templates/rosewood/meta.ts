@@ -6,6 +6,8 @@ const meta: TemplateMeta = {
   name: 'THE ROSEWOOD',
   summary: 'An Art Deco grand hotel: generative sunburst, gold shimmer, and an elevator-dial scroll indicator.',
   technique: 'DECO SVG',
+  tags: ['art deco', 'luxury', 'gold', 'green', 'vintage', 'elegant', 'hotel', '1920s'],
+  bestFor: ['hotels', 'restaurants & cocktail bars', 'weddings & events'],
   swatch: ['#0b2b22', '#d4af6a', '#f0d9a8'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=Marcellus&family=Montserrat:wght@300;400;500&display=swap',

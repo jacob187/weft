@@ -6,6 +6,8 @@ const meta: TemplateMeta = {
   name: 'PRISM',
   summary: 'A glass bank dashboard — animated gradient mesh, live drifting chart, honest axes.',
   technique: 'GLASSMORPHISM',
+  tags: ['fintech', 'saas', 'dashboard', 'glass', 'gradient', 'startup', 'dark', 'modern'],
+  bestFor: ['fintech', 'SaaS products', 'dashboards', 'startups'],
   swatch: ['#0b0e16', '#7ce7d8', '#b48bf2'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap',

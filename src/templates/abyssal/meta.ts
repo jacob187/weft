@@ -7,6 +7,8 @@ const meta: TemplateMeta = {
   summary:
     'A deep-sea institute where scrolling is descending — live depth meter, darkening zones, glowing fauna.',
   technique: 'SCROLL DESCENT',
+  tags: ['ocean', 'science', 'storytelling', 'scroll', 'research', 'deep', 'blue', 'nonprofit'],
+  bestFor: ['research institutes', 'nonprofits & conservation', 'long-form storytelling'],
   swatch: ['#0a5568', '#54e0e8', '#01070c'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=Gruppo&family=Albert+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap',

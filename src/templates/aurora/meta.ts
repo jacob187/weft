@@ -6,6 +6,8 @@ const meta: TemplateMeta = {
   name: 'AURORA',
   summary: 'An Arctic retreat beneath a live aurora — fbm noise curtains, stars, and a KP-index gauge.',
   technique: 'FBM SHADER',
+  tags: ['nature', 'calm', 'night', 'travel', 'hospitality', 'atmospheric', 'shader', 'nordic'],
+  bestFor: ['hotels & retreats', 'travel', 'outdoor brands', 'wellness'],
   swatch: ['#060b18', '#78e6c8', '#9d8bf0'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap',

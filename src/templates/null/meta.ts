@@ -6,6 +6,8 @@ const meta: TemplateMeta = {
   name: 'NULLSECTOR',
   summary: 'A security firm fronted by a working terminal — type help, run a scan, find the flag.',
   technique: 'TERMINAL EMU',
+  tags: ['cybersecurity', 'hacker', 'terminal', 'developer', 'dark', 'green', 'interactive', 'matrix'],
+  bestFor: ['security firms', 'developer & CLI tools', 'hackathons'],
   swatch: ['#020803', '#33ff66', '#ffb347'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,600;0,800;1,400&display=swap',

@@ -6,6 +6,8 @@ const meta: TemplateMeta = {
   name: 'PAPERCUT',
   summary: 'A riso zine studio in torn paper — every ragged edge is a generated clip-path.',
   technique: 'TORN CLIP-PATHS',
+  tags: ['zine', 'handmade', 'collage', 'riso', 'indie', 'craft', 'playful', 'paper'],
+  bestFor: ['indie publishers', 'print shops', 'creative studios', 'craft brands'],
   swatch: ['#d9c7a8', '#ff4b33', '#2244cc'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Archivo:ital,wght@0,400;0,600;0,800;1,400&family=Courier+Prime:ital@0;1&display=swap',

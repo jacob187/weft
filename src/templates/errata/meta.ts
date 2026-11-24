@@ -6,6 +6,8 @@ const meta: TemplateMeta = {
   name: 'ERRATA***',
   summary: 'An anti-design laboratory — draggable windows, a button you shouldn’t click, calibrated chaos.',
   technique: 'ANTI-DESIGN',
+  tags: ['anti-design', 'experimental', 'chaotic', 'brutalist', 'playful', 'windows', 'art'],
+  bestFor: ['experimental agencies', 'art projects', 'personal sites'],
   swatch: ['#f2f0ea', '#e03616', '#1133cc'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Courier+Prime:ital@0;1&family=Archivo:wght@400;700&display=swap',

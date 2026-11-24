@@ -6,6 +6,8 @@ const meta: TemplateMeta = {
   name: 'MERIDIAN',
   summary: 'A Swiss editorial quarterly on a strict 12-column grid, set in IKB blue with a collapsing masthead.',
   technique: 'EDITORIAL GRID',
+  tags: ['editorial', 'swiss', 'magazine', 'grid', 'journalism', 'light', 'typographic'],
+  bestFor: ['magazines', 'blogs', 'reports', 'think tanks'],
   swatch: ['#fafaf7', '#101010', '#0031c6'],
   fontsHref:
     'https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,800;0,900;1,300;1,400&family=Inter:wght@300;400;500&display=swap',
