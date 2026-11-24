@@ -22,7 +22,7 @@
 
 Most templates are a layout with a color swap. Each Weft style is a whole design language: its own
 palette, type pairing, motion, and a **signature technique** written in code: WebGL shaders, canvas
-simulations, generative SVG, variable fonts, Web Audio. There are no image files anywhere.
+simulations, generative SVG, variable fonts, Web Audio.
 
 Each template keeps three things separate:
 
@@ -126,23 +126,12 @@ The gallery (`gallery`) and the long-form article (`guide`) are templates too.
 
 ## How a template works
 
-```
-src/templates/<slug>/
-  meta.ts         gallery card, tags, fonts URL, favicon
-  content.ts      `interface Content` (JSDoc on every field) + the `demo` copy
-  theme.css       design tokens on :root (the only raw colors)
-  style.css       layout & components, var(--token) only
-  Template.astro  markup; renders the shared <Page> shell
-  *.ts            signature effects; read colors from tokens at init
-```
-
-- Fields ending in `Html` take trusted inline HTML (`<em> <b> <a> <br>`). Everything else renders as text.
-- Effects respect `prefers-reduced-motion`.
-- Need a knob a style lacks? Add an optional `Content` field whose default keeps the original look.
+Each style lives in `src/templates/<slug>/`. Need a knob a style lacks? Add an optional `Content`
+field whose default keeps the original look.
 
 Adding a style takes four steps: create the folder, add `tags`/`bestFor` to its `meta.ts`, add a
 route at `src/pages/NN-<slug>/`, and run `npm run build:skill` to refresh the plugin's references.
-The full contract is in [`CLAUDE.md`](CLAUDE.md), and the in-site guide is at `/guide/`.
+The in-site guide at `/guide/` walks through the rest.
 
 ## Scripts
 
@@ -155,7 +144,8 @@ The full contract is in [`CLAUDE.md`](CLAUDE.md), and the in-site guide is at `/
 
 ## Credits
 
-The 25 original designs come from the showcase by **[BrainwavePro](https://github.com/BrainwavePro)**.
+The 25 original designs come from the [showcase](https://fable-showcase-25.netlify.app/) by
+**[BrainwavePro](https://github.com/BrainwavePro)** (The Legendary Bobby).
 Weft rebuilds them as reusable, themeable templates and a Claude Code plugin. All brands in the demos
 are fictional.
 
