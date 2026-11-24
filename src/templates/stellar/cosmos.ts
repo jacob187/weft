@@ -249,4 +249,12 @@ export function initCosmos(canvas: HTMLCanvasElement, label: HTMLElement | null)
 
   if (reduced) drawStatic();
   else rafLoop(frame).start();
+
+  // The word is sampled from canvas text, so re-sample once the display face has loaded;
+  // sampling earlier traces the fallback font.
+  document.fonts.load(`700 1em ${font}`).then(() => {
+    if (mode % builders.length !== 0) return;
+    buildTargets();
+    if (reduced) drawStatic();
+  });
 }
