@@ -9,11 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="#quick-start">Quick start</a> ·
-  <a href="#the-claude-code-plugin">Claude Code plugin</a> ·
-  <a href="#the-styles">The styles</a> ·
-  <a href="#how-a-template-works">How it works</a> ·
-  <a href="#credits">Credits</a>
+  Based on the original designs by <a href="https://github.com/BrainwavePro"><b>BrainwavePro</b></a> (The Legendary Bobby).
 </p>
 
 ---
@@ -26,49 +22,19 @@ simulations, generative SVG, variable fonts, Web Audio.
 
 Each template keeps three things separate:
 
-- **Content** (`content.ts`): every headline, list, price and link, typed and documented.
-- **Tokens** (`theme.css`): every color and font stack. Shaders and canvases read them too, so one
-  override recolors the whole page, effects included.
-- **Craft** (`style.css`, markup, effects): untouched when you make it yours.
-
-## Quick start
-
-```sh
-git clone https://github.com/OWNER/weft.git && cd weft
-nvm use              # Node 24 (Astro 7 needs ≥ 22.23)
-npm install
-npm run dev          # http://localhost:4321: the gallery of all 25
-```
-
-Make a site from any style:
-
-```sh
-npm run new-site -- obsidian acme-watches
-```
-
-```ts
-// src/sites/acme-watches/site.ts
-export const content: Content = { ...demo, /* your copy, typed field by field */ };
-export const theme: ThemeOverrides = { '--gold': '#7cc4ff' };   // recolors CSS *and* the shader
-export const seo: Partial<Seo> = { title: 'Acme: Watches' };
-```
-
-It previews at `/sites/acme-watches/`.
+- **Content**: every headline, list, price and link, typed and documented.
+- **Tokens**: every color and font stack. Shaders and canvases read them too, so one override
+  recolors the whole page, effects included.
+- **Craft**: markup, styles and effects, untouched when you make it yours.
 
 ## The Claude Code plugin
 
-The repo is also a Claude Code plugin. Describe the site you want; the `weft` skill suggests three
-matching styles and builds with the one you pick.
-
-```
-/plugin marketplace add OWNER/weft
-/plugin install weft@weft
-```
+Describe the site you want. Weft suggests three matching styles and builds with the one you pick.
 
 | Mode | What you get |
 |---|---|
-| **Template** | A complete standalone Astro site in a new folder. Claude fills the content model with your real copy and maps brand colors onto tokens. |
-| **Style** | A kit for the project you already have (React, Next, Vue, plain HTML): `tokens.css`, the fonts, and framework-agnostic effect modules. Claude maps them onto your existing components. |
+| **Template** | A complete standalone Astro site. Claude fills the content model with your real copy and maps brand colors onto tokens. |
+| **Style** | A kit for the project you already have (React, Next, Vue, plain HTML): tokens, fonts, and framework-agnostic effect modules, mapped onto your existing components. |
 
 Try:
 
@@ -76,22 +42,11 @@ Try:
 - *"Restyle this dashboard like prism."*
 - `/weft:weft list`
 
-The skill's helper also runs on its own:
-
-```sh
-node skills/weft/scripts/weft.mjs deal "climate nonprofit annual report"   # → flux, abyssal
-node skills/weft/scripts/weft.mjs template flux  --out ../climate-report
-node skills/weft/scripts/weft.mjs style    aurora --out ../my-app/src/styles/weft-aurora
-```
-
 ## The styles
 
 <p align="center">
   <img src="docs/assets/weft-styles.svg" alt="The 25 Weft styles as swatch cards" width="100%">
 </p>
-
-<details>
-<summary><b>All 25, with techniques and best uses</b></summary>
 
 | # | Style | Technique | Best for |
 |---|---|---|---|
@@ -120,27 +75,8 @@ node skills/weft/scripts/weft.mjs style    aurora --out ../my-app/src/styles/wef
 | 23 | **CODEX** `codex` | illuminated svg | libraries & bookshops, museums, heritage orgs, publishers |
 | 24 | **ERRATA***** `errata` | anti-design | experimental agencies, art projects, personal sites |
 | 25 | **VERITÉ** `verite` | live film grain | film studios, production companies, photographers, film festivals |
-</details>
 
-The gallery (`gallery`) and the long-form article (`guide`) are templates too.
-
-## How a template works
-
-Each style lives in `src/templates/<slug>/`. Need a knob a style lacks? Add an optional `Content`
-field whose default keeps the original look.
-
-Adding a style takes four steps: create the folder, add `tags`/`bestFor` to its `meta.ts`, add a
-route at `src/pages/NN-<slug>/`, and run `npm run build:skill` to refresh the plugin's references.
-The in-site guide at `/guide/` walks through the rest.
-
-## Scripts
-
-| Command | |
-|---|---|
-| `npm run dev` / `build` / `preview` | Astro dev server, static build to `dist/`, preview |
-| `npm run check` | type-check `.astro` + `.ts` |
-| `npm run new-site -- <style> <name>` | scaffold a site inside this repo |
-| `npm run build:skill` | regenerate the plugin's style references from the templates |
+Plus two layout templates: a gallery (`gallery`) and a long-form article (`guide`).
 
 ## Credits
 
