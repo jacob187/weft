@@ -134,4 +134,7 @@ ${contentModel(content)}
 
 index.sort((a, b) => (a.no || '99').localeCompare(b.no || '99') || a.slug.localeCompare(b.slug));
 writeFileSync(join(outDir, 'index.json'), JSON.stringify(index, null, 2) + '\n');
-console.log(`build-skill: ${index.length} styles → skills/weft/references/`);
+const numbered = index.filter((s) => s.no).length;
+console.log(
+  `build-skill: ${numbered} styles + ${index.length - numbered} layout templates → skills/weft/references/`,
+);

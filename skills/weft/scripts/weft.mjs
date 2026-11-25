@@ -74,13 +74,19 @@ const STOP = new Set(
   'a an and are as at be but by for from has have i in is it its me my of on or our site that the their this to us want we website with you your page'.split(' '),
 );
 
+/** Crude plural folding so "bar" matches "bars" and "bakery" matches "bakeries". */
+const singular = (w) =>
+  w.length > 4 && w.endsWith('ies') ? `${w.slice(0, -3)}y` : w.length > 3 && /[^su]s$/.test(w) ? w.slice(0, -1) : w;
+
 /** Score = weighted word overlap between the brief and each style's tags / best-for / summary / name. */
 function deal(brief, flags) {
   if (!brief) fail('usage: weft.mjs deal "<brief>" [--n 3]');
   const n = Math.max(1, Math.min(10, Number(flags.n) || 3));
-  const words = new Set((brief.toLowerCase().match(/[a-z0-9]+/g) ?? []).filter((w) => w.length > 1 && !STOP.has(w)));
+  const words = new Set(
+    (brief.toLowerCase().match(/[a-z0-9]+/g) ?? []).filter((w) => w.length > 1 && !STOP.has(w)).map(singular),
+  );
   const hits = (text, w) =>
-    (text.toLowerCase().match(/[a-z0-9]+/g) ?? []).reduce((acc, t) => acc + (words.has(t) ? w : 0), 0);
+    (text.toLowerCase().match(/[a-z0-9]+/g) ?? []).reduce((acc, t) => acc + (words.has(singular(t)) ? w : 0), 0);
   const ranked = index
     .map((s) => ({
       s,

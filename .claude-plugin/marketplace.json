@@ -11,7 +11,7 @@
     {
       "name": "weft",
       "source": "./",
-      "description": "27 code-only website styles (WebGL, canvas, generative SVG, Web Audio) as full Astro templates or drop-in style kits for existing projects.",
+      "description": "25 code-only website styles (WebGL, canvas, generative SVG, Web Audio), plus gallery and article layouts, as full Astro templates or drop-in style kits for existing projects.",
       "version": "0.1.0",
       "category": "design",
       "tags": [

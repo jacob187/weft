@@ -5,7 +5,7 @@ An Art Deco grand hotel: generative sunburst, gold shimmer, and an elevator-dial
 
 - **Technique:** DECO SVG
 - **Tags:** art deco, luxury, gold, green, vintage, elegant, hotel, 1920s
-- **Best for:** hotels; restaurants & cocktail bars; weddings & events
+- **Best for:** hotels; restaurants; wine & cocktail bars; weddings & events
 - **Fonts:** Marcellus, Montserrat
 - **Fonts href:** `https://fonts.googleapis.com/css2?family=Marcellus&family=Montserrat:wght@300;400;500&display=swap`
 - **Swatch:** #0b2b22 · #d4af6a · #f0d9a8

@@ -105,7 +105,7 @@ node skills/weft/scripts/weft.mjs style    aurora --out ../my-app/src/styles/wef
 | 08 | **STELLAR** `stellar` | particle morph | museums & planetariums, science & education, events |
 | 09 | **PRISM** `prism` | glassmorphism | fintech, SaaS products, dashboards, startups |
 | 10 | **NULLSECTOR** `null` | terminal emu | security firms, developer & CLI tools, hackathons |
-| 11 | **THE ROSEWOOD** `rosewood` | deco svg | hotels, restaurants & cocktail bars, weddings & events |
+| 11 | **THE ROSEWOOD** `rosewood` | deco svg | hotels, restaurants, wine & cocktail bars, weddings & events |
 | 12 | **HELIX ONE** `helix` | three.js | hardware launches, audio products, consumer electronics |
 | 13 | **DOUGHBOX** `doughbox` | goo & springs | bakeries & cafes, food brands, kids products, playful consumer brands |
 | 14 | **RIOT FEST** `riot` | kinetic type | festivals, concerts, events, streetwear |

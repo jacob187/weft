@@ -1,12 +1,12 @@
 ---
 name: weft
-description: Build or restyle websites from 27 hand-built, code-only design styles (raymarched gold, particle morphs, Bauhaus generators, synthwave grids, editorial grids, Web Audio, film grain…). Use when the user wants a new landing page or site with a distinctive look, wants an existing frontend restyled in one of these styles, names a style from the library (obsidian, aurora, riot, codex…), or says "weft". Two modes — template (scaffold a complete Astro site) and style (a token + effect kit applied to an existing project).
+description: Build or restyle websites from 25 hand-built, code-only design styles (raymarched gold, particle morphs, Bauhaus generators, synthwave grids, editorial grids, Web Audio, film grain…). Use when the user wants a new landing page or site with a distinctive look, wants an existing frontend restyled in one of these styles, names a style from the library (obsidian, aurora, riot, codex…), or says "weft". Two modes — template (scaffold a complete Astro site) and style (a token + effect kit applied to an existing project).
 argument-hint: "[<brief>] | template <style> [dir] | style <style> [path] | list"
 ---
 
 # weft — website styles & templates
 
-27 complete, single-page website designs. Each one is a **style**: design tokens (`theme.css`),
+25 complete, single-page website designs (plus `gallery` and `guide` layout templates). Each one is a **style**: design tokens (`theme.css`),
 type pairing, component treatments, and a signature effect written in code (WebGL, canvas, SVG,
 Web Audio). No image files anywhere. Every style also ships as a working Astro template with a
 typed content model, so a new site is "pick a style, write the content".
